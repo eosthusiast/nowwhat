@@ -135,8 +135,8 @@ export default function App() {
           transition={{ duration: 1, delay: 1.5 }}
           className="mt-10 md:mt-12 z-10"
         >
-          <p className="text-terracotta font-medium tracking-[0.25em] uppercase text-[10px] md:text-xs lg:text-sm">
-            A two-week cocoon for leaders.
+          <p className="text-forest/90 font-medium text-xl md:text-2xl lg:text-3xl font-serif leading-relaxed max-w-4xl mx-auto">
+            Opening doors to radical possibility for those who shape the world.
           </p>
         </motion.div>
 
@@ -154,75 +154,155 @@ export default function App() {
       <Section className="bg-white/50 border-y border-sand/30">
         <div className="max-w-4xl mx-auto">
           <FadeInWhenVisible>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight text-center md:text-left">
-              A cocoon for those ready to emerge differently.
-            </h2>
-            <div className="space-y-6 text-xl md:text-2xl font-light leading-relaxed text-ink/80 text-center md:text-left">
+            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80 text-center md:text-left">
               <p>
-                The world calls for spaces where brilliant, high-integrity people can drop out of their heads, into their bodies, and from that grounded place—create something that actually matters.
+                We gather inspired minds from technology, indigenous wisdom, spiritual practice, relational arts, and creative fields—researchers, builders, artists, and leaders attuned to humanity's future—and create the conditions where unexpected collaborations naturally emerge.
               </p>
-              <p>
-                <strong className="font-serif text-terracotta italic">now what?</strong> is a two-week cocoon. We prioritize silence, stillness, and deep embodiment through sauna, swimming, and movement. From this foundation, we foster concrete plans and funded projects, joining a cohort of collaborators ready to commit to building what is meaningful.
+              <p className="italic text-terracotta">
+                Two weeks. Immediate funding. Startups, movements, films, communities—whatever wants to be born.
               </p>
             </div>
           </FadeInWhenVisible>
         </div>
       </Section>
 
-      {/* Section 3: The Four Threads */}
+      {/* Section 3: The Convergence Moment */}
       <Section>
-        <div className="max-w-7xl mx-auto">
-          <FadeInWhenVisible className="mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif text-forest text-center">
-              Four ways of knowing, one shared inquiry.
+        <div className="max-w-4xl mx-auto">
+          <FadeInWhenVisible>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight">
+              The Convergence Moment
             </h2>
-            <p className="text-center mt-4 text-ink/60 max-w-2xl mx-auto italic">
-              "The boundary between these threads is permeable. We are looking for those who bridge worlds."
-            </p>
-          </FadeInWhenVisible>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { 
-                title: "Tech", 
-                icon: <Cpu className="w-10 h-10" />, 
-                desc: "Engineers, founders, AI researchers, systems thinkers. Those building the future who want to build it well." 
-              },
-              { 
-                title: "Art", 
-                icon: <Palette className="w-10 h-10" />, 
-                desc: "Musicians, visual artists, storytellers. Those who translate the ineffable into the felt experience." 
-              },
-              { 
-                title: "Relating", 
-                icon: <Users className="w-10 h-10" />, 
-                desc: "Facilitators, somatic practitioners, experts in authentic connection. IFS, embodiment, the space between." 
-              },
-              { 
-                title: "Indigenous Wisdom", 
-                icon: <Sprout className="w-10 h-10" />, 
-                desc: "Wisdom keepers, land-based practitioners. Those who remember what industrial culture forgot." 
-              },
-            ].map((thread, idx) => (
-              <FadeInWhenVisible key={idx} className="group">
-                <div className="h-full bg-white p-8 rounded-2xl border border-sand/20 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 flex flex-col">
-                  <div className="mb-6 text-terracotta group-hover:scale-110 transition-transform duration-500">
-                    {thread.icon}
-                  </div>
-                  <h3 className="text-2xl font-serif text-forest mb-4">{thread.title}</h3>
-                  <p className="text-ink/70 leading-relaxed flex-grow">{thread.desc}</p>
-                </div>
-              </FadeInWhenVisible>
-            ))}
-          </div>
-          
-          <FadeInWhenVisible className="mt-12 text-center text-ink/50 text-sm max-w-3xl mx-auto">
-            Deep systems thinkers, ecological artists, indigenous healers, contemplative technologists. Many participants bridge multiple threads.
+            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80">
+              <p>
+                We're at a threshold. AI, climate, and collective incoherence are accelerating faster than our solutions. The old incentives aren't working. The standard approaches aren't aligned to what humanity actually needs.
+              </p>
+              <p className="font-medium text-forest text-2xl">
+                The researchers know it. The builders feel it. The artists see it. The question is: now what?
+              </p>
+              <p>
+                But here's what we've discovered: The answer isn't found by adding more—more frameworks, more strategies, more forcing. It's revealed when you bring the right people together, remove what obstructs their natural brilliance, and make it effortless to build what emerges.
+              </p>
+            </div>
           </FadeInWhenVisible>
         </div>
       </Section>
 
-      {/* Section 4: The Shape */}
+      {/* Section 4: The Alchemy of Unlikely Combinations */}
+      <Section className="bg-sand/10">
+        <div className="max-w-4xl mx-auto">
+          <FadeInWhenVisible>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight">
+              The Alchemy of Unlikely Combinations
+            </h2>
+            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80">
+              <p>
+                What happens when a technologist meets an indigenous knowledge keeper? When a filmmaker collaborates with a consciousness researcher? When a community organizer partners with a systems builder?
+              </p>
+              <p>
+                Drawing on insights from consciousness research, ancient wisdom traditions, and the moral psychology of collective transformation, Now What Alchemizer creates the conditions for these meetings to matter.
+              </p>
+            </div>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible>
+            <h3 className="text-2xl md:text-3xl font-serif text-forest mt-12 mb-6">
+              We bring together people from radically different sectors:
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg text-ink/80">
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Technology & AI researchers</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Indigenous wisdom keepers</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Spiritual practitioners & consciousness explorers</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Artists, filmmakers, & storytellers</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Relational & community builders</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Systems thinkers & entrepreneurs</span>
+              </div>
+            </div>
+            <p className="text-2xl font-medium text-forest mt-8">
+              Then we do something unusual: we remove every obstacle to building together.
+            </p>
+          </FadeInWhenVisible>
+        </div>
+      </Section>
+
+      {/* Section 5: We Make It Effortless */}
+      <Section className="bg-white/50">
+        <div className="max-w-4xl mx-auto">
+          <FadeInWhenVisible>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight">
+              We Make It Effortless
+            </h2>
+            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80">
+              <p>
+                Most gatherings end with inspiration and business cards. Ours end with funded collaborations already in motion.
+              </p>
+            </div>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible>
+            <h3 className="text-2xl md:text-3xl font-serif text-forest mt-12 mb-6">
+              Here's what we provide:
+            </h3>
+            <p className="text-lg leading-relaxed text-ink/80 mb-8">
+              The connections you didn't know you needed. The time well spent without distraction. The process that unveils what's actually there (we don't fully explain it beforehand—it works better that way). The infrastructure to build immediately. The funding to make it real.
+            </p>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible>
+            <h3 className="text-2xl md:text-3xl font-serif text-forest mt-12 mb-6">
+              What emerges might be:
+            </h3>
+            <div className="space-y-3 text-lg text-ink/80">
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A startup at the intersection of sectors that don't usually talk</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A movement that reframes how we think about the problem</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A film that shifts consciousness at scale</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A community model that becomes a template</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A technology built on relational principles</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>An initiative no one saw coming but everyone recognizes as necessary</span>
+              </div>
+            </div>
+            <p className="text-xl font-medium text-forest mt-8">
+              We don't prescribe the form. We create the conditions. You bring the vision. We make building it possible.
+            </p>
+          </FadeInWhenVisible>
+        </div>
+      </Section>
+
+      {/* Section 6: The Shape */}
       <Section className="bg-forest text-parchment relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <div className="absolute top-10 left-10 w-96 h-96 border border-sand rounded-full animate-pulse"></div>
@@ -278,75 +358,212 @@ export default function App() {
         </div>
       </Section>
 
-      {/* Section 5: The Commitment */}
-      <Section>
-        <div className="max-w-4xl mx-auto">
+      {/* Section 7: A Different Set of Incentives */}
+      <Section className="bg-sand/10">
+        <div className="max-w-5xl mx-auto">
           <FadeInWhenVisible>
-            <div className="flex items-center gap-4 mb-8">
-              <div className="h-px bg-terracotta flex-grow"></div>
-              <h2 className="text-3xl md:text-4xl font-serif text-ink shrink-0">A focused commitment.</h2>
-              <div className="h-px bg-terracotta flex-grow"></div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-12">
-              <div className="p-8 border border-sand/40 rounded-xl bg-sand/5">
-                <h3 className="text-2xl font-serif text-forest mb-4 flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-terracotta" /> Presence
-                </h3>
-                <p className="text-ink/70 leading-relaxed text-lg">
-                  Full participation for two weeks. We require your complete attention, creating a sanctuary from the pull of external screens and daily distractions.
-                </p>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-12 leading-tight text-center">
+              A Different Set of Incentives
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="space-y-4">
+                <h3 className="text-2xl font-serif text-ink/50 mb-6">What most programs offer:</h3>
+                <div className="space-y-3 text-lg text-ink/60">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1">•</span>
+                    <span>Networking within your sector</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1">•</span>
+                    <span>Frameworks for innovation</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1">•</span>
+                    <span>Pitch competitions</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1">•</span>
+                    <span>Deferred funding (maybe)</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="mt-1">•</span>
+                    <span>Go home and try to make it happen alone</span>
+                  </div>
+                </div>
               </div>
-              <div className="p-8 border border-sand/40 rounded-xl bg-sand/5">
-                <h3 className="text-2xl font-serif text-forest mb-4 flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-terracotta" /> Availability
-                </h3>
-                <p className="text-ink/70 leading-relaxed text-lg">
-                  Readiness to commit the next two years to what emerges. If a project captures you, you're in. We are here to build real things.
-                </p>
+
+              <div className="space-y-4 border-l-4 border-terracotta pl-8">
+                <h3 className="text-2xl font-serif text-forest mb-6">What Now What Alchemizer delivers:</h3>
+                <div className="space-y-3 text-lg text-ink/80">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                    <span>Cross-sector collision of inspired minds</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                    <span>A process that unveils your clearest vision</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                    <span>Immediate infrastructure and support</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                    <span>Funding that flows to what wants to emerge</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                    <span>Co-conspirators who become long-term collaborators</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                    <span>Better incentives: Joy fuels the work, rather than being its reward</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <p className="mt-12 text-center text-xl text-ink/80 italic">
-              "Funding is ready for the most promising initiatives. We discover what wants to be built when the right people are truly present together."
+            <p className="mt-12 text-center text-lg md:text-xl text-ink/80 leading-relaxed italic max-w-3xl mx-auto">
+              We believe there's a moral responsibility in how we gather brilliant minds. Not to extract and exploit their genius, but to honor it. Not to create artificial scarcity, but to provide genuine abundance for building what matters.
             </p>
           </FadeInWhenVisible>
         </div>
       </Section>
 
-      {/* Section 6: AI Safety */}
-      <Section className="bg-sand/10">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-12 items-center">
-          <FadeInWhenVisible className="md:w-1/3">
-            <div className="relative">
-              <div className="w-full aspect-square bg-forest rounded-full flex items-center justify-center relative overflow-hidden">
-                <Flame className="w-32 h-32 text-terracotta animate-pulse" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-forest to-transparent opacity-50"></div>
+      {/* Section 8: Who This Is For */}
+      <Section className="bg-white/50">
+        <div className="max-w-4xl mx-auto">
+          <FadeInWhenVisible>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight">
+              Who This Is For
+            </h2>
+            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80">
+              <p>
+                You've built amazing things in your sector. You know what's at stake. You're standing at an empty page, asking "now what?"—and you sense the answer lies outside your usual circles.
+              </p>
+            </div>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible>
+            <h3 className="text-2xl md:text-3xl font-serif text-forest mt-12 mb-6">
+              You might be:
+            </h3>
+            <div className="space-y-3 text-lg text-ink/80">
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A technologist who knows code alone won't solve this</span>
               </div>
-              <div className="absolute -bottom-4 -right-4 bg-terracotta text-white px-4 py-2 rounded-full font-serif italic text-sm shadow-lg">
-                May 2025
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>An artist whose work addresses what's emerging</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>An indigenous knowledge keeper with wisdom the moment needs</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A researcher whose insights need embodied application</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A community builder ready to work at a different scale</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>A spiritual practitioner understanding this is the spiritual work</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Anyone attuned to the fact that siloed solutions won't meet this moment</span>
+              </div>
+            </div>
+            <p className="text-xl font-medium text-forest mt-8">
+              You don't need more content or credentials. You need time well spent with people from completely different worlds who are asking the same essential questions.
+            </p>
+          </FadeInWhenVisible>
+        </div>
+      </Section>
+
+      {/* Section 9: What Actually Happens */}
+      <Section className="bg-forest text-parchment">
+        <div className="max-w-4xl mx-auto">
+          <FadeInWhenVisible>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight">
+              What Actually Happens
+            </h2>
+            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-sand/90">
+              <p>
+                Two weeks. A carefully composed group from sectors that rarely collaborate. A location that matters. Everything you need to build, already in place.
+              </p>
+              <p className="italic">
+                We can't tell you everything—some things only work when experienced, not explained. But we can tell you this:
+              </p>
+              <p>
+                You'll meet a filmmaker who needs exactly what your research provides. A technologist who's been looking for the relational framework you carry. An indigenous elder whose cosmology unlocks the systems design. An artist who can make it all visible.
+              </p>
+              <p>
+                The collaborations that form aren't networked—they're alchemical. The solutions that arise feel obvious in hindsight, impossible to predict beforehand.
+              </p>
+            </div>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible>
+            <h3 className="text-2xl md:text-3xl font-serif mt-12 mb-6">
+              By the end:
+            </h3>
+            <div className="space-y-3 text-lg text-sand/80">
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                <span>You have co-creators, not contacts</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                <span>You have funding, not just ideas</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                <span>You have infrastructure, not just intention</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                <span>You're already building, not planning to start someday</span>
               </div>
             </div>
           </FadeInWhenVisible>
-          
-          <FadeInWhenVisible className="md:w-2/3">
-            <h2 className="text-4xl font-serif text-forest mb-6">The first cocoon: AI Safety</h2>
-            <div className="text-lg leading-relaxed text-ink/80 space-y-4">
+        </div>
+      </Section>
+
+      {/* Section 10: The Vision */}
+      <Section className="bg-sand/10">
+        <div className="max-w-4xl mx-auto">
+          <FadeInWhenVisible>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight text-center">
+              The Vision
+            </h2>
+            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80 text-center">
               <p>
-                Artificial intelligence is developing faster than our collective wisdom can guide it. The first <strong className="font-serif italic">now what?</strong> cocoon gathers those working at this frontier.
+                We imagine a world where everything that makes us human becomes the foundation for building what's possible.
               </p>
               <p>
-                We bring technologists, ethicists, artists, and indigenous wisdom keepers to define what aligned AI looks like and build the tools to steer toward it.
+                Where the technologist and the mystic, the artist and the systems thinker, the indigenous knowledge keeper and the entrepreneur discover they're working on the same problem from different angles—and together create solutions none could envision alone.
               </p>
-              <p className="font-medium text-forest">
-                A unique crucible for new approaches to artificial intelligence.
+              <p>
+                Where meeting survival needs and building regenerative futures isn't aspirational—it's funded, supported, and already in motion.
+              </p>
+              <p className="text-2xl md:text-3xl font-serif text-terracotta italic mt-8">
+                Unimaginable collaborations leading to unimaginable solutions.
+              </p>
+              <p>
+                Startups. Movements. Films. Communities. Technologies. Initiatives. Whatever this convergence moment requires—built by people who've been unveiled to their truest potential and given everything they need to act on it.
               </p>
             </div>
           </FadeInWhenVisible>
         </div>
       </Section>
 
-      {/* Section 7: Call to Action / Footer */}
+      {/* Section 11: Call to Action / Footer */}
       <Section className="pb-12 text-center">
         <FadeInWhenVisible>
           <div className="max-w-2xl mx-auto bg-white p-12 rounded-3xl border border-sand/40 shadow-2xl relative">
@@ -354,9 +571,12 @@ export default function App() {
               <Mail className="w-6 h-6" />
             </div>
             
-            <h2 className="text-4xl font-serif text-forest mb-4">Interested?</h2>
+            <h2 className="text-4xl font-serif text-forest mb-4">Begin</h2>
+            <p className="text-ink/80 mb-2 text-xl font-light">
+              The alchemical moment is now. The threshold is here.
+            </p>
             <p className="text-ink/60 mb-8 text-lg">
-              Applications open early 2025. Leave your email to be notified when the call for seekers begins.
+              Applications open early 2025. Leave your email to be notified.
             </p>
             
             <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto" onSubmit={(e) => e.preventDefault()}>
@@ -374,20 +594,20 @@ export default function App() {
               </button>
             </form>
             
-            <p className="mt-8 text-sm text-ink/40">
-              Tell us who you are and why this calls to you.
+            <p className="mt-8 text-sm text-ink/50 italic">
+              "We funded a collaboration between a quantum physicist and a Sufi poet. They're building something that shouldn't exist according to conventional categories. It's working."
             </p>
           </div>
         </FadeInWhenVisible>
 
         <footer className="mt-24 pt-12 border-t border-sand/20 flex flex-col md:flex-row justify-between items-center gap-6 text-ink/40 text-sm">
-          <div className="font-serif text-lg tracking-tight text-forest/60 uppercase">now what? 2025</div>
+          <div className="font-serif text-lg tracking-tight text-forest/60">Now What Alchemizer 2025</div>
           <div className="flex gap-8">
             <a href="#" className="hover:text-terracotta transition-colors">Instagram</a>
             <a href="#" className="hover:text-terracotta transition-colors">Substack</a>
-            <a href="mailto:hello@nowwhat.retreat" className="hover:text-terracotta transition-colors">hello@nowwhat.retreat</a>
+            <a href="mailto:hello@nowwhatalchemizer.com" className="hover:text-terracotta transition-colors">hello@nowwhatalchemizer.com</a>
           </div>
-          <div className="italic font-cursive text-base">Emergence through Stillness.</div>
+          <div className="italic text-base text-ink/50">Drawing on consciousness research and the moral responsibility of gathering brilliant minds ethically.</div>
         </footer>
       </Section>
 
