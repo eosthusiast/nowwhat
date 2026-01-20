@@ -282,19 +282,24 @@ export default function App() {
         </div>
       </Section>
 
-      {/* Section 6: The Shape */}
+      {/* Section 6: Two weeks. One question. Many answers. */}
       <Section className="bg-forest text-parchment relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
           <div className="absolute top-10 left-10 w-96 h-96 border border-sand rounded-full animate-pulse"></div>
           <div className="absolute bottom-10 right-10 w-[40rem] h-[40rem] border border-sand/40 rounded-full animate-pulse delay-1000"></div>
         </div>
-        
+
         <div className="max-w-5xl mx-auto relative z-10">
           <FadeInWhenVisible className="mb-16">
             <h2 className="text-4xl md:text-5xl font-serif mb-6">Two weeks. One question. Many answers.</h2>
-            <p className="text-xl md:text-2xl text-sand/80 font-light leading-relaxed">
-              We gather in the quiet edges of nature to listen for what is truly needed next.
-            </p>
+            <div className="space-y-6 text-xl md:text-2xl text-sand/80 font-light leading-relaxed">
+              <p>
+                A carefully composed group. A location that matters. Everything you need to build, already in place.
+              </p>
+              <p>
+                The collaborations that form are alchemical and bridge worlds. The solutions that arise feel obvious in hindsight, difficult to predict beforehand.
+              </p>
+            </div>
           </FadeInWhenVisible>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
@@ -321,7 +326,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20">
             <FadeInWhenVisible>
               <h3 className="text-2xl font-serif text-sand mb-4 uppercase tracking-wider">Week One: Stillness</h3>
               <p className="text-lg text-sand/60 leading-relaxed italic">
@@ -335,6 +340,30 @@ export default function App() {
               </p>
             </FadeInWhenVisible>
           </div>
+
+          <FadeInWhenVisible>
+            <h3 className="text-2xl md:text-3xl font-serif mb-6">
+              By the end you'll have:
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg text-sand/80">
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                <span>Kinship with co-creators</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                <span>Funding</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                <span>Infrastructure</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
+                <span>Sustained momentum</span>
+              </div>
+            </div>
+          </FadeInWhenVisible>
         </div>
       </Section>
 
@@ -483,50 +512,7 @@ export default function App() {
         </div>
       </Section>
 
-      {/* Section 10: What Actually Happens */}
-      <Section className="bg-forest text-parchment">
-        <div className="max-w-4xl mx-auto">
-          <FadeInWhenVisible>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight">
-              What Actually Happens
-            </h2>
-            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-sand/90">
-              <p>
-                Two weeks. A carefully composed group. A location that matters. Everything you need to build, already in place.
-              </p>
-              <p>
-                The collaborations that form are alchemical and bridge worlds. The solutions that arise feel obvious in hindsight, difficult to predict beforehand.
-              </p>
-            </div>
-          </FadeInWhenVisible>
-
-          <FadeInWhenVisible>
-            <h3 className="text-2xl md:text-3xl font-serif mt-12 mb-6">
-              By the end you'll have:
-            </h3>
-            <div className="space-y-3 text-lg text-sand/80">
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                <span>Kinship with co-creators</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                <span>Funding</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                <span>Infrastructure</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                <span>Sustained momentum</span>
-              </div>
-            </div>
-          </FadeInWhenVisible>
-        </div>
-      </Section>
-
-      {/* Section 11: The Vision */}
+      {/* Section 10: The Vision */}
       <Section className="bg-sand/10">
         <div className="max-w-4xl mx-auto">
           <FadeInWhenVisible>
