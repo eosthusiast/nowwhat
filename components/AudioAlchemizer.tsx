@@ -72,7 +72,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
       <audio
         ref={audioRef}
         onEnded={handleAudioEnd}
-        src="/audio/ambient.mp3"
+        src={`${import.meta.env.BASE_URL}audio/ambient.mp3`}
       />
 
       <AnimatePresence mode="wait">
