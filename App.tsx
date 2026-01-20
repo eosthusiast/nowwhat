@@ -120,29 +120,6 @@ export default function App() {
 
       {/* Hero Section */}
       <header className="min-h-screen flex flex-col items-center justify-between relative overflow-hidden px-6 text-center w-full py-12">
-        {/* Question Rotator at Top */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.3 }}
-          className="w-full max-w-5xl z-10 mt-8 md:mt-16"
-        >
-          <div className="h-24 md:h-32 flex items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={questionIndex}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 1, ease: "easeInOut" }}
-                className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-forest/70 font-serif italic px-4"
-              >
-                {ROTATING_QUESTIONS[questionIndex]}
-              </motion.p>
-            </AnimatePresence>
-          </div>
-        </motion.div>
-
         {/* Main Statement Rotator and "now what?" - Centered */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 md:gap-x-6 lg:gap-x-8 z-10 w-full max-w-full flex-grow">
           {/* Rotating statement part */}
@@ -269,7 +246,29 @@ export default function App() {
         </div>
       </Section>
 
-      {/* Section 3: The Convergence Moment */}
+      {/* Section 3: Question Rotator */}
+      <Section className="bg-sand/10">
+        <div className="max-w-5xl mx-auto">
+          <FadeInWhenVisible>
+            <div className="h-32 md:h-40 flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={questionIndex}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 1, ease: "easeInOut" }}
+                  className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-forest/70 font-serif italic px-4 text-center"
+                >
+                  {ROTATING_QUESTIONS[questionIndex]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+          </FadeInWhenVisible>
+        </div>
+      </Section>
+
+      {/* Section 4: The Convergence Moment */}
       <Section>
         <div className="max-w-4xl mx-auto">
           <FadeInWhenVisible>
@@ -286,69 +285,6 @@ export default function App() {
               <p>
                 The answer isn't found by adding more frameworks or strategies. It's revealed when you bring the right people together, remove what obstructs their natural brilliance, and make it effortless to build what emerges.
               </p>
-            </div>
-          </FadeInWhenVisible>
-        </div>
-      </Section>
-
-      {/* Section 4: The Alchemy of Unlikely Combinations */}
-      <Section className="bg-sand/10">
-        <div className="max-w-4xl mx-auto">
-          <FadeInWhenVisible>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight">
-              The Alchemy of Unlikely Combinations
-            </h2>
-            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80">
-              <p>
-                What happens when a technologist meets an indigenous knowledge keeper? When a filmmaker collaborates with a consciousness researcher? When a community organizer partners with a systems builder?
-              </p>
-              <p>
-                We create the conditions for these meetings to matter.
-              </p>
-              <p className="text-2xl font-medium text-forest">
-                Then we do the unusual: we remove every obstacle to building together. And we mean obstacles on all different levels:
-              </p>
-            </div>
-          </FadeInWhenVisible>
-
-          <FadeInWhenVisible>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 text-lg text-ink/80">
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>Funding</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>Infrastructure</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>Time</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>Space</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>Access to collaborators outside your world</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>The logistical friction that kills momentum</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>The institutional barriers that separate sectors</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>The scarcity thinking that makes collaboration feel competitive</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-terracotta mt-1">•</span>
-                <span>The permission structure that says you need to prove it before you can build it</span>
-              </div>
             </div>
           </FadeInWhenVisible>
         </div>
