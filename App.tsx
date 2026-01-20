@@ -40,6 +40,21 @@ const ROTATING_STATEMENTS = [
   "You're ready to serve what's next..."
 ];
 
+const ROTATING_QUESTIONS = [
+  "What if sociopaths could not be in leadership positions?",
+  "What if self-development and learning to work with your nervous system was offered to all?",
+  "What if kids were actually running for president?",
+  "What if everyone had a therapist?",
+  "What if everyone's basic survival needs were met?",
+  "What if everyone was deeply connected to land and ancestry?",
+  "What if we need more questions than more answers?",
+  "What if collaboration didn't feel competitive?",
+  "What if funding flowed to what wants to emerge?",
+  "What if wisdom guided technology?",
+  "What if joy fueled the work rather than being its reward?",
+  "What if different worlds could bridge without friction?"
+];
+
 // --- Sub-components ---
 
 const FadeInWhenVisible: React.FC<{ children: React.ReactNode, className?: string }> = ({ children, className }) => {
@@ -69,11 +84,19 @@ const Section: React.FC<{ children: React.ReactNode, className?: string, id?: st
 
 export default function App() {
   const [statementIndex, setStatementIndex] = useState(0);
+  const [questionIndex, setQuestionIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setStatementIndex((prev) => (prev + 1) % ROTATING_STATEMENTS.length);
     }, 4500);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setQuestionIndex((prev) => (prev + 1) % ROTATING_QUESTIONS.length);
+    }, 5500);
     return () => clearInterval(interval);
   }, []);
 
@@ -96,11 +119,33 @@ export default function App() {
       />
 
       {/* Hero Section */}
-      <header className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden px-6 text-center w-full">
-        {/* Adjusted flex containers to move the gap to the right (md:w-2/3 and md:w-1/3) */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 md:gap-x-6 lg:gap-x-8 z-10 w-full max-w-full">
-          
-          {/* Rotating statement part - Increased width (flex-[2]) and slightly smaller font */}
+      <header className="min-h-screen flex flex-col items-center justify-between relative overflow-hidden px-6 text-center w-full py-12">
+        {/* Question Rotator at Top */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.3 }}
+          className="w-full max-w-5xl z-10 mt-8 md:mt-16"
+        >
+          <div className="h-24 md:h-32 flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={questionIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 1, ease: "easeInOut" }}
+                className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-forest/70 font-serif italic px-4"
+              >
+                {ROTATING_QUESTIONS[questionIndex]}
+              </motion.p>
+            </AnimatePresence>
+          </div>
+        </motion.div>
+
+        {/* Main Statement Rotator and "now what?" - Centered */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-x-4 md:gap-x-6 lg:gap-x-8 z-10 w-full max-w-full flex-grow">
+          {/* Rotating statement part */}
           <div className="h-20 md:h-24 lg:h-28 flex items-center justify-center md:justify-end md:flex-[2] min-w-0">
             <AnimatePresence mode="wait">
               <motion.h2
@@ -109,59 +154,114 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="text-[4.5vw] md:text-[3vw] lg:text-[2.4vw] font-extrabold leading-none text-forest/90 font-serif whitespace-nowrap md:text-right"
+                className="text-[5vw] md:text-[3.5vw] lg:text-[3vw] font-extrabold leading-none text-forest/90 font-serif whitespace-nowrap md:text-right"
               >
                 {ROTATING_STATEMENTS[statementIndex]}
               </motion.h2>
             </AnimatePresence>
           </div>
 
-          {/* Static part - Decreased width (flex-1), matched smaller font size, and added italic */}
+          {/* Static "now what?" part */}
           <div className="flex items-center justify-center md:justify-start md:flex-1 min-w-0 mt-2 md:mt-0">
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-              className="text-[4.5vw] md:text-[3vw] lg:text-[2.4vw] font-extrabold italic font-serif text-forest tracking-tighter whitespace-nowrap lowercase leading-none md:text-left"
+              className="text-[5vw] md:text-[3.5vw] lg:text-[3vw] font-extrabold italic font-serif text-forest tracking-tighter whitespace-nowrap lowercase leading-none md:text-left"
             >
               now what?
             </motion.h1>
           </div>
         </div>
-        
+
+        {/* Whisper Tagline at Bottom */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="mt-10 md:mt-12 z-10"
+          transition={{ duration: 2, delay: 2 }}
+          className="w-full z-10 mb-8 md:mb-12"
         >
-          <p className="text-forest/90 font-medium text-xl md:text-2xl lg:text-3xl font-serif leading-relaxed max-w-4xl mx-auto">
+          <p className="text-forest/20 font-light text-sm md:text-base lg:text-lg tracking-wide leading-relaxed max-w-3xl mx-auto">
             Opening doors to radical possibility for those who shape the world.
           </p>
         </motion.div>
-
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.5, duration: 2 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce"
-        >
-          <ArrowDown className="text-forest/30 w-5 h-5 md:w-6 md:h-6" />
-        </motion.div>
       </header>
 
-      {/* Section 2: The Premise */}
+      {/* Section 2: The Journey Circle */}
       <Section className="bg-white/50 border-y border-sand/30">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <FadeInWhenVisible>
-            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80 text-center md:text-left">
-              <p>
+            {/* Enso Circle Container */}
+            <div className="relative w-full max-w-2xl mx-auto aspect-square">
+              {/* SVG Enso Circle */}
+              <svg viewBox="0 0 400 400" className="w-full h-full">
+                {/* Enso circle - not fully closed */}
+                <path
+                  d="M 350 200 A 150 150 0 1 0 50 200 A 150 150 0 1 0 340 220"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="text-forest/30"
+                  strokeLinecap="round"
+                />
+              </svg>
+
+              {/* Center Text */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <p className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-forest mb-2">
+                    Two Weeks
+                  </p>
+                  <p className="text-2xl md:text-3xl lg:text-4xl font-serif text-forest/70">
+                    30 People
+                  </p>
+                </div>
+              </div>
+
+              {/* Journey Stop 1: Call to Adventure (Top) */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <div className="bg-parchment p-4 rounded-xl border border-forest/20 shadow-sm">
+                  <p className="text-sm md:text-base font-serif text-forest whitespace-nowrap">
+                    Call to Adventure
+                  </p>
+                </div>
+              </div>
+
+              {/* Journey Stop 2: Unexpected Experience (Right) */}
+              <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 text-center">
+                <div className="bg-parchment p-4 rounded-xl border border-forest/20 shadow-sm">
+                  <p className="text-sm md:text-base font-serif text-forest whitespace-nowrap">
+                    Unexpected Experience
+                  </p>
+                </div>
+              </div>
+
+              {/* Journey Stop 3: Finding Kinship (Bottom) */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 text-center">
+                <div className="bg-parchment p-4 rounded-xl border border-forest/20 shadow-sm">
+                  <p className="text-sm md:text-base font-serif text-forest whitespace-nowrap">
+                    Finding Kinship
+                  </p>
+                </div>
+              </div>
+
+              {/* Journey Stop 4: Sharing with the World (Left) */}
+              <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                <div className="bg-parchment p-4 rounded-xl border border-forest/20 shadow-sm">
+                  <p className="text-sm md:text-base font-serif text-forest whitespace-nowrap">
+                    Sharing with the World
+                  </p>
+                </div>
+              </div>
+            </div>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible className="mt-16">
+            <div className="text-center space-y-4">
+              <p className="text-lg md:text-xl font-light text-ink/80">
                 We gather inspired minds and create the conditions where unexpected collaborations naturally emerge.
               </p>
-              <p className="text-xl md:text-2xl font-medium text-forest">
-                Two weeks. The right people. Immediate funding.
-              </p>
-              <p className="italic text-terracotta">
+              <p className="italic text-terracotta text-lg">
                 Whatever wants to be born: startups, movements, films, communities.
               </p>
             </div>
@@ -254,197 +354,65 @@ export default function App() {
         </div>
       </Section>
 
-      {/* Section 5: We Make It Effortless */}
+      {/* Section 5: Four Core Conditions */}
       <Section className="bg-white/50">
-        <div className="max-w-4xl mx-auto">
-          <FadeInWhenVisible>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight">
-              We Make It Effortless
-            </h2>
-            <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80">
-              <p>
-                Most gatherings end with inspiration and business cards. Ours end with funded collaborations already in motion.
-              </p>
-            </div>
-          </FadeInWhenVisible>
-
-          <FadeInWhenVisible>
-            <h3 className="text-2xl md:text-3xl font-serif text-forest mt-12 mb-6">
-              You get:
-            </h3>
-            <p className="text-lg leading-relaxed text-ink/80 mb-8">
-              Connections you didn't know you needed. Time spent free from distractions and less caught up in the mind. A process that unveils what's actually there. Infrastructure to build immediately. Funding to make it real.
-            </p>
-            <p className="text-xl font-medium text-forest mt-8">
-              We create the conditions. You bring the vision. We make building it possible.
-            </p>
-          </FadeInWhenVisible>
-        </div>
-      </Section>
-
-      {/* Section 6: Two weeks. One question. Many answers. */}
-      <Section className="bg-forest text-parchment relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-          <div className="absolute top-10 left-10 w-96 h-96 border border-sand rounded-full animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-[40rem] h-[40rem] border border-sand/40 rounded-full animate-pulse delay-1000"></div>
-        </div>
-
-        <div className="max-w-5xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto">
           <FadeInWhenVisible className="mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif mb-6">Two weeks. One question. Many answers.</h2>
-            <div className="space-y-6 text-xl md:text-2xl text-sand/80 font-light leading-relaxed">
-              <p>
-                A carefully composed group. A location that matters. Everything you need to build, already in place.
-              </p>
-              <p>
-                The collaborations that form are alchemical and bridge worlds. The solutions that arise feel obvious in hindsight, difficult to predict beforehand.
-              </p>
-            </div>
-          </FadeInWhenVisible>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-20">
-            <div className="flex gap-4">
-              <Calendar className="w-8 h-8 text-terracotta shrink-0" />
-              <div>
-                <h4 className="font-serif text-xl mb-2">When</h4>
-                <p className="text-sand/70">May 2025</p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <MapPin className="w-8 h-8 text-terracotta shrink-0" />
-              <div>
-                <h4 className="font-serif text-xl mb-2">Where</h4>
-                <p className="text-sand/70">Nature-adjacent retreat center (Location TBA)</p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <Users className="w-8 h-8 text-terracotta shrink-0" />
-              <div>
-                <h4 className="font-serif text-xl mb-2">Who</h4>
-                <p className="text-sand/70">~30 high-integrity leaders across the threads</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20">
-            <FadeInWhenVisible>
-              <h3 className="text-2xl font-serif text-sand mb-4 uppercase tracking-wider">Week One: Stillness</h3>
-              <p className="text-lg text-sand/60 leading-relaxed italic">
-                Arrival, decompression, silence, embodiment. Letting the nervous system settle. Swimming, sauna, movement, stillness. Finding the ground before the flight.
-              </p>
-            </FadeInWhenVisible>
-            <FadeInWhenVisible>
-              <h3 className="text-2xl font-serif text-sand mb-4 uppercase tracking-wider">Week Two: Emergence</h3>
-              <p className="text-lg text-sand/60 leading-relaxed italic">
-                Ideas surfacing from a grounded place. Collaboration finding its natural form. Concrete plans taking shape. A handful of funded projects emerge, ready to begin.
-              </p>
-            </FadeInWhenVisible>
-          </div>
-
-          <FadeInWhenVisible>
-            <h3 className="text-2xl md:text-3xl font-serif mb-6">
-              By the end you'll have:
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-lg text-sand/80">
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                <span>Kinship with co-creators</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                <span>Funding</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                <span>Infrastructure</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                <span>Sustained momentum</span>
-              </div>
-            </div>
-          </FadeInWhenVisible>
-        </div>
-      </Section>
-
-      {/* Section 7: A Different Set of Incentives */}
-      <Section className="bg-sand/10">
-        <div className="max-w-5xl mx-auto">
-          <FadeInWhenVisible>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-12 leading-tight text-center">
-              A Different Set of Incentives
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest text-center mb-6">
+              The Conditions for Alchemy
             </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="space-y-4">
-                <h3 className="text-2xl font-serif text-ink/50 mb-6">What most programs offer:</h3>
-                <div className="space-y-3 text-lg text-ink/60">
-                  <div className="flex items-start gap-3">
-                    <span className="mt-1">•</span>
-                    <span>Networking within your sector</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="mt-1">•</span>
-                    <span>Frameworks for innovation</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="mt-1">•</span>
-                    <span>Pitch competitions</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="mt-1">•</span>
-                    <span>Deferred funding (maybe)</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span className="mt-1">•</span>
-                    <span>Go home and try to make it happen alone</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4 border-l-4 border-terracotta pl-8">
-                <h3 className="text-2xl font-serif text-forest mb-6">What Now What Alchemizer delivers:</h3>
-                <div className="space-y-3 text-lg text-ink/80">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                    <span>Cross-sector collision of inspired minds</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                    <span>A process that unveils your clearest vision</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                    <span>Sparks of inspiration and kinship</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                    <span>Immediate funding, infrastructure and support</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                    <span>Co-conspirators who become long-term collaborators</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <CheckCircle className="w-5 h-5 text-terracotta mt-1 shrink-0" />
-                    <span>Better incentives: Joy fuels the work, rather than being its reward</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <p className="mt-12 text-center text-lg md:text-xl text-ink/80 leading-relaxed italic max-w-3xl mx-auto">
-              We believe there's a moral responsibility in how we gather brilliant minds. We honor genius rather than extract it. We provide genuine abundance for building what matters.
+            <p className="text-center text-lg md:text-xl text-ink/70 max-w-3xl mx-auto">
+              We create four essential conditions that make the extraordinary inevitable.
             </p>
           </FadeInWhenVisible>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Unlikely Combinations",
+                summary: "Cross-sector collisions that spark the new",
+                detail: "What happens when a technologist meets an indigenous knowledge keeper? When a filmmaker collaborates with a consciousness researcher? We bring together people from radically different worlds and create the conditions for these meetings to matter."
+              },
+              {
+                title: "Effortless Building",
+                summary: "Remove every obstacle to creation",
+                detail: "Most gatherings end with inspiration and business cards. Ours end with funded collaborations already in motion. We provide immediate funding, infrastructure, time, space, and remove the logistical friction, institutional barriers, and scarcity thinking that kills momentum."
+              },
+              {
+                title: "Fertile Soil",
+                summary: "The ground from which emergence happens",
+                detail: "Time spent free from distractions and less caught up in the mind. A process that unveils what's actually there. Swimming, sauna, silence, embodiment. We don't prescribe the form—we create the conditions for what wants to emerge."
+              },
+              {
+                title: "Available People",
+                summary: "Presence and commitment to what emerges",
+                detail: "You're here fully. Two weeks of complete presence. Ready to commit to what captures you. No hedging, no backup plans. Available to row this boat with allies from completely different worlds who are asking the same essential questions."
+              }
+            ].map((condition, idx) => (
+              <FadeInWhenVisible key={idx} className="group">
+                <div className="h-full bg-parchment p-8 rounded-2xl border border-sand/20 shadow-sm hover:shadow-2xl hover:border-terracotta/40 transition-all duration-500 hover:-translate-y-2 cursor-pointer">
+                  <h3 className="text-2xl md:text-3xl font-serif text-forest mb-3 group-hover:text-terracotta transition-colors">
+                    {condition.title}
+                  </h3>
+                  <p className="text-lg text-ink/70 mb-4 font-medium">
+                    {condition.summary}
+                  </p>
+                  <p className="text-base text-ink/60 leading-relaxed opacity-80 group-hover:opacity-100 transition-opacity">
+                    {condition.detail}
+                  </p>
+                </div>
+              </FadeInWhenVisible>
+            ))}
+          </div>
         </div>
       </Section>
 
-      {/* Section 8: Who This Is For */}
+
+      {/* Section 6: Who This Is For */}
       <Section className="bg-white/50">
         <div className="max-w-4xl mx-auto">
           <FadeInWhenVisible>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-forest mb-8 leading-tight text-center">
               Who This Is For
             </h2>
             <div className="space-y-6 text-lg md:text-xl font-light leading-relaxed text-ink/80">
@@ -454,6 +422,30 @@ export default function App() {
               <p className="text-xl font-medium text-forest mt-8">
                 You need allies from completely different worlds asking the same essential questions, who are willing to row this boat together with you.
               </p>
+            </div>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible className="mt-16">
+            <div className="bg-sand/10 p-8 md:p-12 rounded-2xl border-l-4 border-terracotta">
+              <h3 className="text-2xl md:text-3xl font-serif text-forest mb-6">
+                Selection Criteria
+              </h3>
+              <div className="space-y-4 text-lg text-ink/80">
+                <p className="font-medium">
+                  We look for two essential qualities:
+                </p>
+                <div className="space-y-4 ml-4">
+                  <div>
+                    <span className="font-semibold text-terracotta">Available:</span> You can commit two full weeks of presence. No hedging. No backup plans. You're here.
+                  </div>
+                  <div>
+                    <span className="font-semibold text-terracotta">Willing to Commit:</span> If something captures you during these two weeks, you're ready to commit the next two years to building it. You're not here to browse—you're here to begin.
+                  </div>
+                </div>
+                <p className="mt-6 italic text-ink/70">
+                  Everything else—your background, sector, credentials—matters less than these two qualities. What matters is that you're ready.
+                </p>
+              </div>
             </div>
           </FadeInWhenVisible>
         </div>
@@ -574,14 +566,22 @@ export default function App() {
           </div>
         </FadeInWhenVisible>
 
-        <footer className="mt-24 pt-12 border-t border-sand/20 flex flex-col md:flex-row justify-between items-center gap-6 text-ink/40 text-sm">
+        <div className="mt-16 mb-12 max-w-3xl mx-auto text-center">
+          <p className="text-xl md:text-2xl font-light italic text-forest/70 leading-relaxed">
+            "Be patient toward all that is unsolved in your heart and try to love the questions themselves."
+          </p>
+          <p className="mt-4 text-sm md:text-base text-ink/50">
+            — Rainer Maria Rilke
+          </p>
+        </div>
+
+        <footer className="mt-12 pt-12 border-t border-sand/20 flex flex-col md:flex-row justify-between items-center gap-6 text-ink/40 text-sm">
           <div className="font-serif text-lg tracking-tight text-forest/60">Now What Alchemizer 2025</div>
           <div className="flex gap-8">
             <a href="#" className="hover:text-terracotta transition-colors">Instagram</a>
             <a href="#" className="hover:text-terracotta transition-colors">Substack</a>
             <a href="mailto:hello@nowwhatalchemizer.com" className="hover:text-terracotta transition-colors">hello@nowwhatalchemizer.com</a>
           </div>
-          <div className="italic text-base text-ink/50">Drawing on consciousness research and the moral responsibility of gathering brilliant minds ethically.</div>
         </footer>
       </Section>
 
