@@ -111,6 +111,32 @@ export default function App() {
     }
   }, [hasEntered]);
 
+  // Prevent scrolling past question section until Continue is clicked
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!showQuestions) {
+        const questionSection = document.getElementById('questions-section');
+        if (questionSection) {
+          const questionTop = questionSection.offsetTop;
+          const scrollPosition = window.scrollY;
+
+          // If scrolled past the question section, snap back to it
+          if (scrollPosition > questionTop + 200) {
+            window.scrollTo({
+              top: questionTop + 200,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }
+    };
+
+    if (!showQuestions) {
+      window.addEventListener('scroll', handleScroll, { passive: false });
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, [showQuestions]);
+
   const handleAudioEnd = () => {
     setAudioEnded(true);
   };
