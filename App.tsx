@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Volume2, VolumeX, Cpu, Palette, Users, Sprout } from 'lucide-react';
+import { Cpu, Palette, Users, Sprout } from 'lucide-react';
 
 // --- Constants ---
 
@@ -37,9 +37,7 @@ const CONTEMPLATIVE_QUESTIONS = [
   "What if we need more questions than more answers?",
   "What if collaboration didn't feel competitive?",
   "What if funding flowed to what wants to emerge?",
-  "What if wisdom guided technology?",
-  "What if joy fueled the work rather than being its reward?",
-  "What if different worlds could bridge without friction?"
+  "What if wisdom guided technology?"
 ];
 
 // --- Main App ---
@@ -48,9 +46,10 @@ export default function App() {
   const [hasEntered, setHasEntered] = useState(false);
   const [heroIndex, setHeroIndex] = useState(0);
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [audioStarted, setAudioStarted] = useState(false);
   const [audioEnded, setAudioEnded] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
   const [showQuestions, setShowQuestions] = useState(false);
+  const [showCurrentQuestion, setShowCurrentQuestion] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const { scrollYProgress } = useScroll();
@@ -95,21 +94,33 @@ export default function App() {
     }
   }, [hasEntered, showQuestions]);
 
-  // Questions rotator (starts when hasEntered is true, regardless of showQuestions)
+  // Audio-driven question timing - questions appear based on audio playback time
   useEffect(() => {
-    if (hasEntered) {
-      const interval = setInterval(() => {
-        setQuestionIndex((prev) => (prev + 1) % CONTEMPLATIVE_QUESTIONS.length);
-      }, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [hasEntered]);
+    const audio = audioRef.current;
+    if (!audio || !audioStarted) return;
 
-  useEffect(() => {
-    if (hasEntered && audioRef.current) {
-      audioRef.current.play().catch(e => console.log('Audio autoplay prevented:', e));
-    }
-  }, [hasEntered]);
+    const handleTimeUpdate = () => {
+      const currentTime = audio.currentTime;
+
+      // Questions start appearing after 5 seconds
+      if (currentTime >= 5) {
+        setShowCurrentQuestion(true);
+        // Calculate which question to show: changes every 23 seconds after the 5s delay
+        const newIndex = Math.min(
+          Math.floor((currentTime - 5) / 23),
+          CONTEMPLATIVE_QUESTIONS.length - 1
+        );
+        setQuestionIndex(newIndex);
+      } else {
+        setShowCurrentQuestion(false);
+      }
+    };
+
+    audio.addEventListener('timeupdate', handleTimeUpdate);
+    return () => audio.removeEventListener('timeupdate', handleTimeUpdate);
+  }, [audioStarted]);
+
+  // Audio no longer auto-plays on enter - only when Listen button is clicked
 
   // Prevent scrolling past question section until Continue is clicked
   useEffect(() => {
@@ -141,21 +152,15 @@ export default function App() {
     setAudioEnded(true);
   };
 
-  const handleContinueToQuestions = () => {
-    if (audioEnded || isMuted) {
-      setShowQuestions(true);
-      // Allow natural scroll to continue - no forced scroll
+  const handleListenClick = () => {
+    if (audioRef.current) {
+      setAudioStarted(true);
+      audioRef.current.play().catch(e => console.log('Audio play failed:', e));
     }
   };
 
-  const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-      if (!isMuted) {
-        setAudioEnded(true); // Allow progression if muted
-      }
-    }
+  const handleContinueClick = () => {
+    setShowQuestions(true);
   };
 
   if (!hasEntered) {
@@ -182,19 +187,9 @@ export default function App() {
       <audio
         ref={audioRef}
         onEnded={handleAudioEnd}
-        muted={isMuted}
       >
-        {/* Placeholder - replace with actual audio file */}
         <source src="/audio/ambient.mp3" type="audio/mpeg" />
       </audio>
-
-      {/* Mute toggle */}
-      <button
-        onClick={toggleMute}
-        className="fixed top-8 right-8 z-50 p-3 rounded-full bg-slate-800/30 backdrop-blur-sm border border-slate-600/30 hover:bg-slate-700/30 transition-all"
-      >
-        {isMuted ? <VolumeX className="w-5 h-5 text-slate-300" /> : <Volume2 className="w-5 h-5 text-slate-300" />}
-      </button>
 
       {/* Hero Section - Statements and "now what?" */}
       <section className="min-h-screen flex items-center justify-center px-6 relative">
@@ -320,39 +315,62 @@ export default function App() {
           style={{ color: textColor }}
           className="max-w-4xl mx-auto text-center space-y-12"
         >
-          {/* Question Rotator */}
-          <div className="h-32 flex items-center justify-center">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={questionIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-                className="text-3xl md:text-4xl lg:text-5xl font-light leading-relaxed tracking-wide"
-              >
-                {CONTEMPLATIVE_QUESTIONS[questionIndex]}
-              </motion.p>
-            </AnimatePresence>
-          </div>
+          {/* Question Display Area - only visible after 5 seconds of audio */}
+          {audioStarted && showCurrentQuestion && (
+            <div className="h-32 flex items-center justify-center">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={questionIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                  className="text-3xl md:text-4xl lg:text-5xl font-light leading-relaxed tracking-wide"
+                >
+                  {CONTEMPLATIVE_QUESTIONS[questionIndex]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+          )}
 
-          {/* Continue Button - only shows after audio ends */}
-          {!showQuestions && (
+          {/* Listen Button - shows before audio starts */}
+          {!audioStarted && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: audioEnded || isMuted ? 1 : 0.3 }}
-              transition={{ duration: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5 }}
+              className="space-y-4"
             >
               <button
-                onClick={handleContinueToQuestions}
-                disabled={!audioEnded && !isMuted}
-                className={`px-12 py-4 text-lg font-light border rounded-sm transition-all duration-700 ${
-                  audioEnded || isMuted
-                    ? 'border-slate-400 hover:bg-slate-700/20 cursor-pointer'
-                    : 'border-slate-700 cursor-not-allowed'
-                }`}
+                onClick={handleListenClick}
+                className="px-12 py-4 text-lg font-light border border-slate-400 rounded-sm hover:bg-slate-700/20 transition-all duration-300"
               >
-                {audioEnded || isMuted ? 'Continue' : 'Listen...'}
+                Listen
+              </button>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5, duration: 1 }}
+                className="text-sm opacity-60"
+              >
+                get ready and put on headphones
+              </motion.p>
+            </motion.div>
+          )}
+
+          {/* Continue Button - shows after audio ends */}
+          {audioEnded && !showQuestions && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="mt-8"
+            >
+              <button
+                onClick={handleContinueClick}
+                className="px-12 py-4 text-lg font-light border border-slate-400 rounded-sm hover:bg-slate-700/20 transition-all duration-300"
+              >
+                Continue
               </button>
             </motion.div>
           )}
