@@ -56,14 +56,17 @@ export default function App() {
   const { scrollYProgress } = useScroll();
 
   // Transform scroll to color values - dawn transition
+  // Start dark and gradually lighten as user scrolls through the journey
   const backgroundColor = useTransform(
     scrollYProgress,
-    [0, 0.15, 0.3, 0.5, 0.7, 1],
+    [0, 0.05, 0.15, 0.3, 0.5, 0.7, 0.85, 1],
     [
-      'rgb(15, 23, 42)',      // Deep night blue
+      'rgb(15, 23, 42)',      // Deep night blue - start here
+      'rgb(15, 23, 42)',      // Hold dark for initial hero
       'rgb(30, 41, 59)',      // Pre-dawn
       'rgb(51, 65, 85)',      // Dawn breaking
       'rgb(100, 116, 139)',   // Early morning
+      'rgb(139, 152, 176)',   // Mid-morning
       'rgb(203, 213, 225)',   // Light morning
       'rgb(241, 245, 249)'    // Full daylight
     ]
@@ -71,11 +74,13 @@ export default function App() {
 
   const textColor = useTransform(
     scrollYProgress,
-    [0, 0.3, 0.5, 0.7],
+    [0, 0.05, 0.3, 0.5, 0.7, 0.85],
     [
-      'rgb(226, 232, 240)',   // Light text on dark
+      'rgb(226, 232, 240)',   // Light text on dark - start
+      'rgb(226, 232, 240)',   // Hold light for initial dark background
       'rgb(203, 213, 225)',
       'rgb(100, 116, 139)',
+      'rgb(71, 85, 105)',
       'rgb(51, 65, 85)'       // Dark text on light
     ]
   );
@@ -90,15 +95,15 @@ export default function App() {
     }
   }, [hasEntered, showQuestions]);
 
-  // Questions rotator (only when showQuestions is true)
+  // Questions rotator (starts when hasEntered is true, regardless of showQuestions)
   useEffect(() => {
-    if (showQuestions) {
+    if (hasEntered) {
       const interval = setInterval(() => {
         setQuestionIndex((prev) => (prev + 1) % CONTEMPLATIVE_QUESTIONS.length);
       }, 3000);
       return () => clearInterval(interval);
     }
-  }, [showQuestions]);
+  }, [hasEntered]);
 
   useEffect(() => {
     if (hasEntered && audioRef.current) {
@@ -113,11 +118,7 @@ export default function App() {
   const handleContinueToQuestions = () => {
     if (audioEnded || isMuted) {
       setShowQuestions(true);
-      // Scroll to questions section (after journey circle)
-      const questionsSection = document.getElementById('questions-section');
-      if (questionsSection) {
-        questionsSection.scrollIntoView({ behavior: 'smooth' });
-      }
+      // Allow natural scroll to continue - no forced scroll
     }
   };
 
