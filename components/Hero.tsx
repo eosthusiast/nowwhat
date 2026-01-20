@@ -30,13 +30,13 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-white px-4 md:px-12 overflow-hidden">
+    <div className="flex flex-col items-center justify-center h-full text-white px-4 md:px-12">
       <div className="w-full max-w-[95vw]">
         {/* Responsive, non-wrapping container */}
         <div className="flex flex-row items-center justify-center gap-x-[2vw] whitespace-nowrap">
-          
+
           {/* Left: Rotating Statement - Scales with screen, never wraps */}
-          <div className="flex-1 text-right min-w-0 overflow-hidden">
+          <div className="flex-1 text-right min-w-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={statementIndex}
@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 10 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="text-[clamp(1.2rem,4vw,6rem)] font-serif text-white font-light leading-none truncate"
+                className="text-[clamp(1.2rem,4vw,6rem)] font-serif text-white font-light leading-relaxed"
               >
                 {HERO_STATEMENTS[statementIndex]}
               </motion.div>
@@ -52,11 +52,11 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
           </div>
 
           {/* Right: Static Text - Scales identically, bold and italic */}
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.5 }}
-            className="flex-none text-[clamp(1.2rem,4vw,6rem)] font-serif font-bold italic tracking-tight text-white leading-none"
+            className="flex-none text-[clamp(1.2rem,4vw,6rem)] font-serif font-bold italic tracking-tight text-white leading-relaxed"
           >
             now what?
           </motion.h1>
