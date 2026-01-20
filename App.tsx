@@ -206,8 +206,49 @@ export default function App() {
                 We create the conditions for these meetings to matter.
               </p>
               <p className="text-2xl font-medium text-forest">
-                Then we do the unusual: we remove every obstacle to building together. Obstacles on all different levels.
+                Then we do the unusual: we remove every obstacle to building together. And we mean obstacles on all different levels:
               </p>
+            </div>
+          </FadeInWhenVisible>
+
+          <FadeInWhenVisible>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8 text-lg text-ink/80">
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Funding</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Infrastructure</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Time</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Space</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>Access to collaborators outside your world</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>The logistical friction that kills momentum</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>The institutional barriers that separate sectors</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>The scarcity thinking that makes collaboration feel competitive</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-terracotta mt-1">•</span>
+                <span>The permission structure that says you need to prove it before you can build it</span>
+              </div>
             </div>
           </FadeInWhenVisible>
         </div>
