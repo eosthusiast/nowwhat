@@ -60,7 +60,7 @@ const Descent: React.FC = () => {
                 id: 4,
                 title: "Available People",
                 subtitle: "Presence and commitment to what emerges",
-                content: "You're here fully. Two weeks of complete presence. Ready to commit to what captures you. No hedging, no backup plans. Available to row this boat with allies from completely different worlds."
+                content: "You're here fully. Two weeks of complete presence. And you're available to commit your next 2 years to row this boat with allies from completely different worlds."
               }
             ].map((item) => (
               <motion.div 
@@ -85,7 +85,7 @@ const Descent: React.FC = () => {
           <div className="text-center space-y-8">
             <h2 className="text-5xl font-serif font-bold">Who This Is For</h2>
             <p className="text-xl text-slate-600 leading-relaxed">
-              You touched people in meaningful ways. You have created amazing things. You feel what's at stake. 
+              You touched people in meaningful ways. You have created amazing things. You viscerally feel that something's amiss.
               You're standing at an empty page, asking "now what?" The answer lies outside your usual circles.
             </p>
           </div>
@@ -142,7 +142,7 @@ const Descent: React.FC = () => {
 
           <div className="p-12 border border-white/10 rounded-3xl bg-white/5 backdrop-blur-sm space-y-8">
             <h3 className="text-4xl font-serif font-bold">Ready to begin?</h3>
-            <p className="text-slate-400">Applications open early 2025. Leave your email to be notified.</p>
+            <p className="text-slate-400">Applications open early 2026. Leave your email to be notified.</p>
             
             <form className="max-w-md mx-auto flex flex-col md:flex-row gap-4">
               <input 
@@ -167,7 +167,7 @@ const Descent: React.FC = () => {
       <footer className="py-20 px-6 bg-slate-900 text-white">
         <div className="max-w-6xl mx-auto border-t border-white/10 pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-center md:text-left space-y-4">
-            <h4 className="text-2xl font-serif font-bold">Now What Alchemizer 2025</h4>
+            <h4 className="text-2xl font-serif font-bold">Now What Alchemizer 2026</h4>
             <p className="text-slate-500 text-sm max-w-xs">
               "Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rilke
             </p>

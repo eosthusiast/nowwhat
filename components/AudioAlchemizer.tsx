@@ -35,9 +35,9 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
     timerRef.current = setInterval(() => {
       setTimer(prev => {
         const next = prev + 1;
-        
-        // Logical Phase transition for UI text (not dependent on exact audio end yet)
-        if (next >= 30 && phase !== AudioPhase.QUESTIONS) {
+
+        // Transition to questions phase after 23s drop-in
+        if (next >= 23 && phase !== AudioPhase.QUESTIONS) {
           setPhase(AudioPhase.QUESTIONS);
         }
 
@@ -53,10 +53,19 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
 
   useEffect(() => {
     if (phase === AudioPhase.QUESTIONS) {
-      // Each question 23 seconds
-      const relativeTime = timer - 30;
-      const index = Math.floor(relativeTime / 23) % QUESTION_ROTATOR.length;
-      setQuestionIndex(index);
+      // 23s drop-in, then Q1 (7s), then Q2-Q7 (25s each)
+      // Timeline: 0-23s drop-in, 23-30s Q1, 30-55s Q2, 55-80s Q3, etc.
+      const relativeTime = timer - 23;
+
+      if (relativeTime < 7) {
+        // Q1: 0-7s (relative to questions start)
+        setQuestionIndex(0);
+      } else {
+        // Q2-Q7: starting at 7s, 25s each
+        const afterQ1 = relativeTime - 7;
+        const index = Math.min(Math.floor(afterQ1 / 25) + 1, QUESTION_ROTATOR.length - 1);
+        setQuestionIndex(index);
+      }
     }
   }, [timer, phase]);
 
@@ -101,7 +110,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
             
             <div className="space-y-4 max-w-sm">
               <p className="text-gray-400 font-sans text-sm tracking-wide leading-relaxed">
-                Use laptop, put away distractions, wear headphones, and get ready.
+                Put away distractions, wear headphones, and get ready.
               </p>
               <div className="flex items-center justify-center gap-2 text-indigo-500/60">
                 <Headset className="w-4 h-4" />
@@ -128,7 +137,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
                     exit={{ opacity: 0, y: -10 }}
                     className="text-3xl md:text-4xl font-serif italic text-white"
                   >
-                    We take 30s to drop in.
+                    Close your eyes. What is it like to be you now?
                   </motion.p>
                 ) : (
                   <motion.p
