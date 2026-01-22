@@ -22,7 +22,7 @@ const Descent: React.FC = () => {
               The question is: now what?
             </h2>
             <p className="text-sm md:text-base text-slate-500 max-w-2xl mx-auto md:mx-0 leading-relaxed text-center md:text-left">
-              The answer isn't found by adding more frameworks or strategies. It's revealed when you bring the right people together, remove what obstructs their natural brilliance, and make it effortless to build what emerges.
+              The answer lies in <strong>alchemy</strong>. It's revealed when you bring the right people together, remove what obstructs their natural brilliance, and make it effortless to build what emerges.
             </p>
           </motion.div>
         </div>
@@ -54,11 +54,11 @@ const Descent: React.FC = () => {
                 id: 3,
                 title: "Fertile Soil",
                 subtitle: "The ground from which emergence happens",
-                content: "Time spent free from distractions and less caught up in the mind. A process that unveils what's actually there. Swimming, sauna, silence, embodiment. We don't prescribe the form—we create the conditions."
+                content: "Time spent free from distractions and less caught up in the mind. A process that unveils what's actually there."
               },
               {
                 id: 4,
-                title: "Available People",
+                title: "Readiness",
                 subtitle: "Presence and commitment to what emerges",
                 content: "You're here fully. Two weeks of complete presence. And you're available to commit your next 2 years to row this boat with allies from completely different worlds."
               }
@@ -112,9 +112,25 @@ const Descent: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. CTA Section - Light Theme */}
+      {/* 4. Leadup + CTA Section */}
       <section className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-16">
+          {/* Leadup to final "now what" */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="space-y-8"
+          >
+            <p className="text-2xl md:text-3xl font-serif text-slate-600 leading-relaxed">
+              You've made it this far...
+            </p>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold italic text-indigo-600">
+              now what?
+            </h2>
+          </motion.div>
+
+          {/* CTA Box */}
           <div className="p-12 border border-slate-200 rounded-3xl bg-white/50 backdrop-blur-sm space-y-8">
             <h3 className="text-4xl font-serif font-bold text-slate-900">Ready to begin?</h3>
             <p className="text-slate-500">Applications open early 2026. Leave your email to be notified.</p>
@@ -132,23 +148,10 @@ const Descent: React.FC = () => {
             </form>
           </div>
 
-          <blockquote className="max-w-2xl mx-auto pt-20 border-t border-slate-200 italic text-slate-500 font-serif text-xl">
-            "We funded a collaboration between a quantum physicist and a Sufi poet. They're building something that shouldn't exist according to conventional categories. It's working."
+          {/* Rilke quote */}
+          <blockquote className="max-w-2xl mx-auto italic text-slate-500 font-serif text-lg">
+            "Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rilke
           </blockquote>
-        </div>
-      </section>
-
-      {/* 5. Now What - Final Section */}
-      <section className="py-32 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-5xl md:text-7xl font-serif font-bold text-indigo-600"
-          >
-            now what?
-          </motion.h2>
         </div>
       </section>
 
@@ -157,9 +160,6 @@ const Descent: React.FC = () => {
         <div className="max-w-6xl mx-auto border-t border-slate-200 pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-center md:text-left space-y-4">
             <h4 className="text-2xl font-serif font-bold text-slate-900">Now What Alchemizer 2026</h4>
-            <p className="text-slate-500 text-sm max-w-xs">
-              "Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rilke
-            </p>
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-6">

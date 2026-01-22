@@ -128,7 +128,7 @@ const App: React.FC = () => {
         </section>
 
         {unlockedStages.has(AppStage.JOURNEY) && (
-          <section id="journey" className="min-h-screen flex items-center justify-center py-20">
+          <section id="journey" className="min-h-screen">
             <JourneySection />
           </section>
         )}
