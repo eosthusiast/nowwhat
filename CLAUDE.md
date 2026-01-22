@@ -90,3 +90,9 @@ To test the full experience without manual progression:
 1. Set `IS_DEV_MODE = true` in `App.tsx:11`
 2. All stages unlock immediately on load
 3. Set back to `false` for production/intended gated experience
+
+## Git Commit Rules
+
+**IMPORTANT**: Before every git commit/push to GitHub:
+- Ensure `IS_DEV_MODE = false` in `App.tsx:11`
+- Dev mode must ALWAYS be off for production/GitHub
