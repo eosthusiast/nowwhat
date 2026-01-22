@@ -13,10 +13,10 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
   const [showContinue, setShowContinue] = useState(false);
 
   useEffect(() => {
-    // Rotate statements every 4s
+    // Rotate statements every 5.8s (69% of original speed)
     const rotateInterval = setInterval(() => {
       setStatementIndex(prev => (prev + 1) % HERO_STATEMENTS.length);
-    }, 4000);
+    }, 5800);
 
     // Show continue button after 15s
     const unlockTimer = setTimeout(() => {
@@ -32,31 +32,31 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
   return (
     <div className="flex flex-col items-center justify-center h-full text-white px-4 md:px-12">
       <div className="w-full max-w-[95vw]">
-        {/* Responsive, non-wrapping container */}
-        <div className="flex flex-row items-center justify-center gap-x-[2vw] whitespace-nowrap">
+        {/* Responsive, centered vertical layout */}
+        <div className="flex flex-col items-center justify-center gap-y-4">
 
-          {/* Left: Rotating Statement - Scales with screen, never wraps */}
-          <div className="flex-1 text-right min-w-0">
+          {/* Top: Rotating Statement - Centered */}
+          <div className="text-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={statementIndex}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="text-[clamp(1.2rem,4vw,6rem)] font-serif text-white font-light leading-relaxed"
+                className="text-[clamp(1.5rem,5vw,7rem)] font-serif text-white font-light leading-relaxed"
               >
                 {HERO_STATEMENTS[statementIndex]}
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Right: Static Text - Scales identically, bold and italic */}
+          {/* Bottom: Static Text - Centered below rotator */}
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.5 }}
-            className="flex-none text-[clamp(1.2rem,4vw,6rem)] font-serif font-bold italic tracking-tight text-white leading-relaxed"
+            className="text-[clamp(2rem,6.5vw,9rem)] font-serif font-bold italic tracking-tight text-white leading-relaxed"
           >
             now what?
           </motion.h1>

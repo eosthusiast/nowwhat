@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Headset, CheckCircle2, Waves } from 'lucide-react';
+import { Play, Headset, Waves } from 'lucide-react';
 import { QUESTION_ROTATOR } from '../constants';
 
 enum AudioPhase {
@@ -20,9 +20,25 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
   const [phase, setPhase] = useState<AudioPhase>(isUnlocked ? AudioPhase.FINISHED : AudioPhase.IDLE);
   const [timer, setTimer] = useState(0); // Internal timer for text rotation logic
   const [questionIndex, setQuestionIndex] = useState(0);
-  
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const handleNextStep = () => {
+    setIsTransitioning(true);
+    // After the flash animation completes (2s expand + 1.5s fade), trigger the unlock and scroll
+    setTimeout(() => {
+      onUnlock();
+      // Scroll to descent section
+      setTimeout(() => {
+        const descentEl = document.getElementById('descent');
+        if (descentEl) {
+          descentEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }, 3500);
+  };
 
   const startAudio = () => {
     if (audioRef.current) {
@@ -146,7 +162,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 1 }}
-                    className="text-3xl md:text-5xl font-serif text-white max-w-2xl mx-auto leading-tight"
+                    className="text-3xl md:text-5xl font-serif text-white max-w-2xl mx-auto leading-relaxed"
                   >
                     {QUESTION_ROTATOR[questionIndex]}
                   </motion.p>
@@ -183,20 +199,55 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
             className="flex flex-col items-center gap-12"
           >
             <div className="text-center space-y-4">
-              <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto mb-6" />
+              {/* Small white circle indicator */}
+              <motion.div
+                className="w-4 h-4 bg-white rounded-full mx-auto mb-6"
+                animate={isTransitioning ? {} : {
+                  scale: [1, 1.2, 1],
+                  opacity: [0.6, 1, 0.6]
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 2,
+                  ease: "easeInOut"
+                }}
+              />
               <h3 className="text-4xl font-serif text-white font-bold">The questions remain.</h3>
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(99, 102, 241, 1)' }}
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
               whileTap={{ scale: 0.95 }}
-              onClick={onUnlock}
-              className="px-12 py-4 rounded-full border border-indigo-500 text-white font-sans tracking-widest uppercase text-sm transition-all bg-indigo-500/20"
+              onClick={handleNextStep}
+              disabled={isTransitioning}
+              className="px-12 py-4 rounded-full border border-white/50 text-white font-sans tracking-widest uppercase text-sm transition-all bg-white/10"
             >
               Ready to take the next step?
             </motion.button>
           </motion.div>
         )}
+
+        {/* Full-screen flash transition overlay */}
+        <AnimatePresence>
+          {isTransitioning && (
+            <motion.div
+              className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
+              transition={{ delay: 2, duration: 1.5, ease: "easeOut" }}
+            >
+              <motion.div
+                className="bg-white rounded-full"
+                initial={{ width: 16, height: 16 }}
+                animate={{
+                  width: '300vmax',
+                  height: '300vmax',
+                  transition: { duration: 2, ease: [0.4, 0, 0.2, 1] }
+                }}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </AnimatePresence>
     </div>
   );

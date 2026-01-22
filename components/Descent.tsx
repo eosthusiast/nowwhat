@@ -5,7 +5,7 @@ import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkle
 
 const Descent: React.FC = () => {
   return (
-    <div className="bg-[#fdfcf8] text-slate-900 font-sans selection:bg-indigo-100 pb-20">
+    <div className="bg-[#f7f5f0] text-slate-900 font-sans selection:bg-indigo-100 pb-20">
       {/* 1. The Convergence Moment */}
       <section className="min-h-screen flex items-center justify-center px-6 py-32 border-b border-slate-100">
         <div className="max-w-4xl mx-auto space-y-12">
@@ -112,43 +112,18 @@ const Descent: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. The Vision & CTA */}
-      <section className="py-32 px-6 bg-slate-900 text-white rounded-t-[4rem]">
+      {/* 4. CTA Section - Light Theme */}
+      <section className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="space-y-12"
-          >
-            <h2 className="text-4xl md:text-6xl font-serif font-bold">The Vision</h2>
-            
-            <div className="space-y-10 max-w-3xl mx-auto">
-              <p className="text-lg md:text-xl font-serif leading-relaxed text-slate-200">
-                We imagine a world where everything that makes us human becomes the foundation for building what's possible. Where together we create solutions none could envision alone. Where meeting survival needs and building regenerative futures is funded, supported, and already in motion.
-              </p>
+          <div className="p-12 border border-slate-200 rounded-3xl bg-white/50 backdrop-blur-sm space-y-8">
+            <h3 className="text-4xl font-serif font-bold text-slate-900">Ready to begin?</h3>
+            <p className="text-slate-500">Applications open early 2026. Leave your email to be notified.</p>
 
-              <div>
-                <p className="text-xl md:text-2xl font-serif font-bold italic text-slate-200 leading-relaxed">
-                  Unimaginable collaborations leading to unimaginable solutions.
-                </p>
-              </div>
-
-              <p className="text-lg md:text-xl font-serif text-slate-200 leading-relaxed">
-                Startups. Movements. Films. Communities. Technologies. Initiatives. Whatever gets alchemized.
-              </p>
-            </div>
-          </motion.div>
-
-          <div className="p-12 border border-white/10 rounded-3xl bg-white/5 backdrop-blur-sm space-y-8">
-            <h3 className="text-4xl font-serif font-bold">Ready to begin?</h3>
-            <p className="text-slate-400">Applications open early 2026. Leave your email to be notified.</p>
-            
             <form className="max-w-md mx-auto flex flex-col md:flex-row gap-4">
-              <input 
-                type="email" 
+              <input
+                type="email"
                 placeholder="email@example.com"
-                className="flex-1 bg-white/10 border border-white/20 rounded-full px-8 py-4 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
+                className="flex-1 bg-slate-100 border border-slate-200 rounded-full px-8 py-4 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"
               />
               <button className="bg-indigo-600 hover:bg-indigo-500 text-white rounded-full px-8 py-4 font-bold flex items-center justify-center gap-2 transition-all group">
                 Notify Me
@@ -157,17 +132,31 @@ const Descent: React.FC = () => {
             </form>
           </div>
 
-          <blockquote className="max-w-2xl mx-auto pt-20 border-t border-white/10 italic text-slate-400 font-serif text-xl">
+          <blockquote className="max-w-2xl mx-auto pt-20 border-t border-slate-200 italic text-slate-500 font-serif text-xl">
             "We funded a collaboration between a quantum physicist and a Sufi poet. They're building something that shouldn't exist according to conventional categories. It's working."
           </blockquote>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-20 px-6 bg-slate-900 text-white">
-        <div className="max-w-6xl mx-auto border-t border-white/10 pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
+      {/* 5. Now What - Final Section */}
+      <section className="py-32 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            className="text-5xl md:text-7xl font-serif font-bold text-indigo-600"
+          >
+            now what?
+          </motion.h2>
+        </div>
+      </section>
+
+      {/* Footer - Light Theme */}
+      <footer className="py-20 px-6">
+        <div className="max-w-6xl mx-auto border-t border-slate-200 pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-center md:text-left space-y-4">
-            <h4 className="text-2xl font-serif font-bold">Now What Alchemizer 2026</h4>
+            <h4 className="text-2xl font-serif font-bold text-slate-900">Now What Alchemizer 2026</h4>
             <p className="text-slate-500 text-sm max-w-xs">
               "Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rilke
             </p>
@@ -175,11 +164,11 @@ const Descent: React.FC = () => {
 
           <div className="flex flex-col items-center md:items-end gap-6">
             <div className="flex gap-6">
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Instagram /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><MessageCircle /></a>
-              <a href="mailto:hello@nowwhatalchemizer.com" className="text-slate-400 hover:text-white transition-colors"><Mail /></a>
+              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors"><Instagram /></a>
+              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors"><MessageCircle /></a>
+              <a href="mailto:hello@nowwhatalchemizer.com" className="text-slate-400 hover:text-indigo-600 transition-colors"><Mail /></a>
             </div>
-            <p className="text-[10px] uppercase tracking-widest text-slate-600">Built with intention • All rights reserved</p>
+            <p className="text-[10px] uppercase tracking-widest text-slate-400">Built with intention • All rights reserved</p>
           </div>
         </div>
       </footer>

@@ -28,7 +28,7 @@ const App: React.FC = () => {
       case AppStage.AUDIO:
         return '#050b1a'; // Deep Navy
       case AppStage.DESCENT:
-        return '#fdfcf8'; // Paper Off-White
+        return '#f7f5f0'; // Warm Off-White (brightest white reserved for flash)
       default:
         return '#050b1a';
     }

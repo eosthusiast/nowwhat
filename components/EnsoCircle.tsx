@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { JOURNEY_STOPS } from '../constants';
 import { Compass, Sparkles, Users, Globe } from 'lucide-react';
@@ -11,8 +11,71 @@ const ICON_MAP = {
   left: Globe
 };
 
+// Order for sequential animation: top, right, bottom, left
+const POSITION_ORDER = ['top', 'right', 'bottom', 'left'];
+const AUTO_ANIMATION_INTERVAL = 4000; // 4 seconds per corner
+
+const INITIAL_DELAY = 3000; // 3 seconds delay before starting auto-animation
+
 const EnsoCircle: React.FC = () => {
   const [activeStop, setActiveStop] = useState<number | null>(null);
+  const [autoActiveIndex, setAutoActiveIndex] = useState<number>(-1); // Start at -1 (nothing shown)
+  const [isHovering, setIsHovering] = useState(false);
+  const [hasStartedAuto, setHasStartedAuto] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const delayTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Initial delay before starting auto-animation
+  useEffect(() => {
+    delayTimeoutRef.current = setTimeout(() => {
+      setHasStartedAuto(true);
+      setAutoActiveIndex(0); // Start with first position (top)
+    }, INITIAL_DELAY);
+
+    return () => {
+      if (delayTimeoutRef.current) {
+        clearTimeout(delayTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Auto-animation effect (only runs after initial delay)
+  useEffect(() => {
+    if (!hasStartedAuto) return;
+
+    // Start auto-animation when not hovering
+    if (!isHovering) {
+      intervalRef.current = setInterval(() => {
+        setAutoActiveIndex((prev) => (prev + 1) % POSITION_ORDER.length);
+      }, AUTO_ANIMATION_INTERVAL);
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isHovering, hasStartedAuto]);
+
+  // Get the index of a stop based on its position in the auto-animation order
+  const getStopIndexByPosition = (position: string): number => {
+    return JOURNEY_STOPS.findIndex(stop => stop.position === position);
+  };
+
+  // Determine which stop should be active (hover takes priority over auto)
+  const currentActiveStop = isHovering
+    ? activeStop
+    : (autoActiveIndex >= 0 ? getStopIndexByPosition(POSITION_ORDER[autoActiveIndex]) : null);
+
+  const handleMouseEnter = (idx: number) => {
+    setIsHovering(true);
+    setActiveStop(idx);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setActiveStop(null);
+  };
 
   const getPositionStyles = (pos: string) => {
     switch (pos) {
@@ -90,27 +153,40 @@ const EnsoCircle: React.FC = () => {
       <div className="absolute inset-[15%] pointer-events-none">
         {JOURNEY_STOPS.map((stop, idx) => {
           const Icon = ICON_MAP[stop.position as keyof typeof ICON_MAP];
+          const isActive = currentActiveStop === idx;
           return (
-            <div 
+            <div
               key={idx}
               className={`absolute ${getPositionStyles(stop.position)} pointer-events-auto group`}
-              onMouseEnter={() => setActiveStop(idx)}
-              onMouseLeave={() => setActiveStop(null)}
+              onMouseEnter={() => handleMouseEnter(idx)}
+              onMouseLeave={handleMouseLeave}
             >
               <motion.div
+                animate={isActive ? {
+                  scale: 1.15,
+                  boxShadow: '0 0 20px rgba(129, 140, 248, 0.6), 0 0 40px rgba(129, 140, 248, 0.3)'
+                } : {
+                  scale: 1,
+                  boxShadow: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)'
+                }}
                 whileHover={{ scale: 1.15, rotate: 5 }}
-                className="w-10 h-10 md:w-12 md:h-12 bg-indigo-950/40 backdrop-blur-md border border-indigo-500/20 rounded-full flex items-center justify-center text-indigo-300/60 group-hover:text-indigo-200 group-hover:border-indigo-400/40 cursor-help transition-all duration-500 shadow-inner"
+                transition={{ duration: 0.3 }}
+                className={`w-10 h-10 md:w-12 md:h-12 bg-indigo-950/40 backdrop-blur-md border rounded-full flex items-center justify-center cursor-help transition-colors duration-500 ${
+                  isActive
+                    ? 'border-indigo-400/60 text-indigo-200'
+                    : 'border-indigo-500/20 text-indigo-300/60 group-hover:text-indigo-200 group-hover:border-indigo-400/40'
+                }`}
               >
                 <Icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
               </motion.div>
 
               <AnimatePresence>
-                {activeStop === idx && (
+                {isActive && (
                   <motion.div
                     initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                     exit={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
-                    className="absolute z-30 w-56 md:w-72 p-6 bg-slate-900/90 border border-indigo-500/30 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] backdrop-blur-lg pointer-events-none overflow-hidden"
+                    className="absolute z-30 w-44 md:w-52 p-4 bg-slate-900/90 border border-indigo-500/30 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] backdrop-blur-lg pointer-events-none overflow-hidden"
                     style={{
                       top: stop.position === 'bottom' ? '60px' : 'auto',
                       bottom: stop.position === 'top' ? '60px' : 'auto',
@@ -121,9 +197,9 @@ const EnsoCircle: React.FC = () => {
                   >
                     {/* Decorative mark */}
                     <div className="absolute -right-4 -top-4 w-12 h-12 bg-indigo-500/5 rounded-full blur-xl" />
-                    
-                    <h4 className="font-serif text-xl font-bold text-white mb-2 tracking-tight">{stop.title}</h4>
-                    <p className="text-sm text-indigo-100/70 leading-relaxed font-sans font-light">{stop.description}</p>
+
+                    <h4 className="font-serif text-sm font-bold text-white mb-1.5 tracking-tight">{stop.title}</h4>
+                    <p className="text-[10px] text-indigo-100/70 leading-relaxed font-sans font-light">{stop.description}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
