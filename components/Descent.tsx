@@ -14,7 +14,7 @@ const Descent: React.FC = () => {
     if (sectionInView && convergenceStep < 3) {
       timerRef.current = setTimeout(() => {
         setConvergenceStep(prev => prev + 1);
-      }, 6000);
+      }, 4000);
     }
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
@@ -47,6 +47,7 @@ const Descent: React.FC = () => {
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 4, ease: [0.25, 0.1, 0.25, 1] }}
                   className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600"
                 >
                   We all know what the problems are: AI, climate, mental health crisis, collective incoherence, you name it…
@@ -59,6 +60,7 @@ const Descent: React.FC = () => {
                 <motion.h2
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 4, ease: [0.25, 0.1, 0.25, 1] }}
                   className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8"
                 >
                   The question is: now what?
@@ -71,6 +73,7 @@ const Descent: React.FC = () => {
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 4, ease: [0.25, 0.1, 0.25, 1] }}
                   className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left"
                 >
                   The answer lies in the alchemy of bringing the right people together at the right time in the right place.
