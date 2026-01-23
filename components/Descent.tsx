@@ -89,138 +89,80 @@ const Descent: React.FC = () => {
         }}
         onViewportLeave={() => setSectionInView(false)}
       >
-        <motion.div layout className="max-w-4xl mx-auto space-y-12" transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}>
-          <motion.div layout className="space-y-8" transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}>
-            {convergenceStep >= 1 && (
-              <motion.p
-                layout
-                className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600"
+        <div className="max-w-4xl mx-auto space-y-12">
+          <div className="space-y-8">
+            {/* Problem - always rendered for space, opacity controlled */}
+            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600">
+              <motion.span
+                animate={{ opacity: problemStep >= 1 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
               >
-                <AnimatePresence>
-                  {problemStep >= 1 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      We all know what the problems are:
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {problemStep >= 2 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      {" "}AI,
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {problemStep >= 3 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      {" "}climate,
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {problemStep >= 4 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      {" "}mental health crisis,
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {problemStep >= 5 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      {" "}collective incoherence,
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {problemStep >= 6 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      {" "}you name it…
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.p>
-            )}
-
-            <AnimatePresence>
-              {convergenceStep >= 2 && (
-                <motion.h2
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8"
-                >
-                  The question is: now what?
-                </motion.h2>
-              )}
-            </AnimatePresence>
-
-            {convergenceStep >= 3 && (
-              <motion.p
-                layout
-                className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left"
+                We all know what the problems are:
+              </motion.span>
+              <motion.span
+                animate={{ opacity: problemStep >= 2 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
               >
-                <AnimatePresence>
-                  {answerStep >= 1 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      The answer lies in the alchemy of bringing the right people together
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {answerStep >= 2 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      {" "}at the right time
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {answerStep >= 3 && (
-                    <motion.span
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                    >
-                      {" "}in the right place.
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </motion.p>
-            )}
-          </motion.div>
-        </motion.div>
+                {" "}AI,
+              </motion.span>
+              <motion.span
+                animate={{ opacity: problemStep >= 3 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                {" "}climate,
+              </motion.span>
+              <motion.span
+                animate={{ opacity: problemStep >= 4 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                {" "}mental health crisis,
+              </motion.span>
+              <motion.span
+                animate={{ opacity: problemStep >= 5 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                {" "}collective incoherence,
+              </motion.span>
+              <motion.span
+                animate={{ opacity: problemStep >= 6 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                {" "}you name it…
+              </motion.span>
+            </p>
+
+            {/* Question - always rendered for space, opacity controlled */}
+            <motion.h2
+              animate={{ opacity: convergenceStep >= 2 ? 1 : 0 }}
+              transition={{ duration: 2, ease: "easeOut" }}
+              className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8"
+            >
+              The question is: now what?
+            </motion.h2>
+
+            {/* Answer - always rendered for space, opacity controlled */}
+            <p className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left">
+              <motion.span
+                animate={{ opacity: answerStep >= 1 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                The answer lies in the alchemy of bringing the right people together
+              </motion.span>
+              <motion.span
+                animate={{ opacity: answerStep >= 2 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                {" "}at the right time
+              </motion.span>
+              <motion.span
+                animate={{ opacity: answerStep >= 3 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                {" "}in the right place.
+              </motion.span>
+            </p>
+          </div>
+        </div>
 
         {/* Continue button - positioned at bottom */}
         {answerStep >= 3 && (
