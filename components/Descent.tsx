@@ -48,7 +48,7 @@ const Descent: React.FC = () => {
 
   // Handle staged reveal for the answer sentence
   useEffect(() => {
-    if (convergenceStep === 3 && answerStep < 3) {
+    if (convergenceStep === 3 && answerStep < 4) {
       answerTimerRef.current = setTimeout(() => {
         setAnswerStep(prev => prev + 1);
       }, answerStep === 0 ? 0 : 1500); // First part immediately, then 1.5s delays
@@ -158,14 +158,20 @@ const Descent: React.FC = () => {
                 animate={{ opacity: answerStep >= 3 ? 1 : 0 }}
                 transition={{ duration: 2, ease: "easeOut" }}
               >
-                {" "}in the right place.
+                {" "}in the right way.
+              </motion.span>
+              <motion.span
+                animate={{ opacity: answerStep >= 4 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                {" "}This could be the antidote to the epidemic of helplessness.
               </motion.span>
             </p>
           </div>
         </div>
 
         {/* Continue button - positioned at bottom */}
-        {answerStep >= 3 && (
+        {answerStep >= 4 && (
           <motion.button
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

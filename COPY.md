@@ -93,7 +93,7 @@ Keep listening. Let the questions sit with you.
 
 The questions remain...
 
-**Button:** Are you ready for the antidote to the epidemic of helplessness?
+**Button:** Ready when you are.
 
 *"Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rainer Maria Rilke*
 
@@ -107,7 +107,7 @@ We all know what the problems are: AI, climate, mental health crisis, collective
 
 **The question is: now what?**
 
-The answer lies in the alchemy of bringing the right people together at the right time in the right place.
+The answer lies in the alchemy of bringing the right people together at the right time in the right way. This could be the antidote to the epidemic of helplessness.
 
 ---
 

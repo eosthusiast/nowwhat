@@ -322,7 +322,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
               disabled={isTransitioning}
               className="px-12 py-4 rounded-full border border-white/50 text-white font-sans tracking-wide text-base transition-all bg-white/10"
             >
-              Are you ready for the antidote<br />to the epidemic of helplessness?
+              Ready when you are.
             </motion.button>
 
             <p className="text-white/30 font-serif text-base italic mt-8 max-w-md">
