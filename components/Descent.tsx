@@ -14,7 +14,7 @@ const Descent: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="space-y-8"
           >
-            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-300">
+            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600">
               You've heard this countless times before. It's the same old story: we're at a threshold. AI, climate, and collective incoherence are accelerating faster than our solutions. The old incentives aren't working. The standard approaches aren't aligned to what humanity actually needs.
             </p>
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8">
