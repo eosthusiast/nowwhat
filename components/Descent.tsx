@@ -222,10 +222,7 @@ const Descent: React.FC = () => {
           <div className="text-center space-y-8">
             <h2 className="text-5xl font-serif font-bold">Who This Is For</h2>
             <p className="text-xl text-slate-600 leading-relaxed">
-              The right people are the ones who are ready to commit their next 2 years (or their whole lives) to solutions. People with the courage to stand in their truth. People who we're ready to support in building what emerges.
-            </p>
-            <p className="text-xl text-slate-600 leading-relaxed">
-              You're proud of what you created in the past. You've left a meaningful mark on others. You know deep in your bones that something's amiss. You feel the need to do things differently. You're standing at an empty page, asking "now what?"
+              You're ready to commit your next 2 years (or your whole life) to solutions. You have the courage to stand in your truth. You're proud of what you created in the past. You've left a meaningful mark on others. You know deep in your bones that something's amiss. You feel the need to do things differently. You're standing at an empty page, asking "now what?"
             </p>
             <p className="text-xl text-slate-600 leading-relaxed">
               The answer lies outside your usual circles.
