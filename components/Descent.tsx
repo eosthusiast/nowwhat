@@ -20,7 +20,7 @@ const Descent: React.FC = () => {
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8">
               The question is: now what?
             </h2>
-            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left">
+            <p className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left">
               The answer lies in the alchemy of bringing people together who are ready to commit their next 2 years to solutions. Who have the courage to stand in their truth and who we support to build what emerges.
             </p>
           </motion.div>
