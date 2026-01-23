@@ -7,10 +7,12 @@ const Descent: React.FC = () => {
   const [showWhatNow, setShowWhatNow] = useState(false);
   const [convergenceStep, setConvergenceStep] = useState(0); // 0: nothing, 1: problem, 2: question, 3: answer
   const [problemStep, setProblemStep] = useState(0); // 0-6: staged reveal of problem items
-  const [answerStep, setAnswerStep] = useState(0); // 0: nothing, 1: "together", 2: "at the right time", 3: "in the right place"
+  const [questionStep, setQuestionStep] = useState(0); // 0-2: staged reveal of question
+  const [answerStep, setAnswerStep] = useState(0); // 0: nothing, 1: "together", 2: "at the right time", 3: "in the right way", 4: "antidote"
   const [sectionInView, setSectionInView] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const problemTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const questionTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const answerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Handle sequential reveal for convergence section
@@ -45,6 +47,18 @@ const Descent: React.FC = () => {
       if (problemTimerRef.current) clearTimeout(problemTimerRef.current);
     };
   }, [convergenceStep, problemStep]);
+
+  // Handle staged reveal for the question sentence
+  useEffect(() => {
+    if (convergenceStep >= 2 && questionStep < 2) {
+      questionTimerRef.current = setTimeout(() => {
+        setQuestionStep(prev => prev + 1);
+      }, questionStep === 0 ? 0 : 1500); // First part immediately, then 1.5s delay
+    }
+    return () => {
+      if (questionTimerRef.current) clearTimeout(questionTimerRef.current);
+    };
+  }, [convergenceStep, questionStep]);
 
   // Handle staged reveal for the answer sentence
   useEffect(() => {
@@ -132,13 +146,20 @@ const Descent: React.FC = () => {
             </p>
 
             {/* Question - always rendered for space, opacity controlled */}
-            <motion.h2
-              animate={{ opacity: convergenceStep >= 2 ? 1 : 0 }}
-              transition={{ duration: 2, ease: "easeOut" }}
-              className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8"
-            >
-              The question is: now what?
-            </motion.h2>
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8">
+              <motion.span
+                animate={{ opacity: questionStep >= 1 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                The question is:
+              </motion.span>
+              <motion.span
+                animate={{ opacity: questionStep >= 2 ? 1 : 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
+              >
+                {" "}now what?
+              </motion.span>
+            </h2>
 
             {/* Answer - always rendered for space, opacity controlled */}
             <p className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left">
