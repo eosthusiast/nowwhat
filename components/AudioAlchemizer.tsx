@@ -109,7 +109,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
   }, []);
 
   return (
-    <div className="w-full max-w-4xl px-6 text-center">
+    <div className="w-full max-w-4xl px-6 text-center relative">
       {/* Hidden Audio Element */}
       <audio
         ref={audioRef}
@@ -140,22 +140,22 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={startAudio}
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-indigo-500/50 flex items-center justify-center group relative overflow-hidden"
+              className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-purple-700/50 flex items-center justify-center group relative overflow-hidden"
             >
               <motion.div
-                className="absolute inset-0 bg-indigo-500/10"
+                className="absolute inset-0 bg-purple-700/10"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
                 transition={{ repeat: Infinity, duration: 4 }}
               />
-              <Play className="w-12 h-12 md:w-16 md:h-16 text-indigo-400 group-hover:text-white transition-colors ml-2" />
-              <span className="absolute bottom-6 md:bottom-10 text-[10px] tracking-widest uppercase text-indigo-400">Listen</span>
+              <Play className="w-12 h-12 md:w-16 md:h-16 text-purple-600 group-hover:text-white transition-colors ml-2" />
+              <span className="absolute bottom-6 md:bottom-10 text-[10px] tracking-widest uppercase text-purple-600">Listen</span>
             </motion.button>
             
             <div className="space-y-4 max-w-sm">
               <p className="text-gray-400 font-sans text-sm tracking-wide leading-relaxed">
                 Put away distractions, wear headphones, and get ready.
               </p>
-              <div className="flex items-center justify-center gap-2 text-indigo-500/60">
+              <div className="flex items-center justify-center gap-2 text-purple-700/60">
                 <Headset className="w-4 h-4" />
                 <span className="text-[10px] uppercase tracking-widest">Contemplative Experience (4:15)</span>
               </div>
@@ -211,7 +211,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
                     ease: "easeInOut"
                   }}
                 >
-                  <Waves className="w-6 h-6 text-indigo-400/40" />
+                  <Waves className="w-6 h-6 text-purple-600/40" />
                 </motion.div>
               </div>
             </div>
@@ -240,7 +240,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
-                className="text-indigo-400/60 font-sans text-sm tracking-widest"
+                className="text-purple-600/60 font-sans text-sm tracking-widest"
               >
                 {formatTime(remainingTime)} remaining
               </motion.div>
@@ -258,7 +258,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
                 ease: "easeInOut"
               }}
             >
-              <Waves className="w-8 h-8 text-indigo-400/40" />
+              <Waves className="w-8 h-8 text-purple-600/40" />
             </motion.div>
 
             {/* Skip button */}
@@ -297,7 +297,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
                   ease: "easeInOut"
                 }}
               />
-              <h3 className="text-4xl font-serif text-white font-bold">The questions remain.</h3>
+              <h3 className="text-4xl font-serif text-white font-bold">The questions remain...</h3>
             </div>
 
             <motion.button
@@ -334,6 +334,15 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
           )}
         </AnimatePresence>
       </AnimatePresence>
+
+      {/* Hidden dev skip button */}
+      {phase !== AudioPhase.FINISHED && (
+        <button
+          onClick={handleSkip}
+          className="fixed bottom-4 right-4 w-8 h-8 opacity-0 hover:opacity-20 transition-opacity cursor-default"
+          aria-label="Skip"
+        />
+      )}
     </div>
   );
 };

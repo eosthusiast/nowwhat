@@ -92,7 +92,7 @@ const EnsoCircle: React.FC = () => {
       {/* Hand-drawn Enso SVG */}
       <svg 
         viewBox="0 0 100 100" 
-        className="absolute inset-0 w-full h-full text-indigo-400/20 drop-shadow-2xl"
+        className="absolute inset-0 w-full h-full text-purple-600/20 drop-shadow-2xl"
         style={{ filter: 'url(#enso-texture)' }}
       >
         <defs>
@@ -164,17 +164,17 @@ const EnsoCircle: React.FC = () => {
               <motion.div
                 animate={isActive ? {
                   scale: 1.15,
-                  boxShadow: '0 0 20px rgba(129, 140, 248, 0.6), 0 0 40px rgba(129, 140, 248, 0.3)'
+                  boxShadow: '0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.3)'
                 } : {
                   scale: 1,
                   boxShadow: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)'
                 }}
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 transition={{ duration: 0.3 }}
-                className={`w-10 h-10 md:w-12 md:h-12 bg-indigo-950/40 backdrop-blur-md border rounded-full flex items-center justify-center cursor-help transition-colors duration-500 ${
+                className={`w-10 h-10 md:w-12 md:h-12 bg-purple-900/40 backdrop-blur-md border rounded-full flex items-center justify-center cursor-help transition-colors duration-500 ${
                   isActive
-                    ? 'border-indigo-400/60 text-indigo-200'
-                    : 'border-indigo-500/20 text-indigo-300/60 group-hover:text-indigo-200 group-hover:border-indigo-400/40'
+                    ? 'border-purple-600/60 text-purple-400'
+                    : 'border-purple-700/20 text-purple-500/60 group-hover:text-purple-400 group-hover:border-purple-600/40'
                 }`}
               >
                 <Icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
@@ -183,23 +183,21 @@ const EnsoCircle: React.FC = () => {
               <AnimatePresence>
                 {isActive && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
-                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                    exit={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
-                    className="absolute z-30 w-44 md:w-52 p-4 bg-slate-900/90 border border-indigo-500/30 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] backdrop-blur-lg pointer-events-none overflow-hidden"
+                    initial={{ opacity: 0, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, filter: 'blur(4px)' }}
+                    className="absolute z-30 w-auto p-3 bg-slate-900/90 border border-purple-700/30 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.5)] backdrop-blur-lg pointer-events-none overflow-hidden"
                     style={{
-                      top: stop.position === 'bottom' ? '60px' : 'auto',
-                      bottom: stop.position === 'top' ? '60px' : 'auto',
-                      left: stop.position === 'right' ? '60px' : (stop.position === 'top' || stop.position === 'bottom' ? '50%' : 'auto'),
-                      right: stop.position === 'left' ? '60px' : 'auto',
-                      transform: (stop.position === 'top' || stop.position === 'bottom') ? 'translateX(-50%)' : 'none'
+                      ...(stop.position === 'top' && { bottom: '60px', left: '50%', transform: 'translateX(-50%)' }),
+                      ...(stop.position === 'bottom' && { top: '60px', left: '50%', transform: 'translateX(-50%)' }),
+                      ...(stop.position === 'left' && { right: '60px', top: '50%', transform: 'translateY(-50%)' }),
+                      ...(stop.position === 'right' && { left: '60px', top: '50%', transform: 'translateY(-50%)' }),
                     }}
                   >
                     {/* Decorative mark */}
-                    <div className="absolute -right-4 -top-4 w-12 h-12 bg-indigo-500/5 rounded-full blur-xl" />
+                    <div className="absolute -right-4 -top-4 w-12 h-12 bg-purple-700/5 rounded-full blur-xl" />
 
-                    <h4 className="font-serif text-sm font-bold text-white mb-1.5 tracking-tight">{stop.title}</h4>
-                    <p className="text-[10px] text-indigo-100/70 leading-relaxed font-sans font-light">{stop.description}</p>
+                    <h4 className="font-serif text-sm font-bold text-white tracking-tight whitespace-nowrap">{stop.title}</h4>
                   </motion.div>
                 )}
               </AnimatePresence>

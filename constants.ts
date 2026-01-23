@@ -1,7 +1,6 @@
 
 export const HERO_STATEMENTS = [
   "You had a life-changing experience...",
-  "Climate change is accelerating...",
   "The biosphere is collapsing...",
   "People are addicted to screens...",
   "AI is evolving faster than wisdom...",
@@ -12,6 +11,7 @@ export const HERO_STATEMENTS = [
   "The world feels upside down...",
   "You're ready to serve what's next...",
   "Your kids are asking hard questions...",
+  "Climate change is accelerating...",
   "You sold your company...",
   "You've seen behind the curtain...",
   "The mushrooms showed you a path...",
@@ -21,32 +21,30 @@ export const HERO_STATEMENTS = [
 export const JOURNEY_STOPS = [
   {
     title: "Call to Adventure",
-    description: "The spark of recognition that the path you're on has reached its natural conclusion.",
     position: "top"
   },
   {
     title: "Unexpected Experience",
-    description: "Stepping into the unknown where standard logic fails and intuition leads.",
     position: "right"
   },
   {
     title: "Finding Kinship",
-    description: "Discovering those who speak the language of your deepest questions.",
     position: "bottom"
   },
   {
-    title: "Sharing with the World",
-    description: "Bringing the alchemized vision back to the structures of society.",
+    title: "Of Service to the World",
     position: "left"
   }
 ];
 
 export const QUESTION_ROTATOR = [
-  "You're feeling impatient. Now what?",
+  "You've been asked to slow down. What does that bring up in you?",
   "If you're feeling daring… move your body to this song now.",
-  "What global problem and pattern keeps playing in your mind that you can no longer ignore?",
-  "Why do you care?",
-  "What stops you from acting, and what does waiting another year cost you?",
-  "What do you know how to do that the world actually needs right now?",
-  "What becomes possible if you had inspiring collaborators from all domains to support you?"
+  "You wake up in the middle of the night. What are the problems that keep you awake?",
+  "The news covers a crisis. You think \"if they just did X...\" What's the X you know would work?",
+  "Someone asks why these problems matter so much to you. What memory or moment comes to mind first?",
+  "You've had the same idea for months without acting on it. What excuse are you telling yourself, and what will you regret if nothing changes by next year?",
+  "A door is closing slowly. You can still walk through it, but not for long. What's stopping your feet, and what's on the other side?",
+  "You're in a room with the collaborators you always wanted, and those you never knew you needed. What's possible now that felt impossible to you before?",
+  "What's love got to do with it?"
 ];

@@ -119,7 +119,7 @@ const App: React.FC = () => {
 
   return (
     <motion.div 
-      className="min-h-screen bg-transition selection:bg-indigo-500/30"
+      className="min-h-screen bg-transition selection:bg-purple-700/30"
       animate={{ backgroundColor: getBackgroundColor() }}
     >
       <div ref={scrollContainerRef}>

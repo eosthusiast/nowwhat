@@ -81,7 +81,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 onClick={onUnlock}
-                className="group flex flex-col items-center gap-2 hover:text-indigo-300 transition-colors"
+                className="group flex flex-col items-center gap-2 hover:text-purple-500 transition-colors"
               >
                 <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
                 <motion.div
