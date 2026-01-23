@@ -28,7 +28,7 @@ const JourneySection: React.FC = () => {
           >
             <p className="text-purple-500 font-sans text-sm tracking-widest uppercase mb-4">The <em className="italic">Now What</em> Alchemizer</p>
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 leading-tight">
-              We gather inspired and motivated people, and create the conditions where unexpected ideas emerge naturally.
+              We gather inspired, motivated people, and create the conditions where unexpected ideas emerge naturally.
             </h2>
             <p className="text-base md:text-lg text-gray-400 font-sans mb-4 leading-relaxed">
               A container targeted at the world's most pressing and challenging problems, beginning with a journey of unteachable lessons.

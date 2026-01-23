@@ -39,7 +39,7 @@ The *Now What* Alchemizer
 
 ### Main Copy
 
-We gather inspired and motivated people, and create the conditions where unexpected ideas emerge naturally.
+We gather inspired, motivated people, and create the conditions where unexpected ideas emerge naturally.
 
 A container targeted at the world's most pressing and challenging problems, beginning with a journey of unteachable lessons.
 
