@@ -23,8 +23,13 @@ const Descent: React.FC = () => {
         return; // Wait for problem to finish revealing
       }
 
+      // For step 2→3: wait until question is fully revealed (questionStep >= 2), then 1.5s
+      if (convergenceStep === 2 && questionStep < 2) {
+        return; // Wait for question to finish revealing
+      }
+
       const delay = convergenceStep === 1 ? 1500 : // 1.5s after "you name it"
-                    convergenceStep === 2 ? 3000 : // 3s for answer to appear
+                    convergenceStep === 2 ? 1500 : // 1.5s after "now what?"
                     4000;
 
       timerRef.current = setTimeout(() => {
@@ -34,14 +39,14 @@ const Descent: React.FC = () => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [sectionInView, convergenceStep, problemStep]);
+  }, [sectionInView, convergenceStep, problemStep, questionStep]);
 
   // Handle staged reveal for the problem sentence
   useEffect(() => {
     if (convergenceStep >= 1 && problemStep < 6) {
       problemTimerRef.current = setTimeout(() => {
         setProblemStep(prev => prev + 1);
-      }, problemStep === 0 ? 0 : 1000); // First part immediately, then 1s delays
+      }, problemStep === 0 ? 0 : 1500); // First part immediately, then 1.5s delays
     }
     return () => {
       if (problemTimerRef.current) clearTimeout(problemTimerRef.current);
