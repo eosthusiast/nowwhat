@@ -90,7 +90,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
       // Song is 4:15 (255s). Timeline: 14s drop-in + questions + contemplation
       const dropInDuration = 14;
       const firstQuestionDuration = 17; // First question is 60% of normal (29s * 0.6 ≈ 17s)
-      const normalQuestionDuration = 29; // Other questions display for 29 seconds
+      const normalQuestionDuration = 26; // Other questions display for 26 seconds
       const relativeTime = timer - dropInDuration;
 
       let index = 0;
