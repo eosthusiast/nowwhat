@@ -6,20 +6,57 @@ import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkle
 const Descent: React.FC = () => {
   const [showWhatNow, setShowWhatNow] = useState(false);
   const [convergenceStep, setConvergenceStep] = useState(0); // 0: nothing, 1: problem, 2: question, 3: answer
+  const [problemStep, setProblemStep] = useState(0); // 0-6: staged reveal of problem items
+  const [answerStep, setAnswerStep] = useState(0); // 0: nothing, 1: "together", 2: "at the right time", 3: "in the right place"
   const [sectionInView, setSectionInView] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const problemTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const answerTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Handle sequential reveal for convergence section
   useEffect(() => {
     if (sectionInView && convergenceStep < 3) {
+      // For step 1→2: wait until problem is fully revealed (problemStep >= 6), then 1.5s
+      if (convergenceStep === 1 && problemStep < 6) {
+        return; // Wait for problem to finish revealing
+      }
+
+      const delay = convergenceStep === 1 ? 1500 : // 1.5s after "you name it"
+                    convergenceStep === 2 ? 3000 : // 3s for answer to appear
+                    4000;
+
       timerRef.current = setTimeout(() => {
         setConvergenceStep(prev => prev + 1);
-      }, 4000);
+      }, delay);
     }
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [sectionInView, convergenceStep]);
+  }, [sectionInView, convergenceStep, problemStep]);
+
+  // Handle staged reveal for the problem sentence
+  useEffect(() => {
+    if (convergenceStep >= 1 && problemStep < 6) {
+      problemTimerRef.current = setTimeout(() => {
+        setProblemStep(prev => prev + 1);
+      }, problemStep === 0 ? 0 : 1000); // First part immediately, then 1s delays
+    }
+    return () => {
+      if (problemTimerRef.current) clearTimeout(problemTimerRef.current);
+    };
+  }, [convergenceStep, problemStep]);
+
+  // Handle staged reveal for the answer sentence
+  useEffect(() => {
+    if (convergenceStep === 3 && answerStep < 3) {
+      answerTimerRef.current = setTimeout(() => {
+        setAnswerStep(prev => prev + 1);
+      }, answerStep === 0 ? 0 : 1500); // First part immediately, then 1.5s delays
+    }
+    return () => {
+      if (answerTimerRef.current) clearTimeout(answerTimerRef.current);
+    };
+  }, [convergenceStep, answerStep]);
 
   const handleConvergenceClick = () => {
     if (convergenceStep < 3) {
@@ -44,7 +81,7 @@ const Descent: React.FC = () => {
     <div className="bg-[#f7f5f0] text-slate-900 font-sans selection:bg-indigo-100 pb-20">
       {/* 1. The Convergence Moment */}
       <motion.section
-        className="min-h-screen flex items-center justify-center px-6 py-32 border-b border-slate-100 bg-white cursor-pointer"
+        className="min-h-screen flex flex-col items-center justify-center px-6 py-32 border-b border-slate-100 bg-white cursor-pointer relative"
         onClick={handleConvergenceClick}
         onViewportEnter={() => {
           setSectionInView(true);
@@ -54,19 +91,79 @@ const Descent: React.FC = () => {
       >
         <motion.div layout className="max-w-4xl mx-auto space-y-12" transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}>
           <motion.div layout className="space-y-8" transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}>
-            <AnimatePresence>
-              {convergenceStep >= 1 && (
-                <motion.p
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600"
-                >
-                  We all know what the problems are: AI, climate, mental health crisis, collective incoherence, you name it…
-                </motion.p>
-              )}
-            </AnimatePresence>
+            {convergenceStep >= 1 && (
+              <motion.p
+                layout
+                className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600"
+              >
+                <AnimatePresence>
+                  {problemStep >= 1 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      We all know what the problems are:
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {problemStep >= 2 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      {" "}AI,
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {problemStep >= 3 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      {" "}climate,
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {problemStep >= 4 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      {" "}mental health crisis,
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {problemStep >= 5 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      {" "}collective incoherence,
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {problemStep >= 6 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      {" "}you name it…
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.p>
+            )}
 
             <AnimatePresence>
               {convergenceStep >= 2 && (
@@ -82,40 +179,67 @@ const Descent: React.FC = () => {
               )}
             </AnimatePresence>
 
-            <AnimatePresence>
-              {convergenceStep >= 3 && (
-                <motion.p
-                  layout
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
-                  className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left"
-                >
-                  The answer lies in the alchemy of bringing the right people together at the right time in the right place.
-                </motion.p>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Continue button */}
-          {convergenceStep >= 3 && (
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 1 }}
-              onClick={scrollToWhoFor}
-              className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-12"
-            >
-              <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 2 }}
+            {convergenceStep >= 3 && (
+              <motion.p
+                layout
+                className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left"
               >
-                <ChevronDown className="w-6 h-6" />
-              </motion.div>
-            </motion.button>
-          )}
+                <AnimatePresence>
+                  {answerStep >= 1 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      The answer lies in the alchemy of bringing the right people together
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {answerStep >= 2 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      {" "}at the right time
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <AnimatePresence>
+                  {answerStep >= 3 && (
+                    <motion.span
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 2, ease: [0.25, 0.1, 0.25, 1] }}
+                    >
+                      {" "}in the right place.
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.p>
+            )}
+          </motion.div>
         </motion.div>
+
+        {/* Continue button - positioned at bottom */}
+        {answerStep >= 3 && (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 1 }}
+            onClick={scrollToWhoFor}
+            className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors absolute bottom-12"
+          >
+            <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <ChevronDown className="w-6 h-6" />
+            </motion.div>
+          </motion.button>
+        )}
       </motion.section>
 
       {/* 2. Who This Is For & Threads */}
