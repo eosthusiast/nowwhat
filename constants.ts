@@ -46,5 +46,5 @@ export const QUESTION_ROTATOR = [
   "You've had the same idea for months without acting on it. What excuse are you telling yourself, and what will you regret if nothing changes by next year?",
   "A door is closing slowly. You can still walk through it, but not for long. What's stopping your feet, and what's on the other side?",
   "You're in a room with the collaborators you always wanted, and those you never knew you needed. What's possible now that felt impossible to you before?",
-  "What's love got to do with it?"
+  "What if you didn't need to do it alone?"
 ];

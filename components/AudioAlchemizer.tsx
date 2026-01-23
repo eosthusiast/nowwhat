@@ -151,14 +151,13 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
               <span className="absolute bottom-6 md:bottom-10 text-[10px] tracking-widest uppercase text-purple-600">Listen</span>
             </motion.button>
             
-            <div className="space-y-4 max-w-sm">
+            <div className="space-y-6 max-w-sm">
               <p className="text-gray-400 font-sans text-sm tracking-wide leading-relaxed">
-                Put away distractions, wear headphones, and get ready.
+                You're going on a journey that's going to take 4 minutes. Put away distractions and wear headphones.
               </p>
-              <div className="flex items-center justify-center gap-2 text-purple-700/60">
-                <Headset className="w-4 h-4" />
-                <span className="text-[10px] uppercase tracking-widest">Contemplative Experience (4:15)</span>
-              </div>
+              <p className="text-white font-serif text-lg italic">
+                Are you ready?
+              </p>
             </div>
           </motion.div>
         )}
@@ -305,10 +304,14 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
               whileTap={{ scale: 0.95 }}
               onClick={handleNextStep}
               disabled={isTransitioning}
-              className="px-12 py-4 rounded-full border border-white/50 text-white font-sans tracking-widest uppercase text-sm transition-all bg-white/10"
+              className="px-12 py-4 rounded-full border border-white/50 text-white font-sans tracking-wide text-sm transition-all bg-white/10"
             >
-              Ready to take the next step?
+              Are you ready for the antidote to the epidemic of helplessness?
             </motion.button>
+
+            <p className="text-white/30 font-serif text-xs italic mt-8 max-w-md">
+              "Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rainer Maria Rilke
+            </p>
           </motion.div>
         )}
 

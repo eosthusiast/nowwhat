@@ -39,7 +39,7 @@ The *Now What* Alchemizer
 
 ### Main Copy
 
-We gather inspired people and create the conditions where unexpected ideas emerge naturally.
+We gather inspired and motivated people, and create the conditions where unexpected ideas emerge naturally.
 
 A container targeted at the world's most pressing and challenging problems, beginning with a journey of unteachable lessons.
 
@@ -61,9 +61,9 @@ A container targeted at the world's most pressing and challenging problems, begi
 
 ### Idle State
 
-Put away distractions, wear headphones, and get ready.
+You're going on a journey that's going to take 4 minutes. Put away distractions and wear headphones.
 
-Contemplative Experience (4:15)
+Are you ready?
 
 ### Drop-In Phase
 
@@ -73,14 +73,13 @@ Take some time to drop in.
 
 1. You've been asked to slow down. What does that bring up in you?
 2. If you're feeling daring… move your body to this song now.
-3. If you're feeling daring… move your body to this song now.
-4. You wake up in the middle of the night. What are the problems that keep you awake?
-5. The news covers a crisis. You think "if they just did X..." What's the X you know would work?
-6. Someone asks why these problems matter so much to you. What memory or moment comes to mind first?
-7. You've had the same idea for months without acting on it. What excuse are you telling yourself, and what will you regret if nothing changes by next year?
-8. A door is closing slowly. You can still walk through it, but not for long. What's stopping your feet, and what's on the other side?
-9. You're in a room with the collaborators you always wanted, and those you never knew you needed. What's possible now that felt impossible to you before?
-10. What's love got to do with it?
+3. You wake up in the middle of the night. What are the problems that keep you awake?
+4. The news covers a crisis. You think "if they just did X..." What's the X you know would work?
+5. Someone asks why these problems matter so much to you. What memory or moment comes to mind first?
+6. You've had the same idea for months without acting on it. What excuse are you telling yourself, and what will you regret if nothing changes by next year?
+7. A door is closing slowly. You can still walk through it, but not for long. What's stopping your feet, and what's on the other side?
+8. You're in a room with the collaborators you always wanted, and those you never knew you needed. What's possible now that felt impossible to you before?
+9. What if you didn't need to do it alone?
 
 ### Contemplating Phase
 
@@ -94,7 +93,9 @@ Keep listening. Let the questions sit with you.
 
 The questions remain...
 
-**Button:** Ready to take the next step?
+**Button:** Are you ready for the antidote to the epidemic of helplessness?
+
+*"Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rainer Maria Rilke*
 
 ---
 
@@ -102,43 +103,19 @@ The questions remain...
 
 ### 1. The Convergence Moment
 
-You've heard this countless times before. It's the same old story: we're at a threshold. AI, climate, and collective incoherence are accelerating faster than our solutions. The old incentives aren't working. The standard approaches aren't aligned to what humanity actually needs.
+We all know what the problems are: AI, climate, mental health crisis, collective incoherence, you name it…
 
 **The question is: now what?**
 
-The answer lies in the alchemy of bringing people together who are ready to commit their next 2 years to solutions. Who have the courage to stand in their truth and who we support to build what emerges.
+The answer lies in the alchemy of bringing the right people together at the right time in the right place.
 
 ---
 
-### 2. The Conditions for Alchemy
+### 2. Who This Is For
 
-*We create five essential conditions that make the extraordinary inevitable.*
+The right people are the ones who are ready to commit their next 2 years or their whole lives to solutions. People with the courage to stand in their truth. People who we're ready to support in building what emerges.
 
-**01. Unlikely Combinations** *Cross-sector collisions that spark the new*
-
-What happens when a technologist meets an indigenous wisdom keeper? When a filmmaker collaborates with a consciousness researcher? We bring together people from radically different worlds and create the conditions for these sparks to linger.
-
-**02. Resourced from the Start** *Remove every obstacle to creation*
-
-Most gatherings end with inspiration and business cards. Ours end with funded collaborations already in motion. We provide immediate funding, infrastructure, time, space, and remove the logistical friction.
-
-**03. Fertile Soil** *The ground from which emergence happens*
-
-A process that unveils what's actually there. A mystery school of sorts. Beyond the basics of time spent free from distractions, and inclusive of all of your parts.
-
-**04. Readiness** *Presence and commitment to what emerges*
-
-You're available to commit your next 2 years to steer a course to positive change. You get connected with allies who are as ready as you are.
-
-**05. Domain Expertise** *Wisdom from those who've walked the path*
-
-Each event brings domain experts who are there to provide scaffolding, nuanced understanding and mentorship. These are the people who are actively solving the problems you're stepping into, and know the terrain and how to tread it.
-
----
-
-### 3. Who This Is For
-
-You're proud of what you created in the past. You've left a meaningful mark on people. You know deep in your bones that something's amiss. You feel the need to do things differently. You're standing at an empty page, asking "now what?"
+You're proud of what you created in the past. You've left a meaningful mark on others. You know deep in your bones that something's amiss. You feel the need to do things differently. You're standing at an empty page, asking "now what?"
 
 The answer lies outside your usual circles.
 
@@ -151,23 +128,53 @@ The answer lies outside your usual circles.
 
 ---
 
+### 3. The Conditions for Alchemy
+
+*We create five essential conditions that make the extraordinary inevitable.*
+
+**01. Surprising Collaborations** *Cross-sector collisions that spark the new*
+
+We learn so much through failure and diversity that leads to the most unpredictable outcomes. When we go about things differently with people you'd think have no overlap, we get something none of us could've dreamed up in our silos.
+
+**02. Resourced from the Start** *Remove every obstacle to creation*
+
+Most gatherings end with inspiration and business cards. Ours end with funded collaborations already in motion. We provide immediate funding, infrastructure, time, space, and remove the logistical friction. We do the due diligence ourselves.
+
+**03. Fertile Soil** *The ground from which emergence happens*
+
+A process that unveils what's actually there. A school of unteachable lessons, led by master experience designers. Beyond the basics of time spent free from distractions, and inclusive of all of your parts.
+
+**04. Readiness and Capacity** *Presence and commitment to what emerges*
+
+You're available to commit your next 2 years to steer a course to positive change. You get connected with allies who are as ready as you are.
+
+**05. Domain Expertise** *Wisdom from those who've walked the path*
+
+Each event brings domain experts who are there to provide scaffolding, nuanced understanding and mentorship. These are the people who are actively solving the problems you're stepping into, and know the terrain and how to tread it.
+
+*If something doesn't feel totally clear, invite that in. We've given you as much as you need to know at this stage.*
+
+---
+
 ### 4. Leadup + CTA
 
 You've made it this far...
 
-***what now?***
+***now what?*** → ***what now?*** (animated flip)
 
 ---
 
 ### Want to hear more?
 
-Applications open early 2026. Leave your email to be notified.
+[Email input]
 
-[Email input] [Notify Me]
+[Your opportunity to leave a note...]
+
+[Notify Me]
 
 ---
 
-*"Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rilke*
+*"Never doubt that a small group of thoughtful, committed, citizens can change the world. Indeed, it is the only thing that ever has."* — Margaret Mead
 
 ---
 
