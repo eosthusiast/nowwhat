@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkles } from 'lucide-react';
+import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkles, ChevronDown } from 'lucide-react';
 
 const Descent: React.FC = () => {
   const [showWhatNow, setShowWhatNow] = useState(false);
@@ -26,6 +26,18 @@ const Descent: React.FC = () => {
       if (timerRef.current) clearTimeout(timerRef.current);
       setConvergenceStep(prev => prev + 1);
     }
+  };
+
+  const scrollToWhoFor = () => {
+    document.getElementById('who-for')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToConditions = () => {
+    document.getElementById('conditions')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToCTA = () => {
+    document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -84,11 +96,30 @@ const Descent: React.FC = () => {
               )}
             </AnimatePresence>
           </motion.div>
+
+          {/* Continue button */}
+          {convergenceStep >= 3 && (
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 1 }}
+              onClick={scrollToWhoFor}
+              className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-12"
+            >
+              <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                <ChevronDown className="w-6 h-6" />
+              </motion.div>
+            </motion.button>
+          )}
         </motion.div>
       </motion.section>
 
       {/* 2. Who This Is For & Threads */}
-      <section className="py-32 px-6 bg-[#f7f5f0]">
+      <section id="who-for" className="py-32 px-6 bg-[#f7f5f0]">
         <div className="max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-8">
             <h2 className="text-5xl font-serif font-bold">Who This Is For</h2>
@@ -122,11 +153,28 @@ const Descent: React.FC = () => {
               );
             })}
           </div>
+
+          {/* Continue button */}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            onClick={scrollToConditions}
+            className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-12 mx-auto"
+          >
+            <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <ChevronDown className="w-6 h-6" />
+            </motion.div>
+          </motion.button>
         </div>
       </section>
 
       {/* 3. The Conditions for Alchemy */}
-      <section className="py-32 px-6 bg-slate-50">
+      <section id="conditions" className="py-32 px-6 bg-slate-50">
         <div className="max-w-6xl mx-auto">
           <div className="mb-20 text-center">
             <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6">The Conditions for Alchemy</h2>
@@ -188,11 +236,28 @@ const Descent: React.FC = () => {
           >
             If something doesn't feel totally clear, invite that in. We've given you as much as you need to know at this stage.
           </motion.p>
+
+          {/* Continue button */}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            onClick={scrollToCTA}
+            className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-16 mx-auto"
+          >
+            <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <ChevronDown className="w-6 h-6" />
+            </motion.div>
+          </motion.button>
         </div>
       </section>
 
       {/* 4. Leadup + CTA Section */}
-      <section className="py-32 px-6">
+      <section id="cta" className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-16">
           {/* Leadup with animated flip */}
           <motion.div
@@ -200,7 +265,7 @@ const Descent: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             onViewportEnter={() => {
               setShowWhatNow(false);
-              setTimeout(() => setShowWhatNow(true), 1500);
+              setTimeout(() => setShowWhatNow(true), 3000);
             }}
             transition={{ duration: 1 }}
             className="space-y-8"
