@@ -41,7 +41,7 @@ const Descent: React.FC = () => {
                 id: 1,
                 title: "Unlikely Combinations",
                 subtitle: "Cross-sector collisions that spark the new",
-                content: "What happens when a technologist meets an indigenous wisdom keeper? When a filmmaker collaborates with a consciousness researcher? We bring together people from radically different worlds and create the conditions for these sparks to linger."
+                content: "We learn so much through failure and diversity that leads to the most unpredictable outcomes. When we go about things differently with people you'd think have no overlap, we get something none of us could've dreamed up in our silos."
               },
               {
                 id: 2,
