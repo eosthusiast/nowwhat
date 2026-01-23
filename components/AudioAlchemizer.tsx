@@ -70,8 +70,8 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
       setTimer(prev => {
         const next = prev + 1;
 
-        // Transition to questions phase after 23s drop-in
-        if (next >= 23 && phase !== AudioPhase.QUESTIONS) {
+        // Transition to questions phase after 14s drop-in (60% of original 23s)
+        if (next >= 14 && phase !== AudioPhase.QUESTIONS) {
           setPhase(AudioPhase.QUESTIONS);
         }
 
@@ -87,11 +87,20 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
 
   useEffect(() => {
     if (phase === AudioPhase.QUESTIONS) {
-      // Song is 4:15 (255s). Timeline: 23s drop-in + 7 questions × 29s each (203s) + ~29s contemplation
-      const dropInDuration = 23;
-      const questionDuration = 29; // Each question displays for 29 seconds
+      // Song is 4:15 (255s). Timeline: 14s drop-in + questions + contemplation
+      const dropInDuration = 14;
+      const firstQuestionDuration = 17; // First question is 60% of normal (29s * 0.6 ≈ 17s)
+      const normalQuestionDuration = 29; // Other questions display for 29 seconds
       const relativeTime = timer - dropInDuration;
-      const index = Math.floor(relativeTime / questionDuration);
+
+      let index = 0;
+      if (relativeTime < firstQuestionDuration) {
+        index = 0;
+      } else {
+        // After first question, calculate index for remaining questions
+        const timeAfterFirst = relativeTime - firstQuestionDuration;
+        index = 1 + Math.floor(timeAfterFirst / normalQuestionDuration);
+      }
 
       // Check if we've gone past all questions
       if (index >= QUESTION_ROTATOR.length) {
@@ -151,11 +160,11 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
               <span className="absolute bottom-6 md:bottom-10 text-[10px] tracking-widest uppercase text-purple-600">Listen</span>
             </motion.button>
             
-            <div className="space-y-6 max-w-sm">
-              <p className="text-gray-400 font-sans text-sm tracking-wide leading-relaxed">
+            <div className="space-y-6 max-w-lg">
+              <p className="text-gray-400 font-sans text-base tracking-wide leading-relaxed">
                 You're going on a journey that's going to take 4 minutes. Put away distractions and wear headphones.
               </p>
-              <p className="text-white font-serif text-lg italic">
+              <p className="text-white font-serif text-2xl italic">
                 Are you ready?
               </p>
             </div>
@@ -182,16 +191,23 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
                     Take some time to drop in.
                   </motion.p>
                 ) : (
-                  <motion.p
+                  <motion.div
                     key={questionIndex}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 1 }}
-                    className="text-3xl md:text-5xl font-serif text-white max-w-2xl mx-auto leading-[6.0]"
+                    className="text-center"
                   >
-                    {QUESTION_ROTATOR[questionIndex]}
-                  </motion.p>
+                    <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-relaxed">
+                      {QUESTION_ROTATOR[questionIndex]}
+                    </p>
+                    {questionIndex === 1 && (
+                      <p className="text-base md:text-xl font-serif text-white/60 mt-4 max-w-xl mx-auto">
+                        This might be just stretching your neck or finding your pulse.
+                      </p>
+                    )}
+                  </motion.div>
                 )}
               </AnimatePresence>
             </div>
@@ -304,12 +320,12 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
               whileTap={{ scale: 0.95 }}
               onClick={handleNextStep}
               disabled={isTransitioning}
-              className="px-12 py-4 rounded-full border border-white/50 text-white font-sans tracking-wide text-sm transition-all bg-white/10"
+              className="px-12 py-4 rounded-full border border-white/50 text-white font-sans tracking-wide text-base transition-all bg-white/10"
             >
-              Are you ready for the antidote to the epidemic of helplessness?
+              Are you ready for the antidote<br />to the epidemic of helplessness?
             </motion.button>
 
-            <p className="text-white/30 font-serif text-xs italic mt-8 max-w-md">
+            <p className="text-white/30 font-serif text-base italic mt-8 max-w-md">
               "Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rainer Maria Rilke
             </p>
           </motion.div>

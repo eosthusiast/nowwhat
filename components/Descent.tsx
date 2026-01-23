@@ -1,41 +1,93 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkles } from 'lucide-react';
 
 const Descent: React.FC = () => {
   const [showWhatNow, setShowWhatNow] = useState(false);
+  const [convergenceStep, setConvergenceStep] = useState(0); // 0: nothing, 1: problem, 2: question, 3: answer
+  const [sectionInView, setSectionInView] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Handle sequential reveal for convergence section
+  useEffect(() => {
+    if (sectionInView && convergenceStep < 3) {
+      timerRef.current = setTimeout(() => {
+        setConvergenceStep(prev => prev + 1);
+      }, 6000);
+    }
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [sectionInView, convergenceStep]);
+
+  const handleConvergenceClick = () => {
+    if (convergenceStep < 3) {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      setConvergenceStep(prev => prev + 1);
+    }
+  };
 
   return (
     <div className="bg-[#f7f5f0] text-slate-900 font-sans selection:bg-indigo-100 pb-20">
       {/* 1. The Convergence Moment */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-32 border-b border-slate-100">
+      <motion.section
+        className="min-h-screen flex items-center justify-center px-6 py-32 border-b border-slate-100 bg-white cursor-pointer"
+        onClick={handleConvergenceClick}
+        onViewportEnter={() => {
+          setSectionInView(true);
+          if (convergenceStep === 0) setConvergenceStep(1);
+        }}
+        onViewportLeave={() => setSectionInView(false)}
+      >
         <div className="max-w-4xl mx-auto space-y-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="space-y-8"
-          >
-            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600">
-              We all know what the problems are: AI, climate, mental health crisis, collective incoherence, you name it…
-            </p>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8">
-              The question is: now what?
-            </h2>
-            <p className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left">
-              The answer lies in the alchemy of bringing the right people together at the right time in the right place.
-            </p>
-          </motion.div>
+          <div className="space-y-8">
+            <AnimatePresence>
+              {convergenceStep >= 1 && (
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600"
+                >
+                  We all know what the problems are: AI, climate, mental health crisis, collective incoherence, you name it…
+                </motion.p>
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {convergenceStep >= 2 && (
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8"
+                >
+                  The question is: now what?
+                </motion.h2>
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence>
+              {convergenceStep >= 3 && (
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left"
+                >
+                  The answer lies in the alchemy of bringing the right people together at the right time in the right place.
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 2. Who This Is For & Threads */}
-      <section className="py-32 px-6">
+      <section className="py-32 px-6 bg-[#f7f5f0]">
         <div className="max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-8">
             <h2 className="text-5xl font-serif font-bold">Who This Is For</h2>
             <p className="text-xl text-slate-600 leading-relaxed">
-              The right people are the ones who are ready to commit their next 2 years or their whole lives to solutions. People with the courage to stand in their truth. People who we're ready to support in building what emerges.
+              The right people are the ones who are ready to commit their next 2 years (or their whole lives) to solutions. People with the courage to stand in their truth. People who we're ready to support in building what emerges.
             </p>
             <p className="text-xl text-slate-600 leading-relaxed">
               You're proud of what you created in the past. You've left a meaningful mark on others. You know deep in your bones that something's amiss. You feel the need to do things differently. You're standing at an empty page, asking "now what?"
@@ -126,7 +178,7 @@ const Descent: React.FC = () => {
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-center text-slate-500 italic font-serif mt-16 max-w-2xl mx-auto"
+            className="text-center text-slate-500 italic font-serif mt-16 max-w-2xl mx-auto text-2xl"
           >
             If something doesn't feel totally clear, invite that in. We've given you as much as you need to know at this stage.
           </motion.p>
@@ -141,6 +193,7 @@ const Descent: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             onViewportEnter={() => {
+              setShowWhatNow(false);
               setTimeout(() => setShowWhatNow(true), 1500);
             }}
             transition={{ duration: 1 }}
