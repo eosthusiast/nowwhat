@@ -14,13 +14,13 @@ const Descent: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="space-y-8"
           >
-            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-400">
+            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-300">
               You've heard this countless times before. It's the same old story: we're at a threshold. AI, climate, and collective incoherence are accelerating faster than our solutions. The old incentives aren't working. The standard approaches aren't aligned to what humanity actually needs.
             </p>
             <h2 className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8">
               The question is: now what?
             </h2>
-            <p className="text-lg md:text-xl font-serif leading-relaxed text-center md:text-left">
+            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left">
               The answer lies in the alchemy of bringing people together who are ready to commit their next 2 years to solutions. Who have the courage to stand in their truth and who we support to build what emerges.
             </p>
           </motion.div>
@@ -139,7 +139,7 @@ const Descent: React.FC = () => {
 
           {/* CTA Box */}
           <div className="p-12 border border-slate-200 rounded-3xl bg-white/50 backdrop-blur-sm space-y-8">
-            <h3 className="text-4xl font-serif font-bold text-slate-900">Want to hear more?</h3>
+            <h3 className="text-2xl font-serif font-bold text-slate-900">Want to hear more?</h3>
             <p className="text-slate-500">Applications open early 2026. Leave your email to be notified.</p>
 
             <form className="max-w-md mx-auto flex flex-col md:flex-row gap-4">
