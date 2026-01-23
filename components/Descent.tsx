@@ -29,7 +29,7 @@ const Descent: React.FC = () => {
       }
 
       const delay = convergenceStep === 1 ? 1500 : // 1.5s after "you name it"
-                    convergenceStep === 2 ? 1500 : // 1.5s after "now what?"
+                    convergenceStep === 2 ? 3000 : // 3s after "now what?"
                     4000;
 
       timerRef.current = setTimeout(() => {
