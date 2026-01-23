@@ -73,6 +73,7 @@ Take some time to drop in.
 
 1. You've been asked to slow down. What does that bring up in you?
 2. If you're feeling daring… move your body to this song now.
+   - *This might be just stretching your neck or finding your pulse.*
 3. You wake up in the middle of the night. What are the problems that keep you awake?
 4. The news covers a crisis. You think "if they just did X..." What's the X you know would work?
 5. Someone asks why these problems matter so much to you. What memory or moment comes to mind first?
@@ -113,7 +114,7 @@ The answer lies in the alchemy of bringing the right people together at the righ
 
 ### 2. Who This Is For
 
-The right people are the ones who are ready to commit their next 2 years or their whole lives to solutions. People with the courage to stand in their truth. People who we're ready to support in building what emerges.
+The right people are the ones who are ready to commit their next 2 years (or their whole lives) to solutions. People with the courage to stand in their truth. People who we're ready to support in building what emerges.
 
 You're proud of what you created in the past. You've left a meaningful mark on others. You know deep in your bones that something's amiss. You feel the need to do things differently. You're standing at an empty page, asking "now what?"
 
@@ -160,13 +161,13 @@ Each event brings domain experts who are there to provide scaffolding, nuanced u
 
 You've made it this far...
 
-***now what?*** → ***what now?*** (animated flip)
+***now what?*** → ***what now?*** (animated flip after 3s)
 
 ---
 
 ### Want to hear more?
 
-[Email input]
+[Email input: email@example.com]
 
 [Your opportunity to leave a note...]
 
