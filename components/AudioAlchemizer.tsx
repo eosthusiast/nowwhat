@@ -25,7 +25,6 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
   const [audioDuration, setAudioDuration] = useState(0);
   const [audioCurrentTime, setAudioCurrentTime] = useState(0);
   const [showEarlyClickHint, setShowEarlyClickHint] = useState(false);
-  const [earlyClickCount, setEarlyClickCount] = useState(0);
   const [songEnded, setSongEnded] = useState(false);
   const [timerDisabledAfterQ3, setTimerDisabledAfterQ3] = useState(false);
 
@@ -60,7 +59,6 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
       if (earlyClickTimeoutRef.current) {
         clearTimeout(earlyClickTimeoutRef.current);
       }
-      setEarlyClickCount(prev => prev + 1);
       setShowEarlyClickHint(true);
       earlyClickTimeoutRef.current = setTimeout(() => {
         setShowEarlyClickHint(false);
@@ -351,7 +349,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
                     transition={{ duration: 0.3 }}
                     className="text-sm text-white/30 mt-6"
                   >
-                    {earlyClickCount >= 2 ? "very good very good, yay!" : "Not yet..."}
+                    Not yet...
                   </motion.p>
                 )}
               </AnimatePresence>
