@@ -270,12 +270,12 @@ const Descent: React.FC = () => {
             ].map((thread) => {
               const Icon = thread.icon;
               return (
-                <div key={thread.title} className="text-center p-6 border-l border-slate-100 flex flex-col items-center gap-4">
+                <div key={thread.title} className="text-center p-6 flex flex-col items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-[#FEF6EE] flex items-center justify-center text-purple-700 mb-2">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h4 className="text-2xl font-serif font-bold leading-tight">{thread.title}</h4>
-                  <p className="text-xs text-slate-400 uppercase tracking-widest leading-relaxed">{thread.desc}</p>
+                  <p className="text-xs text-slate-600 uppercase tracking-widest leading-relaxed">{thread.desc}</p>
                 </div>
               );
             })}
@@ -384,7 +384,7 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 4. Event Details */}
-      <section id="event-details" className="py-24 px-6 bg-[#FFFBF5]">
+      <section id="event-details" className="py-24 px-6 bg-[#FAEADD]">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-serif font-bold text-center mb-16">Event Details</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -430,7 +430,7 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 5. Leadup + CTA Section */}
-      <section id="cta" className="py-32 px-6">
+      <section id="cta" className="py-32 px-6 bg-[#FFFBF5]">
         <div className="max-w-4xl mx-auto text-center space-y-16">
           {/* Leadup with animated flip */}
           <motion.div
@@ -474,50 +474,55 @@ const Descent: React.FC = () => {
           </motion.div>
 
           {/* CTA Box */}
-          <div className="p-12 border border-[#F0E6DD] rounded-3xl bg-[#FFFDFB]/80 backdrop-blur-sm space-y-8">
-            <h3 className="text-2xl font-serif font-bold text-slate-900">Want to hear more?</h3>
+          <div className="p-8 md:p-10 border border-[#F0E6DD] rounded-3xl bg-[#FFFDFB] shadow-sm">
+            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-6">Want to hear more?</h3>
 
-            <form className="max-w-md mx-auto space-y-4">
-              <input
-                type="email"
-                placeholder="email@example.com"
-                className="w-full bg-[#FEF9F4] border border-[#F0E6DD] rounded-full px-8 py-4 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all"
-              />
-              <textarea
-                placeholder="Your opportunity to leave a note..."
-                rows={3}
-                className="w-full bg-[#FEF9F4] border border-[#F0E6DD] rounded-2xl px-8 py-4 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all resize-none"
-              />
-              <button className="w-full md:w-auto bg-purple-800 hover:bg-purple-700 text-white rounded-full px-8 py-4 font-bold flex items-center justify-center gap-2 transition-all group mx-auto">
+            <form className="flex flex-col md:flex-row gap-4 items-stretch">
+              <div className="flex-1 space-y-3">
+                <input
+                  type="email"
+                  placeholder="email@example.com"
+                  className="w-full bg-white border border-[#F0E6DD] rounded-full px-6 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all"
+                />
+                <textarea
+                  placeholder="Your opportunity to leave a note..."
+                  rows={2}
+                  className="w-full bg-white border border-[#F0E6DD] rounded-2xl px-6 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all resize-none"
+                />
+              </div>
+              <button className="md:self-center bg-purple-800 hover:bg-purple-700 text-white rounded-full px-8 py-3 font-bold flex items-center justify-center gap-2 transition-all group whitespace-nowrap">
                 Notify Me
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
-
-            {/* Continue to Team button */}
-            <motion.button
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              onClick={scrollToTeam}
-              className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-8 mx-auto"
-            >
-              <span className="text-sm tracking-widest uppercase font-sans">Meet the Team</span>
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-              >
-                <ChevronDown className="w-6 h-6" />
-              </motion.div>
-            </motion.button>
           </div>
 
-          {/* Team Section */}
-          <div id="team" className="pt-16 scroll-mt-16">
-            <h3 className="text-3xl font-serif font-bold text-slate-900 mb-12">The Team</h3>
+          {/* Continue to Team button */}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            onClick={scrollToTeam}
+            className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mx-auto"
+          >
+            <span className="text-sm tracking-widest uppercase font-sans">Meet the Team</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <ChevronDown className="w-6 h-6" />
+            </motion.div>
+          </motion.button>
+        </div>
+      </section>
+
+      {/* 6. Team Section */}
+      <section id="team" className="py-24 px-6 bg-[#FAEADD] scroll-mt-16 snap-start snap-always">
+        <div className="max-w-4xl mx-auto text-center space-y-16">
+          <h3 className="text-3xl font-serif font-bold text-slate-900 mb-12">The Team</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {[
-                { name: "Carolin Fleissner", bio: "Caro bridges embodied wisdom and technological innovation. Dance-trained and first hire at Wayve (AI/autonomous vehicles), she scaled the company from 1 to 220+ employees as VP of People & Culture, supporting $1.2B+ in fundraising. She now works as advisor, coach, and facilitator, running retreats and workshops that weave somatic practices with transformational leadership.", image: "/team/caro.jpeg" },
+                { name: "Carolin Fleissner", bio: "From dance to AI: Caro bridges embodied wisdom and technological innovation. Her genius is attracting inspiring people and creating cultures where the impossible becomes inevitable. Wayve's first employee and executive, she scaled from 1 to 220+ employees, supporting $1.2B+ fundraising for the startup now valued at $10+ billion (technology so compelling Tesla copied it). She now advises CEOs and startups, facilitating transformative retreats and residency programs where embodied practice unlocks breakthrough leadership.", image: "/team/caro.jpeg" },
                 { name: "Askja Michelle Rickenbach", bio: "Askja weaves leadership development with ecological wisdom. Trained in nature and wilderness pedagogy at Woniya Naturschule, she brings experience in social entrepreneurship, youth engagement, and international team management across Switzerland and beyond. Her work integrates somatic practices with organizational transformation, guiding groups to reconnect with natural rhythms while building regenerative systems and conscious communities.", image: "/team/askja.jpg" },
                 { name: "Kaela Atleework", bio: "Kaela brings depth to human connection. Former international model for Chanel turned digital nomad and community architect, she's traveled 40+ countries facilitating workshops on \"instantaneous intimacy\" and regenerative living. Founder of Montaia, a global network of purpose-driven nomads and conscious creatives. Experience designer specializing in co-living experiments, authentic relating practices, and ecologically conscious gatherings that transform superficial networking into meaningful collaboration.", image: "/team/kaela.jpeg" },
                 { name: "David Hera, PhD", bio: "David bridges mycology, technology, and transformational design. PhD in mycology studying indigenous mushrooms of Aotearoa New Zealand, former semiconductor applications manager across Asia and USA, with expertise in complex international coordination. Co-founder of Goodbye Monkey and co-creator of S.A.N (Sentient Advocate of Nature) art installation (Burning Man), photographer, and ecstatic dance DJ. Brings precision, reliability, and interdisciplinary thinking to transformational work.", image: "/team/David.jpg" }
@@ -535,7 +540,6 @@ const Descent: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
 
           {/* Margaret Mead quote */}
           <blockquote className="max-w-2xl mx-auto italic text-slate-500 font-serif text-lg">
