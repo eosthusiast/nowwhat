@@ -13,8 +13,11 @@
       body {
         margin: 0;
         padding: 0;
+        padding-bottom: env(safe-area-inset-bottom);
         background-color: #0a0a0f; /* Initial near-black */
         overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       .font-serif {
         font-family: 'Cormorant Garamond', serif;
@@ -31,13 +34,25 @@
       .bg-transition {
         transition: background-color 2s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      /* Scroll snap for sections */
+      /* Scroll snap for sections - disabled on mobile for better control */
       html {
-        scroll-snap-type: y proximity;
         scroll-behavior: smooth;
       }
-      section {
-        scroll-snap-align: start;
+      @media (min-width: 768px) {
+        html {
+          scroll-snap-type: y proximity;
+        }
+        section {
+          scroll-snap-align: start;
+        }
+      }
+      /* Remove tap highlight for cleaner mobile UX */
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+      /* Ensure minimum touch target size */
+      button, a, [role="button"] {
+        min-height: 44px;
       }
     </style>
   <script type="importmap">

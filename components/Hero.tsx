@@ -30,13 +30,13 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-white px-4 md:px-12">
-      <div className="w-full max-w-[95vw]">
+    <div className="flex flex-col items-center justify-center h-full text-white px-6 md:px-12">
+      <div className="w-full max-w-[90vw] md:max-w-[95vw]">
         {/* Responsive, centered vertical layout */}
         <div className="flex flex-col items-center justify-center gap-y-4">
 
           {/* Top: Rotating Statement - Centered with fixed height to prevent jumping */}
-          <div className="text-center min-h-[3rem] md:min-h-[5rem] flex items-center justify-center">
+          <div className="text-center min-h-[4rem] md:min-h-[5rem] flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={statementIndex}
@@ -63,7 +63,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-8 md:bottom-12 w-full flex flex-col items-center gap-2 md:gap-6 px-4">
+      <div className="absolute bottom-12 md:bottom-12 w-full flex flex-col items-center gap-3 md:gap-6 px-6">
         {/* Progress Bar - Only visible during the 15s wait or subtly stays */}
         <div className="w-32 h-[1px] bg-white/10 relative overflow-hidden">
            <motion.div
@@ -74,7 +74,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
            />
         </div>
 
-        <div className="min-h-[48px] md:min-h-[64px] flex items-center justify-center">
+        <div className="min-h-[56px] md:min-h-[64px] flex items-center justify-center">
           <AnimatePresence>
             {showContinue && (
               <motion.button
@@ -83,7 +83,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
                 onClick={onUnlock}
                 className="group flex flex-col items-center gap-1 md:gap-2 hover:text-purple-500 transition-colors"
               >
-                <span className="text-xs md:text-sm tracking-widest uppercase font-sans">Continue</span>
+                <span className="text-sm md:text-sm tracking-widest uppercase font-sans">Continue</span>
                 <motion.div
                   animate={{ y: [0, 5, 0] }}
                   transition={{ repeat: Infinity, duration: 2 }}
@@ -99,7 +99,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.3 }}
           transition={{ delay: 2, duration: 2 }}
-          className="text-[clamp(14px,2.5vw,12px)] tracking-[0.15em] md:tracking-[0.2em] uppercase font-sans text-center w-full px-4 pb-4 md:pb-0"
+          className="text-[clamp(10px,2.5vw,14px)] tracking-[0.12em] md:tracking-[0.2em] uppercase font-sans text-center w-full pb-6 md:pb-0"
         >
           Opening doors to radical possibility for those who shape the world.
         </motion.p>

@@ -88,7 +88,7 @@ const EnsoCircle: React.FC = () => {
   };
 
   return (
-    <div className="relative w-[14.5rem] h-[14.5rem] md:w-[22.4rem] md:h-[22.4rem] flex items-center justify-center overflow-visible">
+    <div className="relative w-[15rem] h-[15rem] md:w-[22.4rem] md:h-[22.4rem] flex items-center justify-center overflow-visible">
       {/* Hand-drawn Enso SVG */}
       <svg 
         viewBox="0 0 100 100" 
@@ -142,9 +142,9 @@ const EnsoCircle: React.FC = () => {
           transition={{ delay: 1, duration: 1.5 }}
           className="space-y-0"
         >
-          <h2 className="text-xl md:text-3xl font-serif font-light text-white leading-none tracking-wide">
+          <h2 className="text-2xl md:text-3xl font-serif font-light text-white leading-none tracking-wide">
             Two Weeks<br />
-            <span className="font-bold text-[0.7em]">30 People</span>
+            <span className="font-bold text-[0.75em]">30 People</span>
           </h2>
         </motion.div>
       </div>
@@ -171,7 +171,7 @@ const EnsoCircle: React.FC = () => {
                 }}
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 transition={{ duration: 0.3 }}
-                className="w-10 h-10 md:w-12 md:h-12 backdrop-blur-md border rounded-full flex items-center justify-center cursor-help transition-colors duration-500"
+                className="w-11 h-11 md:w-12 md:h-12 backdrop-blur-md border rounded-full flex items-center justify-center cursor-help transition-colors duration-500"
                 style={{
                   backgroundColor: 'rgba(73, 43, 124, 0.5)',
                   borderColor: isActive ? 'rgba(73, 43, 124, 0.8)' : 'rgba(73, 43, 124, 0.4)',
@@ -187,18 +187,18 @@ const EnsoCircle: React.FC = () => {
                     initial={{ opacity: 0, filter: 'blur(4px)' }}
                     animate={{ opacity: 1, filter: 'blur(0px)' }}
                     exit={{ opacity: 0, filter: 'blur(4px)' }}
-                    className="absolute z-30 w-max max-w-[180px] p-2 md:p-3 rounded-lg md:rounded-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-lg pointer-events-none"
+                    className="absolute z-30 w-max max-w-[160px] sm:max-w-[180px] p-3 md:p-3 rounded-lg md:rounded-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-lg pointer-events-none"
                     style={{
                       backgroundColor: 'rgba(73, 43, 124, 0.95)',
                       borderWidth: '1px',
                       borderColor: 'rgba(73, 43, 124, 0.6)',
-                      ...(stop.position === 'top' && { bottom: '50px', left: '50%', transform: 'translateX(-50%)' }),
-                      ...(stop.position === 'bottom' && { top: '50px', left: '50%', transform: 'translateX(-50%)' }),
-                      ...(stop.position === 'left' && { right: '50px', top: '50%', transform: 'translateY(-50%)' }),
-                      ...(stop.position === 'right' && { left: '50px', top: '50%', transform: 'translateY(-50%)' }),
+                      ...(stop.position === 'top' && { bottom: '3rem', left: '50%', transform: 'translateX(-50%)' }),
+                      ...(stop.position === 'bottom' && { top: '3rem', left: '50%', transform: 'translateX(-50%)' }),
+                      ...(stop.position === 'left' && { right: '3rem', top: '50%', transform: 'translateY(-50%)' }),
+                      ...(stop.position === 'right' && { left: '3rem', top: '50%', transform: 'translateY(-50%)' }),
                     }}
                   >
-                    <h4 className="font-serif text-xs md:text-sm font-bold text-white tracking-tight whitespace-pre-line text-center">{stop.title}</h4>
+                    <h4 className="font-serif text-sm md:text-sm font-bold text-white tracking-tight whitespace-pre-line text-center">{stop.title}</h4>
                   </motion.div>
                 )}
               </AnimatePresence>

@@ -132,7 +132,7 @@ const Descent: React.FC = () => {
     <div className="bg-[#FAEADD] text-slate-900 font-sans selection:bg-indigo-100 pb-20">
       {/* 1. The Convergence Moment */}
       <motion.section
-        className="min-h-screen flex flex-col items-center justify-center px-6 py-32 border-b border-slate-100 bg-[#FFFBF5] cursor-pointer relative"
+        className="min-h-screen flex flex-col items-center justify-center px-6 py-20 md:py-32 border-b border-slate-100 bg-[#FFFBF5] cursor-pointer relative"
         onClick={handleConvergenceClick}
         onViewportEnter={() => {
           setSectionInView(true);
@@ -143,7 +143,7 @@ const Descent: React.FC = () => {
         <div className="max-w-4xl mx-auto space-y-12">
           <div className="space-y-8">
             {/* Problem - always rendered for space, opacity controlled */}
-            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600">
+            <p className="text-xl md:text-2xl font-serif leading-relaxed text-center md:text-left text-slate-600 px-2 md:px-0">
               <motion.span
                 animate={{ opacity: problemStep >= 1 ? 1 : 0 }}
                 transition={{ duration: 2, ease: "easeOut" }}
@@ -183,7 +183,7 @@ const Descent: React.FC = () => {
             </p>
 
             {/* Question - always rendered for space, opacity controlled */}
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-purple-800 text-center md:text-left my-8 px-2 md:px-0">
               <motion.span
                 animate={{ opacity: questionStep >= 1 ? 1 : 0 }}
                 transition={{ duration: 2, ease: "easeOut" }}
@@ -199,7 +199,7 @@ const Descent: React.FC = () => {
             </h2>
 
             {/* Answer - always rendered for space, opacity controlled */}
-            <p className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left">
+            <p className="text-2xl md:text-3xl font-serif leading-relaxed text-center md:text-left px-2 md:px-0">
               <motion.span
                 animate={{ opacity: answerStep >= 1 ? 1 : 0 }}
                 transition={{ duration: 2, ease: "easeOut" }}
@@ -235,7 +235,7 @@ const Descent: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 1 }}
             onClick={scrollToWhoFor}
-            className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors absolute bottom-12"
+            className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors absolute bottom-8 md:bottom-12"
           >
             <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
             <motion.div
@@ -249,19 +249,19 @@ const Descent: React.FC = () => {
       </motion.section>
 
       {/* 2. Who This Is For & Threads */}
-      <section id="who-for" className="py-32 px-6 bg-[#FAEADD]">
+      <section id="who-for" className="py-20 md:py-32 px-6 bg-[#FAEADD]">
         <div className="max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-8">
-            <h2 className="text-5xl font-serif font-bold">Who This Is For</h2>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold">Who This Is For</h2>
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed px-2 md:px-0">
               You're proud of what you created in the past. You've made a genuine difference in others' lives. You're ready right now and willing to pivot your life to meaningful projects that come up. You have the courage to stand in your truth. You know deep in your bones that something's amiss. You feel the need to do things differently. You're standing at an empty page, asking "now what?"
             </p>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <p className="text-lg md:text-xl text-slate-600 leading-relaxed px-2 md:px-0">
               The answer lies outside your usual circles.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { title: "Implementers", desc: "Builders & Entrepreneurs", icon: Cpu },
               { title: "Artists", desc: "Storytellers, Musicians & Creators", icon: Palette },
@@ -270,12 +270,12 @@ const Descent: React.FC = () => {
             ].map((thread) => {
               const Icon = thread.icon;
               return (
-                <div key={thread.title} className="text-center p-6 flex flex-col items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#FEF6EE] flex items-center justify-center text-purple-700 mb-2">
-                    <Icon className="w-6 h-6" />
+                <div key={thread.title} className="text-center p-4 md:p-6 flex flex-col items-center gap-4">
+                  <div className="w-14 h-14 md:w-12 md:h-12 rounded-full bg-[#FEF6EE] flex items-center justify-center text-purple-700 mb-2">
+                    <Icon className="w-7 h-7 md:w-6 md:h-6" />
                   </div>
-                  <h4 className="text-2xl font-serif font-bold leading-tight">{thread.title}</h4>
-                  <p className="text-xs text-slate-600 uppercase tracking-widest leading-relaxed">{thread.desc}</p>
+                  <h4 className="text-xl md:text-2xl font-serif font-bold leading-tight">{thread.title}</h4>
+                  <p className="text-sm md:text-xs text-slate-600 uppercase tracking-widest leading-relaxed">{thread.desc}</p>
                 </div>
               );
             })}
@@ -301,11 +301,11 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 3. The Conditions for Alchemy */}
-      <section id="conditions" className="py-32 px-6 bg-[#FEF9F4]">
+      <section id="conditions" className="py-20 md:py-32 px-6 bg-[#FEF9F4]">
         <div className="max-w-6xl mx-auto">
           <div className="mb-20 text-center">
-            <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6">The Conditions for Alchemy</h2>
-            <p className="text-xl text-slate-600 italic font-serif">We create five essential conditions that make the extraordinary inevitable.</p>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold mb-6">The Conditions for Alchemy</h2>
+            <p className="text-lg md:text-xl text-slate-600 italic font-serif px-2 md:px-0">We create five essential conditions that make the extraordinary inevitable.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -345,12 +345,12 @@ const Descent: React.FC = () => {
                 key={item.id}
                 initial={{ opacity: 0, x: item.id % 2 === 0 ? 20 : -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                className="p-10 bg-[#FFFDFB] border border-[#F0E6DD] rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+                className="p-6 md:p-10 bg-[#FFFDFB] border border-[#F0E6DD] rounded-2xl shadow-sm hover:shadow-md transition-shadow"
               >
                 <span className="text-purple-700 font-bold mb-4 block">0{item.id}.</span>
-                <h3 className="text-3xl font-serif font-bold mb-2">{item.title}</h3>
+                <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">{item.title}</h3>
                 <p className="text-purple-800 font-medium mb-6 text-sm uppercase tracking-widest">{item.subtitle}</p>
-                <p className="text-slate-600 leading-relaxed">{item.content}</p>
+                <p className="text-base text-slate-600 leading-relaxed">{item.content}</p>
               </motion.div>
             ))}
           </div>
@@ -359,7 +359,7 @@ const Descent: React.FC = () => {
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-center text-slate-500 italic font-serif mt-16 max-w-2xl mx-auto text-2xl"
+            className="text-center text-slate-500 italic font-serif mt-16 max-w-2xl mx-auto text-xl md:text-2xl px-4 md:px-0"
           >
             If something doesn't feel totally clear, invite that in. We've given you as much as you need to know at this stage.
           </motion.p>
@@ -384,10 +384,10 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 4. Event Details */}
-      <section id="event-details" className="py-24 px-6 bg-[#FAEADD]">
+      <section id="event-details" className="py-20 md:py-24 px-6 bg-[#FAEADD]">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-serif font-bold text-center mb-16">Event Details</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <h2 className="text-3xl md:text-4xl font-serif font-bold text-center mb-16">Event Details</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {[
               { title: "When", info: "To be disclosed", icon: Calendar },
               { title: "Where", info: "To be disclosed", icon: MapPin },
@@ -396,17 +396,17 @@ const Descent: React.FC = () => {
             ].map((detail) => {
               const Icon = detail.icon;
               return (
-                <div key={detail.title} className="text-center p-6 flex flex-col items-center gap-4">
+                <div key={detail.title} className="text-center p-4 md:p-6 flex flex-col items-center gap-4">
                   <div className="w-16 h-16 rounded-full bg-[#FEF6EE] flex items-center justify-center text-purple-700">
                     <Icon className="w-8 h-8" />
                   </div>
-                  <h4 className="text-2xl font-serif font-bold">{detail.title}</h4>
-                  <p className="text-slate-500 italic">{detail.info}</p>
+                  <h4 className="text-xl md:text-2xl font-serif font-bold">{detail.title}</h4>
+                  <p className="text-base text-slate-500 italic">{detail.info}</p>
                 </div>
               );
             })}
           </div>
-          <p className="text-center text-slate-600 mt-12 text-lg font-serif">
+          <p className="text-center text-slate-600 mt-12 text-base md:text-lg font-serif px-4">
             Two weeks. Thirty people. One transformative experience.
           </p>
 
@@ -430,7 +430,7 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 5. Leadup + CTA Section */}
-      <section id="cta" className="py-32 px-6 bg-[#FFFBF5]">
+      <section id="cta" className="py-20 md:py-32 px-6 bg-[#FFFBF5]">
         <div className="max-w-4xl mx-auto text-center space-y-16">
           {/* Leadup with animated flip */}
           <motion.div
@@ -443,7 +443,7 @@ const Descent: React.FC = () => {
             transition={{ duration: 1 }}
             className="space-y-8"
           >
-            <p className="text-2xl md:text-3xl font-serif text-slate-600 leading-relaxed">
+            <p className="text-2xl md:text-3xl font-serif text-slate-600 leading-relaxed px-4 md:px-0">
               You've made it this far...
             </p>
             <div className="h-20 md:h-24 flex items-center justify-center overflow-hidden">
@@ -454,7 +454,7 @@ const Descent: React.FC = () => {
                     initial={{ opacity: 1, rotateX: 0 }}
                     exit={{ opacity: 0, rotateX: 90 }}
                     transition={{ duration: 0.4 }}
-                    className="text-4xl md:text-6xl font-serif font-bold italic text-purple-800"
+                    className="text-3xl md:text-6xl font-serif font-bold italic text-purple-800"
                   >
                     now what?
                   </motion.h2>
@@ -464,7 +464,7 @@ const Descent: React.FC = () => {
                     initial={{ opacity: 0, rotateX: -90 }}
                     animate={{ opacity: 1, rotateX: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="text-4xl md:text-6xl font-serif font-bold italic text-purple-800"
+                    className="text-3xl md:text-6xl font-serif font-bold italic text-purple-800"
                   >
                     what now?
                   </motion.h2>
@@ -474,23 +474,23 @@ const Descent: React.FC = () => {
           </motion.div>
 
           {/* CTA Box */}
-          <div className="p-8 md:p-10 border border-[#F0E6DD] rounded-3xl bg-[#FFFDFB] shadow-sm">
-            <h3 className="text-2xl font-serif font-bold text-slate-900 mb-6">Want to hear more?</h3>
+          <div className="p-6 md:p-10 border border-[#F0E6DD] rounded-3xl bg-[#FFFDFB] shadow-sm">
+            <h3 className="text-xl md:text-2xl font-serif font-bold text-slate-900 mb-6">Want to hear more?</h3>
 
             <form className="flex flex-col md:flex-row gap-4 items-stretch">
               <div className="flex-1 space-y-3">
                 <input
                   type="email"
                   placeholder="email@example.com"
-                  className="w-full bg-white border border-[#F0E6DD] rounded-full px-6 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all"
+                  className="w-full bg-white border border-[#F0E6DD] rounded-full px-6 py-4 md:py-3 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all"
                 />
                 <textarea
                   placeholder="Your opportunity to leave a note..."
-                  rows={2}
-                  className="w-full bg-white border border-[#F0E6DD] rounded-2xl px-6 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all resize-none"
+                  rows={3}
+                  className="w-full bg-white border border-[#F0E6DD] rounded-2xl px-6 py-4 md:py-3 text-base text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all resize-none"
                 />
               </div>
-              <button className="md:self-center bg-purple-800 hover:bg-purple-700 text-white rounded-full px-8 py-3 font-bold flex items-center justify-center gap-2 transition-all group whitespace-nowrap">
+              <button className="md:self-center bg-purple-800 hover:bg-purple-700 text-white rounded-full px-10 py-4 md:px-8 md:py-3 font-bold flex items-center justify-center gap-2 transition-all group whitespace-nowrap text-base">
                 Notify Me
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
@@ -517,51 +517,51 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 6. Team Section */}
-      <section id="team" className="py-24 px-6 bg-[#FAEADD] scroll-mt-16 snap-start snap-always">
+      <section id="team" className="py-20 md:py-24 px-6 bg-[#FAEADD] scroll-mt-16 snap-start snap-always">
         <div className="max-w-4xl mx-auto text-center space-y-16">
-          <h3 className="text-3xl font-serif font-bold text-slate-900 mb-12">The Team</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <h3 className="text-2xl md:text-3xl font-serif font-bold text-slate-900 mb-12">The Team</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8">
               {[
                 { name: "Carolin Fleissner", bio: "From dance to AI: Caro bridges embodied wisdom and technological innovation. Her genius is attracting inspiring people and creating cultures where the impossible becomes inevitable. Wayve's first employee and executive, she scaled from 1 to 220+ employees, supporting $1.2B+ fundraising for the startup now valued at $10+ billion (technology so compelling Tesla copied it). She now advises CEOs and startups, facilitating transformative retreats and residency programs where embodied practice unlocks breakthrough leadership.", image: "/team/caro.jpeg" },
                 { name: "Askja Michelle Rickenbach", bio: "Askja weaves leadership development with ecological wisdom. Trained in nature and wilderness pedagogy at Woniya Naturschule, she brings experience in social entrepreneurship, youth engagement, and international team management across Switzerland and beyond. Her work integrates somatic practices with organizational transformation, guiding groups to reconnect with natural rhythms while building regenerative systems and conscious communities.", image: "/team/askja.jpg" },
                 { name: "Kaela Atleework", bio: "Kaela brings depth to human connection. Former international model for Chanel turned digital nomad and community architect, she's traveled 40+ countries facilitating workshops on \"instantaneous intimacy\" and regenerative living. Founder of Montaia, a global network of purpose-driven nomads and conscious creatives. Experience designer specializing in co-living experiments, authentic relating practices, and ecologically conscious gatherings that transform superficial networking into meaningful collaboration.", image: "/team/kaela.jpeg" },
                 { name: "David Hera, PhD", bio: "David bridges mycology, technology, and transformational design. PhD in mycology studying indigenous mushrooms of Aotearoa New Zealand, former semiconductor applications manager across Asia and USA, with expertise in complex international coordination. Co-founder of Goodbye Monkey and co-creator of S.A.N (Sentient Advocate of Nature) art installation (Burning Man), photographer, and ecstatic dance DJ. Brings precision, reliability, and interdisciplinary thinking to transformational work.", image: "/team/David.jpg" }
               ].map((member) => (
-                <div key={member.name} className="flex flex-col items-center">
-                  <div className="w-40 h-40 rounded-full bg-slate-200 overflow-hidden mb-4">
+                <div key={member.name} className="flex flex-col items-center max-w-md mx-auto md:max-w-none">
+                  <div className="w-48 h-48 md:w-40 md:h-40 rounded-full bg-slate-200 overflow-hidden mb-4">
                     <img
                       src={member.image}
                       alt={member.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h4 className="text-xl font-serif font-bold text-center min-h-14 mb-4">{member.name}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed text-left">{member.bio}</p>
+                  <h4 className="text-xl font-serif font-bold text-center min-h-0 md:min-h-14 mb-4">{member.name}</h4>
+                  <p className="text-base md:text-sm text-slate-500 leading-relaxed text-left">{member.bio}</p>
                 </div>
               ))}
             </div>
 
           {/* Margaret Mead quote */}
-          <blockquote className="max-w-2xl mx-auto italic text-slate-500 font-serif text-lg">
+          <blockquote className="max-w-2xl mx-auto italic text-slate-500 font-serif text-base md:text-lg px-4 md:px-0">
             "Never doubt that a small group of thoughtful, committed, citizens can change the world. Indeed, it is the only thing that ever has." — Margaret Mead
           </blockquote>
         </div>
       </section>
 
       {/* Footer - Light Theme */}
-      <footer className="py-20 px-6">
-        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
+      <footer className="py-16 md:py-20 px-6">
+        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-16 md:pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-center md:text-left space-y-4">
-            <h4 className="text-2xl font-serif font-bold text-slate-900">Now What Alchemizer 2026</h4>
+            <h4 className="text-xl md:text-2xl font-serif font-bold text-slate-900">Now What Alchemizer 2026</h4>
           </div>
 
           <div className="flex flex-col items-center md:items-end gap-6">
             <div className="flex gap-6">
-              <a href="#" className="text-slate-400 hover:text-purple-800 transition-colors"><Instagram /></a>
-              <a href="#" className="text-slate-400 hover:text-purple-800 transition-colors"><MessageCircle /></a>
-              <a href="mailto:hello@nowwhatalchemizer.com" className="text-slate-400 hover:text-purple-800 transition-colors"><Mail /></a>
+              <a href="#" className="text-slate-400 hover:text-purple-800 transition-colors"><Instagram className="w-7 h-7" /></a>
+              <a href="#" className="text-slate-400 hover:text-purple-800 transition-colors"><MessageCircle className="w-7 h-7" /></a>
+              <a href="mailto:hello@nowwhatalchemizer.com" className="text-slate-400 hover:text-purple-800 transition-colors"><Mail className="w-7 h-7" /></a>
             </div>
-            <p className="text-[10px] uppercase tracking-widest text-slate-400">Built with intention • All rights reserved</p>
+            <p className="text-xs uppercase tracking-widest text-slate-400">Built with intention • All rights reserved</p>
           </div>
         </div>
 
@@ -571,8 +571,8 @@ const Descent: React.FC = () => {
           whileHover={{ y: -3 }}
           className="mx-auto mt-12 flex flex-col items-center gap-2 text-slate-400 hover:text-purple-800 transition-colors"
         >
-          <ArrowUp className="w-5 h-5" />
-          <span className="text-[10px] uppercase tracking-widest">Back to top</span>
+          <ArrowUp className="w-6 h-6" />
+          <span className="text-xs uppercase tracking-widest">Back to top</span>
         </motion.button>
       </footer>
     </div>

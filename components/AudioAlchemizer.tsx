@@ -198,7 +198,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
   }, [audioDuration]);
 
   return (
-    <div className="w-full max-w-4xl px-6 text-center relative">
+    <div className="w-full max-w-4xl px-8 md:px-6 text-center relative">
       {/* Hidden Audio Element */}
       <audio
         ref={audioRef}
@@ -229,15 +229,15 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={startAudio}
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-purple-700/50 flex items-center justify-center group relative overflow-hidden"
+              className="w-36 h-36 md:w-48 md:h-48 rounded-full border border-purple-700/50 flex items-center justify-center group relative overflow-hidden"
             >
               <motion.div
                 className="absolute inset-0 bg-purple-700/10"
                 animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
                 transition={{ repeat: Infinity, duration: 4 }}
               />
-              <Play className="w-12 h-12 md:w-16 md:h-16 text-purple-600 group-hover:text-white transition-colors ml-2" />
-              <span className="absolute bottom-6 md:bottom-10 text-[10px] tracking-widest uppercase text-purple-600">Listen</span>
+              <Play className="w-14 h-14 md:w-16 md:h-16 text-purple-600 group-hover:text-white transition-colors ml-2" />
+              <span className="absolute bottom-8 md:bottom-10 text-xs tracking-widest uppercase text-purple-600">Listen</span>
             </motion.button>
             
             <div className="space-y-6 max-w-lg">
@@ -259,7 +259,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
             className="space-y-16 cursor-pointer"
             onClick={handleQuestionClick}
           >
-            <div className="h-auto min-h-40 flex flex-col items-center justify-center">
+            <div className="h-auto min-h-48 md:min-h-40 flex flex-col items-center justify-center">
               <AnimatePresence mode="wait">
                 {phase === AudioPhase.DROP_IN ? (
                   <motion.p
@@ -279,10 +279,10 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
                     transition={{ duration: 1 }}
                     className="text-center"
                   >
-                    <p className="text-2xl md:text-3xl font-serif text-white max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-2xl md:text-3xl font-serif text-white max-w-2xl mx-auto leading-relaxed px-4">
                       There {QUESTION_ROTATOR.length - questionIndex - 1 === 1 ? 'is' : 'are'} {QUESTION_ROTATOR.length - questionIndex - 1} more question{QUESTION_ROTATOR.length - questionIndex - 1 === 1 ? '' : 's'}.
                     </p>
-                    <p className="text-base md:text-lg font-serif text-white/60 mt-4 max-w-xl mx-auto">
+                    <p className="text-base md:text-lg font-serif text-white/60 mt-4 max-w-xl mx-auto px-4">
                       You can make it through them in your own time now, or write them down to reflect on later.
                     </p>
                     <p className="text-sm text-white/40 mt-8">
@@ -318,23 +318,23 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
                         const secondPart = question.slice(splitIndex + 2);
                         return (
                           <>
-                            <p className="text-[1.35rem] md:text-[2.025rem] font-serif text-white max-w-2xl mx-auto leading-snug">
+                            <p className="text-xl md:text-[2.025rem] font-serif text-white max-w-2xl mx-auto leading-snug px-2">
                               {firstPart}
                             </p>
-                            <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-snug mt-4">
+                            <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-snug mt-4 px-2">
                               {secondPart}
                             </p>
                           </>
                         );
                       }
                       return (
-                        <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-relaxed px-2">
                           {question}
                         </p>
                       );
                     })()}
                     {questionIndex === 1 && (
-                      <p className="text-base md:text-xl font-serif text-white/60 mt-4 max-w-xl mx-auto">
+                      <p className="text-base md:text-xl font-serif text-white/60 mt-4 max-w-xl mx-auto px-4">
                         This might be just stretching your neck or finding your pulse.
                       </p>
                     )}
@@ -468,7 +468,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
                   ease: "easeInOut"
                 }}
               />
-              <h3 className="text-4xl font-serif text-white font-bold">The questions remain...</h3>
+              <h3 className="text-3xl md:text-4xl font-serif text-white font-bold">The questions remain...</h3>
             </div>
 
             <motion.button
@@ -476,12 +476,12 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
               whileTap={{ scale: 0.95 }}
               onClick={handleNextStep}
               disabled={isTransitioning}
-              className="px-12 py-4 rounded-full border border-white/50 text-white font-sans tracking-wide text-base transition-all bg-white/10"
+              className="px-16 py-5 md:px-12 md:py-4 rounded-full border border-white/50 text-white font-sans tracking-wide text-base transition-all bg-white/10"
             >
               Ready when you are.
             </motion.button>
 
-            <p className="text-white/30 font-serif text-base italic mt-8 max-w-md">
+            <p className="text-white/30 font-serif text-base italic mt-8 max-w-md px-4">
               "Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rainer Maria Rilke
             </p>
           </motion.div>
@@ -519,13 +519,15 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
         </AnimatePresence>
       </AnimatePresence>
 
-      {/* Hidden dev skip button */}
+      {/* Dev skip button - subtle but accessible */}
       {phase !== AudioPhase.FINISHED && (
         <button
           onClick={handleSkip}
-          className="fixed bottom-4 right-4 w-8 h-8 opacity-0 hover:opacity-20 transition-opacity cursor-default"
-          aria-label="Skip"
-        />
+          className="fixed bottom-8 right-8 px-4 py-2 text-xs text-white/10 hover:text-white/30 transition-opacity"
+          aria-label="Skip audio experience"
+        >
+          Skip
+        </button>
       )}
     </div>
   );
