@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HERO_STATEMENTS } from '../constants';
-import { ChevronDown } from 'lucide-react';
 
 interface HeroProps {
   onUnlock: () => void;
@@ -64,15 +63,24 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
       </div>
 
       <div className="absolute bottom-12 w-full flex flex-col items-center gap-6">
-        {/* Progress Bar - Only visible during the 15s wait or subtly stays */}
-        <div className="w-32 h-[1px] bg-white/10 relative overflow-hidden">
-           <motion.div 
-             initial={{ width: 0 }}
-             animate={{ width: "100%" }}
-             transition={{ duration: 15, ease: "linear" }}
-             className="absolute inset-y-0 left-0 bg-white"
-           />
-        </div>
+        {/* Progress Bar - Fades out when Enter button appears */}
+        <AnimatePresence>
+          {!showContinue && (
+            <motion.div
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-32 h-[1px] bg-white/10 relative overflow-hidden"
+            >
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: "100%" }}
+                transition={{ duration: 15, ease: "linear" }}
+                className="absolute inset-y-0 left-0 bg-white"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <div className="min-h-[64px] flex items-center justify-center">
           <AnimatePresence>
@@ -80,16 +88,11 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
               <motion.button
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
                 onClick={onUnlock}
-                className="group flex flex-col items-center gap-2 hover:text-purple-500 transition-colors"
+                className="enter-button font-sans"
               >
-                <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
-                <motion.div
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                >
-                  <ChevronDown className="w-6 h-6" />
-                </motion.div>
+                Enter
               </motion.button>
             )}
           </AnimatePresence>

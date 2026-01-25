@@ -129,10 +129,10 @@ const Descent: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#FAEADD] text-slate-900 font-sans selection:bg-indigo-100 pb-20">
+    <div className="text-slate-900 font-sans selection:bg-indigo-100 pb-20">
       {/* 1. The Convergence Moment */}
       <motion.section
-        className="min-h-screen flex flex-col items-center justify-center px-6 py-32 border-b border-slate-100 bg-[#FFFBF5] cursor-pointer relative"
+        className="min-h-screen flex flex-col items-center justify-center px-6 py-32 cursor-pointer relative"
         onClick={handleConvergenceClick}
         onViewportEnter={() => {
           setSectionInView(true);
@@ -249,7 +249,7 @@ const Descent: React.FC = () => {
       </motion.section>
 
       {/* 2. Who This Is For & Threads */}
-      <section id="who-for" className="py-32 px-6 bg-[#FAEADD]">
+      <section id="who-for" className="py-32 px-6">
         <div className="max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-8">
             <h2 className="text-5xl font-serif font-bold">Who This Is For</h2>
@@ -271,7 +271,7 @@ const Descent: React.FC = () => {
               const Icon = thread.icon;
               return (
                 <div key={thread.title} className="text-center p-6 flex flex-col items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#FEF6EE] flex items-center justify-center text-purple-700 mb-2">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-purple-700 mb-2" style={{ backgroundColor: 'rgba(254, 246, 238, 0.5)' }}>
                     <Icon className="w-6 h-6" />
                   </div>
                   <h4 className="text-2xl font-serif font-bold leading-tight">{thread.title}</h4>
@@ -301,7 +301,7 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 3. The Conditions for Alchemy */}
-      <section id="conditions" className="py-32 px-6 bg-[#FEF9F4]">
+      <section id="conditions" className="py-32 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-20 text-center">
             <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6">The Conditions for Alchemy</h2>
@@ -345,7 +345,8 @@ const Descent: React.FC = () => {
                 key={item.id}
                 initial={{ opacity: 0, x: item.id % 2 === 0 ? 20 : -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                className="p-10 bg-[#FFFDFB] border border-[#F0E6DD] rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+                className="p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow backdrop-blur-sm"
+                style={{ backgroundColor: 'rgba(255, 253, 251, 0.17)', borderColor: 'rgba(240, 230, 221, 0.3)', borderWidth: '1px' }}
               >
                 <span className="text-purple-700 font-bold mb-4 block">0{item.id}.</span>
                 <h3 className="text-3xl font-serif font-bold mb-2">{item.title}</h3>
@@ -384,7 +385,7 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 4. Event Details */}
-      <section id="event-details" className="py-24 px-6 bg-[#FAEADD]">
+      <section id="event-details" className="py-24 px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-4xl font-serif font-bold text-center mb-16">Event Details</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -397,7 +398,7 @@ const Descent: React.FC = () => {
               const Icon = detail.icon;
               return (
                 <div key={detail.title} className="text-center p-6 flex flex-col items-center gap-4">
-                  <div className="w-16 h-16 rounded-full bg-[#FEF6EE] flex items-center justify-center text-purple-700">
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center text-purple-700" style={{ backgroundColor: 'rgba(254, 246, 238, 0.5)' }}>
                     <Icon className="w-8 h-8" />
                   </div>
                   <h4 className="text-2xl font-serif font-bold">{detail.title}</h4>
@@ -430,7 +431,7 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 5. Leadup + CTA Section */}
-      <section id="cta" className="py-32 px-6 bg-[#FFFBF5]">
+      <section id="cta" className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-16">
           {/* Leadup with animated flip */}
           <motion.div
@@ -474,7 +475,7 @@ const Descent: React.FC = () => {
           </motion.div>
 
           {/* CTA Box */}
-          <div className="p-8 md:p-10 border border-[#F0E6DD] rounded-3xl bg-[#FFFDFB] shadow-sm">
+          <div className="p-8 md:p-10 rounded-3xl shadow-sm backdrop-blur-sm" style={{ backgroundColor: 'rgba(255, 253, 251, 0.17)', borderColor: 'rgba(240, 230, 221, 0.3)', borderWidth: '1px' }}>
             <h3 className="text-2xl font-serif font-bold text-slate-900 mb-6">Want to hear more?</h3>
 
             <form className="flex flex-col md:flex-row gap-4 items-stretch">
@@ -482,12 +483,14 @@ const Descent: React.FC = () => {
                 <input
                   type="email"
                   placeholder="email@example.com"
-                  className="w-full bg-white border border-[#F0E6DD] rounded-full px-6 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all"
+                  className="w-full rounded-full px-6 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.17)', borderColor: 'rgba(240, 230, 221, 0.3)', borderWidth: '1px' }}
                 />
                 <textarea
                   placeholder="Your opportunity to leave a note..."
                   rows={2}
-                  className="w-full bg-white border border-[#F0E6DD] rounded-2xl px-6 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all resize-none"
+                  className="w-full rounded-2xl px-6 py-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all resize-none"
+                  style={{ backgroundColor: 'rgba(255, 255, 255, 0.17)', borderColor: 'rgba(240, 230, 221, 0.3)', borderWidth: '1px' }}
                 />
               </div>
               <button className="md:self-center bg-purple-800 hover:bg-purple-700 text-white rounded-full px-8 py-3 font-bold flex items-center justify-center gap-2 transition-all group whitespace-nowrap">
@@ -517,7 +520,7 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 6. Team Section */}
-      <section id="team" className="py-24 px-6 bg-[#FAEADD] scroll-mt-16 snap-start snap-always">
+      <section id="team" className="py-24 px-6 scroll-mt-16 snap-start snap-always">
         <div className="max-w-4xl mx-auto text-center space-y-16">
           <h3 className="text-3xl font-serif font-bold text-slate-900 mb-12">The Team</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">

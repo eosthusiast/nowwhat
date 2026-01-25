@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import JourneySection from './components/JourneySection';
 import AudioAlchemizer from './components/AudioAlchemizer';
 import Descent from './components/Descent';
+import FloatingBlobs from './components/FloatingBlobs';
 import { AppStage } from './types';
 
 // DEV TOGGLE: Set to false to enable the intended gated/locked experience.
@@ -42,6 +43,7 @@ const lerpColor = (color1: string, color2: string, t: number): string => {
 const App: React.FC = () => {
   const [stage, setStage] = useState<AppStage>(AppStage.HERO);
   const [audioProgress, setAudioProgress] = useState(0); // 0-100
+  const [descentProgress, setDescentProgress] = useState(0); // 0-100, tracks scroll through Descent
 
   // In Dev Mode, we pre-unlock all stages so the full flow is visible.
   const [unlockedStages, setUnlockedStages] = useState<Set<AppStage>>(
@@ -101,7 +103,7 @@ const App: React.FC = () => {
     const handleScroll = () => {
       const sections = [AppStage.HERO, AppStage.JOURNEY, AppStage.AUDIO, AppStage.DESCENT];
       const viewportHeight = window.innerHeight;
-      
+
       for (const s of sections) {
         const el = document.getElementById(s.toLowerCase());
         if (el) {
@@ -109,6 +111,20 @@ const App: React.FC = () => {
           if (rect.top <= viewportHeight / 2 && rect.bottom >= viewportHeight / 2) {
             setStage(s);
           }
+        }
+      }
+
+      // Calculate Descent scroll progress for dynamic blob colors
+      const descentEl = document.getElementById('descent');
+      if (descentEl) {
+        const rect = descentEl.getBoundingClientRect();
+        const sectionHeight = descentEl.offsetHeight;
+        // Progress: 0 when section top is at viewport top, 100 when section bottom is at viewport bottom
+        const scrolledIntoSection = Math.max(0, -rect.top);
+        const totalScrollableHeight = sectionHeight - viewportHeight;
+        if (totalScrollableHeight > 0) {
+          const progress = Math.min(100, Math.max(0, (scrolledIntoSection / totalScrollableHeight) * 100));
+          setDescentProgress(progress);
         }
       }
     };
@@ -158,11 +174,12 @@ const App: React.FC = () => {
   }, [stage, unlockedStages]);
 
   return (
-    <motion.div 
+    <motion.div
       className="min-h-screen bg-transition selection:bg-purple-700/30"
       animate={{ backgroundColor: getBackgroundColor() }}
     >
-      <div ref={scrollContainerRef}>
+      <FloatingBlobs stage={stage} audioProgress={audioProgress} descentProgress={descentProgress} />
+      <div ref={scrollContainerRef} className="relative z-10">
         <section id="hero" className="h-screen relative">
           <Hero onUnlock={() => handleStageUnlock(AppStage.JOURNEY)} />
         </section>

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Headset, Waves } from 'lucide-react';
+import { Waves } from 'lucide-react';
 import { QUESTION_ROTATOR } from '../constants';
 
 enum AudioPhase {
@@ -225,29 +225,20 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
             exit={{ opacity: 0, scale: 1.1 }}
             className="flex flex-col items-center gap-12"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={startAudio}
-              className="w-32 h-32 md:w-48 md:h-48 rounded-full border border-purple-700/50 flex items-center justify-center group relative overflow-hidden"
-            >
-              <motion.div
-                className="absolute inset-0 bg-purple-700/10"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-                transition={{ repeat: Infinity, duration: 4 }}
-              />
-              <Play className="w-12 h-12 md:w-16 md:h-16 text-purple-600 group-hover:text-white transition-colors ml-2" />
-              <span className="absolute bottom-6 md:bottom-10 text-[10px] tracking-widest uppercase text-purple-600">Listen</span>
-            </motion.button>
-            
             <div className="space-y-6 max-w-lg">
               <p className="text-gray-400 font-sans text-base tracking-wide leading-relaxed">
                 You're going on a journey that's going to take 4 minutes. Put away distractions and wear headphones.
               </p>
-              <p className="text-white font-serif text-2xl italic">
-                Are you ready?
-              </p>
             </div>
+
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={startAudio}
+              className="enter-button font-sans"
+            >
+              Are you ready?
+            </motion.button>
           </motion.div>
         )}
 
@@ -472,46 +463,92 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.2)' }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               onClick={handleNextStep}
               disabled={isTransitioning}
-              className="px-12 py-4 rounded-full border border-white/50 text-white font-sans tracking-wide text-base transition-all bg-white/10"
+              className="enter-button font-sans"
             >
-              Ready when you are.
+              Ready when you are
             </motion.button>
 
-            <p className="text-white/30 font-serif text-base italic mt-8 max-w-md">
+            <p className="text-white/45 font-serif text-base italic mt-8 max-w-md">
               "Be patient toward all that is unsolved in your heart and try to love the questions themselves." — Rainer Maria Rilke
             </p>
           </motion.div>
         )}
 
-        {/* Full-screen sunrise gradient flash transition overlay */}
+        {/* Full-screen sunrise gradient flash transition overlay - dissolves into blob layer */}
         <AnimatePresence>
           {isTransitioning && (
             <motion.div
               className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center"
               initial={{ opacity: 1 }}
               animate={{ opacity: 0 }}
-              transition={{ delay: 2.5, duration: 0.75, ease: "easeOut" }}
+              transition={{ delay: 2.2, duration: 1.2, ease: "easeOut" }}
             >
+              {/* Main expanding light circle */}
               <motion.div
-                className="rounded-full"
+                className="absolute rounded-full"
+                style={{ mixBlendMode: 'soft-light' }}
                 initial={{
                   width: 16,
                   height: 16,
-                  backgroundColor: '#6b3a6b' // Start at mauve
+                  backgroundColor: '#6b3a6b',
+                  filter: 'blur(0px)',
                 }}
                 animate={{
                   width: '300vmax',
                   height: '300vmax',
-                  backgroundColor: ['#6b3a6b', '#a87e7a', '#d4a882', '#FFFBF5'], // Mauve → dusty rose → peach → light sunrise
-                  transition: {
-                    width: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
-                    height: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
-                    backgroundColor: { duration: 0.5, ease: "easeOut", times: [0, 0.2, 0.5, 1] }
-                  }
+                  backgroundColor: ['#6b3a6b', '#a87e7a', '#d4a882', '#FFFBF5'],
+                  filter: ['blur(0px)', 'blur(0px)', 'blur(50px)', 'blur(150px)'],
+                }}
+                transition={{
+                  width: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
+                  height: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
+                  backgroundColor: { duration: 1.5, ease: "easeOut", times: [0, 0.15, 0.4, 1] },
+                  filter: { duration: 2, ease: "easeInOut", times: [0, 0.3, 0.6, 1] },
+                }}
+              />
+              {/* Secondary warm glow that emerges and settles */}
+              <motion.div
+                className="absolute rounded-full"
+                initial={{
+                  width: 100,
+                  height: 100,
+                  backgroundColor: 'rgba(255, 215, 140, 0)',
+                  filter: 'blur(80px)',
+                }}
+                animate={{
+                  width: '120vmax',
+                  height: '120vmax',
+                  backgroundColor: ['rgba(255, 215, 140, 0)', 'rgba(255, 215, 140, 0.3)', 'rgba(255, 215, 140, 0.2)'],
+                }}
+                transition={{
+                  width: { duration: 1.5, ease: "easeOut", delay: 0.5 },
+                  height: { duration: 1.5, ease: "easeOut", delay: 0.5 },
+                  backgroundColor: { duration: 2, ease: "easeInOut", times: [0, 0.5, 1] },
+                }}
+              />
+              {/* Tertiary rose accent blob */}
+              <motion.div
+                className="absolute rounded-full"
+                style={{ left: '30%', top: '40%' }}
+                initial={{
+                  width: 50,
+                  height: 50,
+                  backgroundColor: 'rgba(255, 200, 180, 0)',
+                  filter: 'blur(100px)',
+                }}
+                animate={{
+                  width: '80vmax',
+                  height: '80vmax',
+                  backgroundColor: ['rgba(255, 200, 180, 0)', 'rgba(255, 200, 180, 0.25)', 'rgba(255, 200, 180, 0.15)'],
+                }}
+                transition={{
+                  width: { duration: 1.8, ease: "easeOut", delay: 0.3 },
+                  height: { duration: 1.8, ease: "easeOut", delay: 0.3 },
+                  backgroundColor: { duration: 2.2, ease: "easeInOut", times: [0, 0.4, 1] },
                 }}
               />
             </motion.div>
