@@ -88,7 +88,7 @@ const EnsoCircle: React.FC = () => {
   };
 
   return (
-    <div className="relative w-72 h-72 md:w-[28rem] md:h-[28rem] flex items-center justify-center overflow-visible">
+    <div className="relative w-[14.5rem] h-[14.5rem] md:w-[22.4rem] md:h-[22.4rem] flex items-center justify-center overflow-visible">
       {/* Hand-drawn Enso SVG */}
       <svg 
         viewBox="0 0 100 100" 
@@ -142,7 +142,7 @@ const EnsoCircle: React.FC = () => {
           transition={{ delay: 1, duration: 1.5 }}
           className="space-y-0"
         >
-          <h2 className="text-3xl md:text-5xl font-serif font-light text-white leading-none tracking-wide">
+          <h2 className="text-xl md:text-3xl font-serif font-light text-white leading-none tracking-wide">
             Two Weeks<br />
             <span className="font-bold text-[0.7em]">30 People</span>
           </h2>
