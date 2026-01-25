@@ -198,7 +198,7 @@ const EnsoCircle: React.FC = () => {
                       ...(stop.position === 'right' && { left: '50px', top: '50%', transform: 'translateY(-50%)' }),
                     }}
                   >
-                    <h4 className="font-serif text-xs md:text-sm font-bold text-white tracking-tight md:whitespace-nowrap">{stop.title}</h4>
+                    <h4 className="font-serif text-xs md:text-sm font-bold text-white tracking-tight whitespace-pre-line text-center">{stop.title}</h4>
                   </motion.div>
                 )}
               </AnimatePresence>
