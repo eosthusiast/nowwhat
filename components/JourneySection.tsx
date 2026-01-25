@@ -26,7 +26,7 @@ const JourneySection: React.FC = () => {
             transition={{ duration: 1 }}
             className="max-w-xl mx-auto lg:mx-0"
           >
-            <p className="text-blue-400 font-sans text-xs md:text-sm tracking-widest uppercase mb-3 md:mb-4">The <em className="italic">Now What</em> Alchemizer</p>
+            <p className="font-sans text-xs md:text-sm tracking-widest uppercase mb-3 md:mb-4" style={{ color: '#2b1b46' }}>The <em className="italic">Now What</em> Alchemizer</p>
             <h2 className="text-2xl md:text-4xl font-serif font-bold text-white mb-4 md:mb-6 leading-tight">
               We gather inspired, motivated people, and create the conditions where unexpected ideas emerge naturally.
             </h2>

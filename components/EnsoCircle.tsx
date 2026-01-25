@@ -92,8 +92,8 @@ const EnsoCircle: React.FC = () => {
       {/* Hand-drawn Enso SVG */}
       <svg 
         viewBox="0 0 100 100" 
-        className="absolute inset-0 w-full h-full text-blue-900/30 drop-shadow-2xl"
-        style={{ filter: 'url(#enso-texture)' }}
+        className="absolute inset-0 w-full h-full drop-shadow-2xl"
+        style={{ color: 'rgba(43, 27, 70, 0.5)', filter: 'url(#enso-texture)' }}
       >
         <defs>
           <filter id="enso-texture" x="-20%" y="-20%" width="140%" height="140%">
@@ -164,18 +164,19 @@ const EnsoCircle: React.FC = () => {
               <motion.div
                 animate={isActive ? {
                   scale: 1.15,
-                  boxShadow: '0 0 20px rgba(30, 58, 138, 0.5), 0 0 40px rgba(30, 58, 138, 0.2)'
+                  boxShadow: '0 0 20px rgba(43, 27, 70, 0.6), 0 0 40px rgba(43, 27, 70, 0.3)'
                 } : {
                   scale: 1,
                   boxShadow: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)'
                 }}
                 whileHover={{ scale: 1.15, rotate: 5 }}
                 transition={{ duration: 0.3 }}
-                className={`w-10 h-10 md:w-12 md:h-12 bg-blue-950/50 backdrop-blur-md border rounded-full flex items-center justify-center cursor-help transition-colors duration-500 ${
-                  isActive
-                    ? 'border-blue-800/60 text-blue-300'
-                    : 'border-blue-900/30 text-blue-400/60 group-hover:text-blue-300 group-hover:border-blue-800/40'
-                }`}
+                className="w-10 h-10 md:w-12 md:h-12 backdrop-blur-md border rounded-full flex items-center justify-center cursor-help transition-colors duration-500"
+                style={{
+                  backgroundColor: 'rgba(43, 27, 70, 0.5)',
+                  borderColor: isActive ? 'rgba(43, 27, 70, 0.8)' : 'rgba(43, 27, 70, 0.4)',
+                  color: isActive ? 'rgba(120, 100, 160, 1)' : 'rgba(90, 70, 130, 0.7)'
+                }}
               >
                 <Icon className="w-5 h-5 md:w-6 md:h-6" strokeWidth={1.5} />
               </motion.div>
@@ -186,8 +187,11 @@ const EnsoCircle: React.FC = () => {
                     initial={{ opacity: 0, filter: 'blur(4px)' }}
                     animate={{ opacity: 1, filter: 'blur(0px)' }}
                     exit={{ opacity: 0, filter: 'blur(4px)' }}
-                    className="absolute z-30 w-max max-w-[180px] p-2 md:p-3 bg-blue-950/95 border border-blue-800/30 rounded-lg md:rounded-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-lg pointer-events-none"
+                    className="absolute z-30 w-max max-w-[180px] p-2 md:p-3 rounded-lg md:rounded-xl shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-lg pointer-events-none"
                     style={{
+                      backgroundColor: 'rgba(43, 27, 70, 0.95)',
+                      borderWidth: '1px',
+                      borderColor: 'rgba(43, 27, 70, 0.6)',
                       ...(stop.position === 'top' && { bottom: '50px', left: '50%', transform: 'translateX(-50%)' }),
                       ...(stop.position === 'bottom' && { top: '50px', left: '50%', transform: 'translateX(-50%)' }),
                       ...(stop.position === 'left' && { right: '50px', top: '50%', transform: 'translateY(-50%)' }),
