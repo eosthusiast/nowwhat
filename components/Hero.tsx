@@ -35,8 +35,8 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
         {/* Responsive, centered vertical layout */}
         <div className="flex flex-col items-center justify-center gap-y-4">
 
-          {/* Top: Rotating Statement - Centered */}
-          <div className="text-center">
+          {/* Top: Rotating Statement - Centered with fixed height to prevent jumping */}
+          <div className="text-center min-h-[3rem] md:min-h-[5rem] flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={statementIndex}
@@ -44,7 +44,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="text-[clamp(1.5rem,5vw,7rem)] font-serif text-white font-light leading-relaxed"
+                className="text-[clamp(1.5rem,5vw,7rem)] font-serif text-white font-light leading-tight"
               >
                 {HERO_STATEMENTS[statementIndex]}
               </motion.div>
@@ -63,10 +63,10 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-12 w-full flex flex-col items-center gap-6">
+      <div className="absolute bottom-6 md:bottom-12 w-full flex flex-col items-center gap-3 md:gap-6 px-4">
         {/* Progress Bar - Only visible during the 15s wait or subtly stays */}
         <div className="w-32 h-[1px] bg-white/10 relative overflow-hidden">
-           <motion.div 
+           <motion.div
              initial={{ width: 0 }}
              animate={{ width: "100%" }}
              transition={{ duration: 15, ease: "linear" }}
@@ -74,32 +74,32 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
            />
         </div>
 
-        <div className="min-h-[64px] flex items-center justify-center">
+        <div className="min-h-[48px] md:min-h-[64px] flex items-center justify-center">
           <AnimatePresence>
             {showContinue && (
               <motion.button
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 onClick={onUnlock}
-                className="group flex flex-col items-center gap-2 hover:text-purple-500 transition-colors"
+                className="group flex flex-col items-center gap-1 md:gap-2 hover:text-purple-500 transition-colors"
               >
-                <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
+                <span className="text-xs md:text-sm tracking-widest uppercase font-sans">Continue</span>
                 <motion.div
                   animate={{ y: [0, 5, 0] }}
                   transition={{ repeat: Infinity, duration: 2 }}
                 >
-                  <ChevronDown className="w-6 h-6" />
+                  <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
                 </motion.div>
               </motion.button>
             )}
           </AnimatePresence>
         </div>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.3 }}
           transition={{ delay: 2, duration: 2 }}
-          className="text-[10px] md:text-xs tracking-[0.2em] uppercase font-sans text-center max-w-[80vw] mt-4"
+          className="text-[9px] md:text-xs tracking-[0.15em] md:tracking-[0.2em] uppercase font-sans text-center max-w-[90vw] md:max-w-[80vw]"
         >
           Opening doors to radical possibility for those who shape the world.
         </motion.p>

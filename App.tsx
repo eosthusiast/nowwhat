@@ -10,14 +10,14 @@ import { AppStage } from './types';
 // DEV TOGGLE: Set to false to enable the intended gated/locked experience.
 const IS_DEV_MODE = false;
 
-// Dawn gradient color keyframes
+// Dawn gradient color keyframes - dark blues, minimal purple
 const DAWN_COLORS = {
-  night: '#0a0a0f',      // Near black (Hero start)
-  deepNavy: '#0d0d1a',   // Deep navy (Hero end / Journey start)
-  deepPurple: '#1a0a2e', // Deep purple (Journey end)
-  purple: '#2d1b4a',     // Purple (Audio start)
-  dustyPurple: '#4a2a5a',// Dusty purple (Audio 25%)
-  mauve: '#6b3a6b',      // Mauve (Audio end - flash starts here)
+  night: '#050508',      // Pure black (Hero)
+  deepNavy: '#080a12',   // Very dark navy (Journey start)
+  darkBlue: '#0c1018',   // Dark blue (Journey end)
+  slateBlue: '#101520',  // Slate blue (Audio start)
+  deepSlate: '#1a2030',  // Deep slate (Audio 50%)
+  duskSlate: '#2a3040',  // Dusk slate (Audio end - flash starts here)
   dustyRose: '#a87e7a',  // Dusty rose (flash transition)
   preDawn: '#d4a882',    // Warm pre-dawn peach (flash transition)
   sunriseYellow: '#FFFBF5', // Very light warm sunrise cream (flash end, convergence bg)
@@ -54,18 +54,18 @@ const App: React.FC = () => {
   const getBackgroundColor = () => {
     switch (stage) {
       case AppStage.HERO:
-        // Subtle shift from night to deep navy during Hero
-        return lerpColor(DAWN_COLORS.night, DAWN_COLORS.deepNavy, 0.3);
+        // Pure black for Hero
+        return DAWN_COLORS.night;
       case AppStage.JOURNEY:
-        // Transition to deep purple during Journey
-        return lerpColor(DAWN_COLORS.deepNavy, DAWN_COLORS.deepPurple, 0.7);
+        // Transition to dark blue during Journey
+        return lerpColor(DAWN_COLORS.deepNavy, DAWN_COLORS.darkBlue, 0.7);
       case AppStage.AUDIO:
-        // Gradual transition through purple → dusty purple → mauve (stops at mauve)
+        // Gradual transition through slate blues (much darker, less purple)
         const p = audioProgress / 100;
         if (p < 0.5) {
-          return lerpColor(DAWN_COLORS.purple, DAWN_COLORS.dustyPurple, p * 2);
+          return lerpColor(DAWN_COLORS.slateBlue, DAWN_COLORS.deepSlate, p * 2);
         } else {
-          return lerpColor(DAWN_COLORS.dustyPurple, DAWN_COLORS.mauve, (p - 0.5) * 2);
+          return lerpColor(DAWN_COLORS.deepSlate, DAWN_COLORS.duskSlate, (p - 0.5) * 2);
         }
       case AppStage.DESCENT:
         return DAWN_COLORS.dawn; // Warm tan for Descent
