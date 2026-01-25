@@ -10,27 +10,67 @@ import { AppStage } from './types';
 // DEV TOGGLE: Set to false to enable the intended gated/locked experience.
 const IS_DEV_MODE = false;
 
+// Dawn gradient color keyframes
+const DAWN_COLORS = {
+  night: '#0a0a0f',      // Near black (Hero start)
+  deepNavy: '#0d0d1a',   // Deep navy (Hero end / Journey start)
+  deepPurple: '#1a0a2e', // Deep purple (Journey end)
+  purple: '#2d1b4a',     // Purple (Audio start)
+  dustyPurple: '#4a2a5a',// Dusty purple (Audio 25%)
+  mauve: '#6b3a6b',      // Mauve (Audio end - flash starts here)
+  dustyRose: '#a87e7a',  // Dusty rose (flash transition)
+  preDawn: '#d4a882',    // Warm pre-dawn peach (flash transition)
+  sunriseYellow: '#FFFBF5', // Very light warm sunrise cream (flash end, convergence bg)
+  dawn: '#FAEADD',       // Dawn/warm tan (Descent sections)
+};
+
+// Linear interpolation between two hex colors
+const lerpColor = (color1: string, color2: string, t: number): string => {
+  const c1 = parseInt(color1.slice(1), 16);
+  const c2 = parseInt(color2.slice(1), 16);
+
+  const r1 = (c1 >> 16) & 255, g1 = (c1 >> 8) & 255, b1 = c1 & 255;
+  const r2 = (c2 >> 16) & 255, g2 = (c2 >> 8) & 255, b2 = c2 & 255;
+
+  const r = Math.round(r1 + (r2 - r1) * t);
+  const g = Math.round(g1 + (g2 - g1) * t);
+  const b = Math.round(b1 + (b2 - b1) * t);
+
+  return `#${((r << 16) | (g << 8) | b).toString(16).padStart(6, '0')}`;
+};
+
 const App: React.FC = () => {
   const [stage, setStage] = useState<AppStage>(AppStage.HERO);
-  
+  const [audioProgress, setAudioProgress] = useState(0); // 0-100
+
   // In Dev Mode, we pre-unlock all stages so the full flow is visible.
   const [unlockedStages, setUnlockedStages] = useState<Set<AppStage>>(
     new Set(IS_DEV_MODE ? Object.values(AppStage) : [AppStage.HERO])
   );
-  
+
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Global background color logic
+  // Global background color with gradual dawn transition
   const getBackgroundColor = () => {
     switch (stage) {
       case AppStage.HERO:
+        // Subtle shift from night to deep navy during Hero
+        return lerpColor(DAWN_COLORS.night, DAWN_COLORS.deepNavy, 0.3);
       case AppStage.JOURNEY:
+        // Transition to deep purple during Journey
+        return lerpColor(DAWN_COLORS.deepNavy, DAWN_COLORS.deepPurple, 0.7);
       case AppStage.AUDIO:
-        return '#050b1a'; // Deep Navy
+        // Gradual transition through purple → dusty purple → mauve (stops at mauve)
+        const p = audioProgress / 100;
+        if (p < 0.5) {
+          return lerpColor(DAWN_COLORS.purple, DAWN_COLORS.dustyPurple, p * 2);
+        } else {
+          return lerpColor(DAWN_COLORS.dustyPurple, DAWN_COLORS.mauve, (p - 0.5) * 2);
+        }
       case AppStage.DESCENT:
-        return '#f7f5f0'; // Warm Off-White (brightest white reserved for flash)
+        return DAWN_COLORS.dawn; // Warm tan for Descent
       default:
-        return '#050b1a';
+        return DAWN_COLORS.night;
     }
   };
 
@@ -135,9 +175,10 @@ const App: React.FC = () => {
 
         {unlockedStages.has(AppStage.AUDIO) && (
           <section id="audio" className="h-screen flex items-center justify-center overflow-hidden">
-            <AudioAlchemizer 
+            <AudioAlchemizer
               isUnlocked={unlockedStages.has(AppStage.DESCENT)}
-              onUnlock={() => handleStageUnlock(AppStage.DESCENT)} 
+              onUnlock={() => handleStageUnlock(AppStage.DESCENT)}
+              onProgress={setAudioProgress}
             />
           </section>
         )}

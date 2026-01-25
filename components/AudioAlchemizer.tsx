@@ -15,9 +15,10 @@ enum AudioPhase {
 interface AudioAlchemizerProps {
   onUnlock: () => void;
   isUnlocked: boolean;
+  onProgress?: (progress: number) => void;
 }
 
-const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked }) => {
+const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked, onProgress }) => {
   const [phase, setPhase] = useState<AudioPhase>(isUnlocked ? AudioPhase.FINISHED : AudioPhase.IDLE);
   const [timer, setTimer] = useState(0); // Internal timer for text rotation logic
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -39,6 +40,18 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
+
+  // Report progress to parent for background color transitions
+  useEffect(() => {
+    if (onProgress && audioDuration > 0) {
+      const progress = Math.min(100, (audioCurrentTime / audioDuration) * 100);
+      onProgress(progress);
+    }
+    // Also set to 100% when finished
+    if (onProgress && phase === AudioPhase.FINISHED) {
+      onProgress(100);
+    }
+  }, [audioCurrentTime, audioDuration, phase, onProgress]);
 
   // Skip to finished phase
   const handleSkip = () => {
@@ -474,7 +487,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
           </motion.div>
         )}
 
-        {/* Full-screen flash transition overlay */}
+        {/* Full-screen sunrise gradient flash transition overlay */}
         <AnimatePresence>
           {isTransitioning && (
             <motion.div
@@ -484,12 +497,21 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked 
               transition={{ delay: 2.5, duration: 0.75, ease: "easeOut" }}
             >
               <motion.div
-                className="bg-white rounded-full"
-                initial={{ width: 16, height: 16 }}
+                className="rounded-full"
+                initial={{
+                  width: 16,
+                  height: 16,
+                  backgroundColor: '#6b3a6b' // Start at mauve
+                }}
                 animate={{
                   width: '300vmax',
                   height: '300vmax',
-                  transition: { duration: 1, ease: [0.4, 0, 0.2, 1] }
+                  backgroundColor: ['#6b3a6b', '#a87e7a', '#d4a882', '#FFFBF5'], // Mauve → dusty rose → peach → light sunrise
+                  transition: {
+                    width: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
+                    height: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
+                    backgroundColor: { duration: 0.5, ease: "easeOut", times: [0, 0.2, 0.5, 1] }
+                  }
                 }}
               />
             </motion.div>

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkles, ChevronDown } from 'lucide-react';
+import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkles, ChevronDown, Calendar, MapPin, DollarSign, ArrowUp } from 'lucide-react';
 
 const Descent: React.FC = () => {
   const [showWhatNow, setShowWhatNow] = useState(false);
@@ -44,9 +44,11 @@ const Descent: React.FC = () => {
   // Handle staged reveal for the problem sentence
   useEffect(() => {
     if (convergenceStep >= 1 && problemStep < 6) {
+      // Step 1→2 (when "AI" appears) has 1s extra delay
+      const delay = problemStep === 0 ? 0 : problemStep === 1 ? 2500 : 1500;
       problemTimerRef.current = setTimeout(() => {
         setProblemStep(prev => prev + 1);
-      }, problemStep === 0 ? 0 : 1500); // First part immediately, then 1.5s delays
+      }, delay);
     }
     return () => {
       if (problemTimerRef.current) clearTimeout(problemTimerRef.current);
@@ -78,9 +80,27 @@ const Descent: React.FC = () => {
   }, [convergenceStep, answerStep]);
 
   const handleConvergenceClick = () => {
-    if (convergenceStep < 3) {
+    // Sequential advancement: problem → question → answer
+    if (convergenceStep >= 1 && problemStep < 6) {
+      // Still revealing problem - advance problem
+      if (problemTimerRef.current) clearTimeout(problemTimerRef.current);
+      setProblemStep(prev => prev + 1);
+    } else if (convergenceStep < 2) {
+      // Problem done, trigger question phase
       if (timerRef.current) clearTimeout(timerRef.current);
-      setConvergenceStep(prev => prev + 1);
+      setConvergenceStep(2);
+    } else if (convergenceStep >= 2 && questionStep < 2) {
+      // Still revealing question - advance question
+      if (questionTimerRef.current) clearTimeout(questionTimerRef.current);
+      setQuestionStep(prev => prev + 1);
+    } else if (convergenceStep < 3) {
+      // Question done, trigger answer phase
+      if (timerRef.current) clearTimeout(timerRef.current);
+      setConvergenceStep(3);
+    } else if (convergenceStep === 3 && answerStep < 4) {
+      // Still revealing answer - advance answer
+      if (answerTimerRef.current) clearTimeout(answerTimerRef.current);
+      setAnswerStep(prev => prev + 1);
     }
   };
 
@@ -96,11 +116,23 @@ const Descent: React.FC = () => {
     document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollToEventDetails = () => {
+    document.getElementById('event-details')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTeam = () => {
+    document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="bg-[#f7f5f0] text-slate-900 font-sans selection:bg-indigo-100 pb-20">
+    <div className="bg-[#FAEADD] text-slate-900 font-sans selection:bg-indigo-100 pb-20">
       {/* 1. The Convergence Moment */}
       <motion.section
-        className="min-h-screen flex flex-col items-center justify-center px-6 py-32 border-b border-slate-100 bg-white cursor-pointer relative"
+        className="min-h-screen flex flex-col items-center justify-center px-6 py-32 border-b border-slate-100 bg-[#FFFBF5] cursor-pointer relative"
         onClick={handleConvergenceClick}
         onViewportEnter={() => {
           setSectionInView(true);
@@ -217,7 +249,7 @@ const Descent: React.FC = () => {
       </motion.section>
 
       {/* 2. Who This Is For & Threads */}
-      <section id="who-for" className="py-32 px-6 bg-[#f7f5f0]">
+      <section id="who-for" className="py-32 px-6 bg-[#FAEADD]">
         <div className="max-w-4xl mx-auto space-y-16">
           <div className="text-center space-y-8">
             <h2 className="text-5xl font-serif font-bold">Who This Is For</h2>
@@ -239,7 +271,7 @@ const Descent: React.FC = () => {
               const Icon = thread.icon;
               return (
                 <div key={thread.title} className="text-center p-6 border-l border-slate-100 flex flex-col items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-slate-50 flex items-center justify-center text-purple-700 mb-2">
+                  <div className="w-12 h-12 rounded-full bg-[#FEF6EE] flex items-center justify-center text-purple-700 mb-2">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h4 className="text-2xl font-serif font-bold leading-tight">{thread.title}</h4>
@@ -269,7 +301,7 @@ const Descent: React.FC = () => {
       </section>
 
       {/* 3. The Conditions for Alchemy */}
-      <section id="conditions" className="py-32 px-6 bg-slate-50">
+      <section id="conditions" className="py-32 px-6 bg-[#FEF9F4]">
         <div className="max-w-6xl mx-auto">
           <div className="mb-20 text-center">
             <h2 className="text-5xl md:text-6xl font-serif font-bold mb-6">The Conditions for Alchemy</h2>
@@ -313,7 +345,7 @@ const Descent: React.FC = () => {
                 key={item.id}
                 initial={{ opacity: 0, x: item.id % 2 === 0 ? 20 : -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                className="p-10 bg-white border border-slate-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+                className="p-10 bg-[#FFFDFB] border border-[#F0E6DD] rounded-2xl shadow-sm hover:shadow-md transition-shadow"
               >
                 <span className="text-purple-700 font-bold mb-4 block">0{item.id}.</span>
                 <h3 className="text-3xl font-serif font-bold mb-2">{item.title}</h3>
@@ -337,7 +369,7 @@ const Descent: React.FC = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            onClick={scrollToCTA}
+            onClick={scrollToEventDetails}
             className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-16 mx-auto"
           >
             <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
@@ -351,7 +383,53 @@ const Descent: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Leadup + CTA Section */}
+      {/* 4. Event Details */}
+      <section id="event-details" className="py-24 px-6 bg-[#FFFBF5]">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-serif font-bold text-center mb-16">Event Details</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { title: "When", info: "To be disclosed", icon: Calendar },
+              { title: "Where", info: "To be disclosed", icon: MapPin },
+              { title: "Cost", info: "To be disclosed", icon: DollarSign },
+              { title: "Theme", info: "To be disclosed", icon: Sparkles }
+            ].map((detail) => {
+              const Icon = detail.icon;
+              return (
+                <div key={detail.title} className="text-center p-6 flex flex-col items-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-[#FEF6EE] flex items-center justify-center text-purple-700">
+                    <Icon className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-2xl font-serif font-bold">{detail.title}</h4>
+                  <p className="text-slate-500 italic">{detail.info}</p>
+                </div>
+              );
+            })}
+          </div>
+          <p className="text-center text-slate-600 mt-12 text-lg font-serif">
+            Two weeks. Thirty people. One transformative experience.
+          </p>
+
+          {/* Continue button */}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            onClick={scrollToCTA}
+            className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-12 mx-auto"
+          >
+            <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <ChevronDown className="w-6 h-6" />
+            </motion.div>
+          </motion.button>
+        </div>
+      </section>
+
+      {/* 5. Leadup + CTA Section */}
       <section id="cta" className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-16">
           {/* Leadup with animated flip */}
@@ -396,25 +474,67 @@ const Descent: React.FC = () => {
           </motion.div>
 
           {/* CTA Box */}
-          <div className="p-12 border border-slate-200 rounded-3xl bg-white/50 backdrop-blur-sm space-y-8">
+          <div className="p-12 border border-[#F0E6DD] rounded-3xl bg-[#FFFDFB]/80 backdrop-blur-sm space-y-8">
             <h3 className="text-2xl font-serif font-bold text-slate-900">Want to hear more?</h3>
 
             <form className="max-w-md mx-auto space-y-4">
               <input
                 type="email"
                 placeholder="email@example.com"
-                className="w-full bg-slate-100 border border-slate-200 rounded-full px-8 py-4 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all"
+                className="w-full bg-[#FEF9F4] border border-[#F0E6DD] rounded-full px-8 py-4 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all"
               />
               <textarea
                 placeholder="Your opportunity to leave a note..."
                 rows={3}
-                className="w-full bg-slate-100 border border-slate-200 rounded-2xl px-8 py-4 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all resize-none"
+                className="w-full bg-[#FEF9F4] border border-[#F0E6DD] rounded-2xl px-8 py-4 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-700 transition-all resize-none"
               />
               <button className="w-full md:w-auto bg-purple-800 hover:bg-purple-700 text-white rounded-full px-8 py-4 font-bold flex items-center justify-center gap-2 transition-all group mx-auto">
                 Notify Me
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
+
+            {/* Continue to Team button */}
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              onClick={scrollToTeam}
+              className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-8 mx-auto"
+            >
+              <span className="text-sm tracking-widest uppercase font-sans">Meet the Team</span>
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                <ChevronDown className="w-6 h-6" />
+              </motion.div>
+            </motion.button>
+          </div>
+
+          {/* Team Section */}
+          <div id="team" className="pt-16 scroll-mt-16">
+            <h3 className="text-3xl font-serif font-bold text-slate-900 mb-12">The Team</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { name: "Carolin Fleissner", bio: "Caro bridges embodied wisdom and technological innovation. Dance-trained and first hire at Wayve (AI/autonomous vehicles), she scaled the company from 1 to 220+ employees as VP of People & Culture, supporting $1.2B+ in fundraising. She now works as advisor, coach, and facilitator, running retreats and workshops that weave somatic practices with transformational leadership.", image: "/team/caro.jpeg" },
+                { name: "Askja Michelle Rickenbach", bio: "Askja weaves leadership development with ecological wisdom. Trained in nature and wilderness pedagogy at Woniya Naturschule, she brings experience in social entrepreneurship, youth engagement, and international team management across Switzerland and beyond. Her work integrates somatic practices with organizational transformation, guiding groups to reconnect with natural rhythms while building regenerative systems and conscious communities.", image: "/team/askja.jpg" },
+                { name: "Kaela Atleework", bio: "Kaela brings depth to human connection. Former international model for Chanel turned digital nomad and community architect, she's traveled 40+ countries facilitating workshops on \"instantaneous intimacy\" and regenerative living. Founder of Montaia, a global network of purpose-driven nomads and conscious creatives. Experience designer specializing in co-living experiments, authentic relating practices, and ecologically conscious gatherings that transform superficial networking into meaningful collaboration.", image: "/team/kaela.jpeg" },
+                { name: "David Hera, PhD", bio: "David bridges mycology, technology, and transformational design. PhD in mycology studying indigenous mushrooms of Aotearoa New Zealand, former semiconductor applications manager across Asia and USA, with expertise in complex international coordination. Co-founder of Goodbye Monkey and co-creator of S.A.N (Sentient Advocate of Nature) art installation (Burning Man), photographer, and ecstatic dance DJ. Brings precision, reliability, and interdisciplinary thinking to transformational work.", image: "/team/David.jpg" }
+              ].map((member) => (
+                <div key={member.name} className="flex flex-col items-center">
+                  <div className="w-40 h-40 rounded-full bg-slate-200 overflow-hidden mb-4">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h4 className="text-xl font-serif font-bold text-center min-h-14 mb-4">{member.name}</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed text-left">{member.bio}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Margaret Mead quote */}
@@ -426,7 +546,7 @@ const Descent: React.FC = () => {
 
       {/* Footer - Light Theme */}
       <footer className="py-20 px-6">
-        <div className="max-w-6xl mx-auto border-t border-slate-200 pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
+        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
           <div className="text-center md:text-left space-y-4">
             <h4 className="text-2xl font-serif font-bold text-slate-900">Now What Alchemizer 2026</h4>
           </div>
@@ -440,6 +560,16 @@ const Descent: React.FC = () => {
             <p className="text-[10px] uppercase tracking-widest text-slate-400">Built with intention • All rights reserved</p>
           </div>
         </div>
+
+        {/* Back to top */}
+        <motion.button
+          onClick={scrollToTop}
+          whileHover={{ y: -3 }}
+          className="mx-auto mt-12 flex flex-col items-center gap-2 text-slate-400 hover:text-purple-800 transition-colors"
+        >
+          <ArrowUp className="w-5 h-5" />
+          <span className="text-[10px] uppercase tracking-widest">Back to top</span>
+        </motion.button>
       </footer>
     </div>
   );
