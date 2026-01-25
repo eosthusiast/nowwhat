@@ -64,24 +64,24 @@ interface BlobConfig {
   delay: number;
 }
 
-// Dark stage blob config - standard
+// Dark stage blob config - standard (0.5x speed)
 const DARK_BLOBS: BlobConfig[] = [
-  { id: 1, size: 600, initialX: -10, initialY: -20, duration: 25, delay: 0 },
-  { id: 2, size: 500, initialX: 70, initialY: 10, duration: 30, delay: 2 },
-  { id: 3, size: 450, initialX: 20, initialY: 60, duration: 22, delay: 4 },
-  { id: 4, size: 550, initialX: 80, initialY: 70, duration: 28, delay: 1 },
-  { id: 5, size: 400, initialX: 40, initialY: 30, duration: 20, delay: 3 },
-  { id: 6, size: 480, initialX: 60, initialY: 85, duration: 26, delay: 5 },
+  { id: 1, size: 600, initialX: -10, initialY: -20, duration: 50, delay: 0 },
+  { id: 2, size: 500, initialX: 70, initialY: 10, duration: 60, delay: 2 },
+  { id: 3, size: 450, initialX: 20, initialY: 60, duration: 44, delay: 4 },
+  { id: 4, size: 550, initialX: 80, initialY: 70, duration: 56, delay: 1 },
+  { id: 5, size: 400, initialX: 40, initialY: 30, duration: 40, delay: 3 },
+  { id: 6, size: 480, initialX: 60, initialY: 85, duration: 52, delay: 5 },
 ];
 
-// Light stage blob config - larger, slower, more meditative
+// Light stage blob config - larger, slower, more meditative (0.5x speed)
 const LIGHT_BLOBS: BlobConfig[] = [
-  { id: 1, size: 700, initialX: -15, initialY: -25, duration: 35, delay: 0 },
-  { id: 2, size: 600, initialX: 65, initialY: 5, duration: 40, delay: 2 },
-  { id: 3, size: 550, initialX: 15, initialY: 55, duration: 32, delay: 4 },
-  { id: 4, size: 650, initialX: 75, initialY: 65, duration: 38, delay: 1 },
-  { id: 5, size: 500, initialX: 35, initialY: 25, duration: 30, delay: 3 },
-  { id: 6, size: 580, initialX: 55, initialY: 80, duration: 36, delay: 5 },
+  { id: 1, size: 700, initialX: -15, initialY: -25, duration: 70, delay: 0 },
+  { id: 2, size: 600, initialX: 65, initialY: 5, duration: 80, delay: 2 },
+  { id: 3, size: 550, initialX: 15, initialY: 55, duration: 64, delay: 4 },
+  { id: 4, size: 650, initialX: 75, initialY: 65, duration: 76, delay: 1 },
+  { id: 5, size: 500, initialX: 35, initialY: 25, duration: 60, delay: 3 },
+  { id: 6, size: 580, initialX: 55, initialY: 80, duration: 72, delay: 5 },
 ];
 
 const FloatingBlobs: React.FC<FloatingBlobsProps> = ({ stage, audioProgress, descentProgress = 0 }) => {

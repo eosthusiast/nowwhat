@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkles, ChevronDown, Calendar, MapPin, DollarSign, ArrowUp } from 'lucide-react';
+import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Wand2, ChevronDown, Calendar, MapPin, DollarSign, ArrowUp, Lightbulb } from 'lucide-react';
 
 const Descent: React.FC = () => {
   const [showWhatNow, setShowWhatNow] = useState(false);
@@ -266,7 +266,7 @@ const Descent: React.FC = () => {
               { title: "Implementers", desc: "Builders & Entrepreneurs", icon: Cpu },
               { title: "Artists", desc: "Storytellers, Musicians & Creators", icon: Palette },
               { title: "Stewards", desc: "Wisdom Keepers", icon: Leaf },
-              { title: "Alchemists", desc: "Space Holders, Relational Adepts", icon: Sparkles }
+              { title: "Alchemists", desc: "Space Holders, Relational Adepts", icon: Wand2 }
             ].map((thread) => {
               const Icon = thread.icon;
               return (
@@ -393,7 +393,7 @@ const Descent: React.FC = () => {
               { title: "When", info: "To be disclosed", icon: Calendar },
               { title: "Where", info: "To be disclosed", icon: MapPin },
               { title: "Cost", info: "To be disclosed", icon: DollarSign },
-              { title: "Theme", info: "To be disclosed", icon: Sparkles }
+              { title: "Theme", info: "To be disclosed", icon: Lightbulb }
             ].map((detail) => {
               const Icon = detail.icon;
               return (
@@ -523,7 +523,7 @@ const Descent: React.FC = () => {
       <section id="team" className="py-24 px-6 scroll-mt-16 snap-start snap-always">
         <div className="max-w-4xl mx-auto text-center space-y-16">
           <h3 className="text-3xl font-serif font-bold text-slate-900 mb-12">The Team</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
               {[
                 { name: "Carolin Fleissner", bio: "From dance to AI: Caro bridges embodied wisdom and technological innovation. Her genius is attracting inspiring people and creating cultures where the impossible becomes inevitable. Wayve's first employee and executive, she scaled from 1 to 220+ employees, supporting $1.2B+ fundraising for the startup now valued at $10+ billion (technology so compelling Tesla copied it). She now advises CEOs and startups, facilitating transformative retreats and residency programs where embodied practice unlocks breakthrough leadership.", image: "/team/caro.jpeg" },
                 { name: "Askja Michelle Rickenbach", bio: "Askja weaves leadership development with ecological wisdom. Trained in nature and wilderness pedagogy at Woniya Naturschule, she brings experience in social entrepreneurship, youth engagement, and international team management across Switzerland and beyond. Her work integrates somatic practices with organizational transformation, guiding groups to reconnect with natural rhythms while building regenerative systems and conscious communities.", image: "/team/askja.jpg" },
@@ -552,31 +552,31 @@ const Descent: React.FC = () => {
       </section>
 
       {/* Footer - Light Theme */}
-      <footer className="py-20 px-6">
-        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-20 flex flex-col md:flex-row justify-between items-center gap-12">
-          <div className="text-center md:text-left space-y-4">
+      <footer className="py-12 px-6">
+        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="text-center md:text-left">
             <h4 className="text-2xl font-serif font-bold text-slate-900">Now What Alchemizer 2026</h4>
+            <p className="text-[10px] uppercase tracking-widest text-slate-400 mt-2">Built with intention</p>
           </div>
 
-          <div className="flex flex-col items-center md:items-end gap-6">
+          <div className="flex items-center gap-8">
             <div className="flex gap-6">
               <a href="#" className="text-slate-400 hover:text-purple-800 transition-colors"><Instagram /></a>
               <a href="#" className="text-slate-400 hover:text-purple-800 transition-colors"><MessageCircle /></a>
               <a href="mailto:hello@nowwhatalchemizer.com" className="text-slate-400 hover:text-purple-800 transition-colors"><Mail /></a>
             </div>
-            <p className="text-[10px] uppercase tracking-widest text-slate-400">Built with intention • All rights reserved</p>
+
+            {/* Back to top - inline with social icons */}
+            <motion.button
+              onClick={scrollToTop}
+              whileHover={{ y: -3 }}
+              className="flex items-center gap-2 text-slate-400 hover:text-purple-800 transition-colors"
+            >
+              <ArrowUp className="w-4 h-4" />
+              <span className="text-[10px] uppercase tracking-widest">Top</span>
+            </motion.button>
           </div>
         </div>
-
-        {/* Back to top */}
-        <motion.button
-          onClick={scrollToTop}
-          whileHover={{ y: -3 }}
-          className="mx-auto mt-12 flex flex-col items-center gap-2 text-slate-400 hover:text-purple-800 transition-colors"
-        >
-          <ArrowUp className="w-5 h-5" />
-          <span className="text-[10px] uppercase tracking-widest">Back to top</span>
-        </motion.button>
       </footer>
     </div>
   );

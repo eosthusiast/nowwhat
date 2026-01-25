@@ -2,11 +2,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { JOURNEY_STOPS } from '../constants';
-import { Compass, Sparkles, Users, Globe } from 'lucide-react';
+import { Compass, Zap, Users, Globe } from 'lucide-react';
 
 const ICON_MAP = {
   top: Compass,
-  right: Sparkles,
+  right: Zap,
   bottom: Users,
   left: Globe
 };

@@ -112,7 +112,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
       if (descentEl) {
         descentEl.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 1000); // Trigger scroll after expansion completes
+    }, 1500); // Trigger scroll after flash reaches peak brightness
   };
 
   const startAudio = () => {
@@ -309,17 +309,17 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
                         const secondPart = question.slice(splitIndex + 2);
                         return (
                           <>
-                            <p className="text-[1.35rem] md:text-[2.025rem] font-serif text-white max-w-2xl mx-auto leading-snug">
+                            <p className="text-[1.35rem] md:text-[2.025rem] font-serif text-white max-w-2xl mx-auto leading-snug whitespace-pre-line">
                               {firstPart}
                             </p>
-                            <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-snug mt-4">
+                            <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-snug mt-4 whitespace-pre-line">
                               {secondPart}
                             </p>
                           </>
                         );
                       }
                       return (
-                        <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-relaxed">
+                        <p className="text-2xl md:text-4xl font-serif text-white max-w-2xl mx-auto leading-relaxed whitespace-pre-line">
                           {question}
                         </p>
                       );
@@ -333,8 +333,8 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
                       <motion.p
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 2 }}
-                        className="text-sm text-white/40 mt-8 max-w-md mx-auto"
+                        transition={{ delay: 3 }}
+                        className="text-xl text-white/40 mt-8 max-w-md mx-auto"
                       >
                         When you're ready, click to continue to the next question.
                       </motion.p>
@@ -485,7 +485,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
               className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center"
               initial={{ opacity: 1 }}
               animate={{ opacity: 0 }}
-              transition={{ delay: 2.2, duration: 1.2, ease: "easeOut" }}
+              transition={{ delay: 3.5, duration: 0.8, ease: "easeOut" }}
             >
               {/* Main expanding light circle */}
               <motion.div
