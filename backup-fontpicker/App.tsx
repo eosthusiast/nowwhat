@@ -6,19 +6,20 @@ import JourneySection from './components/JourneySection';
 import AudioAlchemizer from './components/AudioAlchemizer';
 import Descent from './components/Descent';
 import FloatingBlobs from './components/FloatingBlobs';
+import FontPicker from './components/FontPicker';
 import { AppStage } from './types';
 
 // DEV TOGGLE: Set to false to enable the intended gated/locked experience.
 const IS_DEV_MODE = false;
 
-// Dawn gradient color keyframes - black to purple to warm
+// Dawn gradient color keyframes
 const DAWN_COLORS = {
-  night: '#050508',      // Pure black (Hero)
-  deepNavy: '#050508',   // Very dark navy (Journey start)
-  darkSlate: '#06081a',  // Dark blue-slate (Journey end)
-  midSlate: '#161624',   // Mid slate (Audio start)
-  dustyPurple: '#492259',// Dusty purple (Audio 50%)
-  mauve: '#5a3436',      // Mauve (Audio end)
+  night: '#0a0a0f',      // Near black (Hero start)
+  deepNavy: '#0d0d1a',   // Deep navy (Hero end / Journey start)
+  deepPurple: '#1a0a2e', // Deep purple (Journey end)
+  purple: '#2d1b4a',     // Purple (Audio start)
+  dustyPurple: '#4a2a5a',// Dusty purple (Audio 25%)
+  mauve: '#6b3a6b',      // Mauve (Audio end - flash starts here)
   dustyRose: '#a87e7a',  // Dusty rose (flash transition)
   preDawn: '#d4a882',    // Warm pre-dawn peach (flash transition)
   sunriseYellow: '#FFFBF5', // Very light warm sunrise cream (flash end, convergence bg)
@@ -56,16 +57,16 @@ const App: React.FC = () => {
   const getBackgroundColor = () => {
     switch (stage) {
       case AppStage.HERO:
-        // Pure black for Hero
-        return DAWN_COLORS.night;
+        // Subtle shift from night to deep navy during Hero
+        return lerpColor(DAWN_COLORS.night, DAWN_COLORS.deepNavy, 0.3);
       case AppStage.JOURNEY:
-        // Transition from deep navy to dark slate during Journey
-        return lerpColor(DAWN_COLORS.deepNavy, DAWN_COLORS.darkSlate, 0.7);
+        // Transition to deep purple during Journey
+        return lerpColor(DAWN_COLORS.deepNavy, DAWN_COLORS.deepPurple, 0.7);
       case AppStage.AUDIO:
-        // Gradual transition through mid slate → dusty purple → mauve
+        // Gradual transition through purple → dusty purple → mauve (stops at mauve)
         const p = audioProgress / 100;
         if (p < 0.5) {
-          return lerpColor(DAWN_COLORS.midSlate, DAWN_COLORS.dustyPurple, p * 2);
+          return lerpColor(DAWN_COLORS.purple, DAWN_COLORS.dustyPurple, p * 2);
         } else {
           return lerpColor(DAWN_COLORS.dustyPurple, DAWN_COLORS.mauve, (p - 0.5) * 2);
         }
@@ -213,6 +214,9 @@ const App: React.FC = () => {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Dev Tool: Font Picker - always visible for local testing */}
+      <FontPicker />
     </motion.div>
   );
 };

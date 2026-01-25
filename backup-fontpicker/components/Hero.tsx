@@ -12,10 +12,10 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
   const [showContinue, setShowContinue] = useState(false);
 
   useEffect(() => {
-    // Rotate statements every ~4.8s (0.8x slower)
+    // Rotate statements every ~3.9s (1.5x faster)
     const rotateInterval = setInterval(() => {
       setStatementIndex(prev => (prev + 1) % HERO_STATEMENTS.length);
-    }, 4834);
+    }, 3867);
 
     // Show continue button after 15s
     const unlockTimer = setTimeout(() => {
@@ -29,12 +29,12 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center h-full text-white px-4 md:px-12 pt-[15vh]">
+    <div className="flex flex-col items-center justify-center h-full text-white px-4 md:px-12">
       <div className="w-full max-w-[95vw]">
-        {/* Responsive, centered vertical layout - positioned higher */}
+        {/* Responsive, centered vertical layout */}
         <div className="flex flex-col items-center justify-center gap-y-4">
 
-          {/* Top: Rotating Statement - Centered, 0.8x size */}
+          {/* Top: Rotating Statement - Centered */}
           <div className="text-center">
             <AnimatePresence mode="wait">
               <motion.div
@@ -43,19 +43,19 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.8, ease: "easeInOut" }}
-                className="text-[clamp(1.2rem,4vw,5.6rem)] font-serif text-white font-light leading-relaxed"
+                className="text-[clamp(1.5rem,5vw,7rem)] font-serif text-white font-light leading-relaxed"
               >
                 {HERO_STATEMENTS[statementIndex]}
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Bottom: Static Text - Centered below rotator, 0.8x size */}
+          {/* Bottom: Static Text - Centered below rotator */}
           <motion.h1
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.5 }}
-            className="text-[clamp(1.6rem,5.2vw,7.2rem)] font-serif font-bold italic tracking-tight text-purple-500 leading-relaxed"
+            className="text-[clamp(2rem,6.5vw,9rem)] font-serif font-bold italic tracking-tight text-purple-500 leading-relaxed"
           >
             now what?
           </motion.h1>
@@ -98,11 +98,11 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
           </AnimatePresence>
         </div>
 
-        <motion.p
+        <motion.p 
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.3 }}
           transition={{ delay: 2, duration: 2 }}
-          className="text-[clamp(8px,1.5vw,12px)] tracking-[0.2em] uppercase font-sans text-center max-w-[80vw] mt-4"
+          className="text-[10px] md:text-xs tracking-[0.2em] uppercase font-sans text-center max-w-[80vw] mt-4"
         >
           Opening doors to radical possibility for those who shape the world.
         </motion.p>

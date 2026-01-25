@@ -129,7 +129,7 @@ const Descent: React.FC = () => {
   };
 
   return (
-    <div className="text-slate-900 font-sans selection:bg-indigo-100 pb-2">
+    <div className="text-slate-900 font-sans selection:bg-indigo-100 pb-20">
       {/* 1. The Convergence Moment */}
       <motion.section
         className="min-h-screen flex flex-col items-center justify-center px-6 py-32 cursor-pointer relative"
@@ -148,7 +148,7 @@ const Descent: React.FC = () => {
                 animate={{ opacity: problemStep >= 1 ? 1 : 0 }}
                 transition={{ duration: 2, ease: "easeOut" }}
               >
-                You've heard this countless times before. It's the same old story:
+                We all know what the problems are:
               </motion.span>
               <motion.span
                 animate={{ opacity: problemStep >= 2 ? 1 : 0 }}
@@ -308,7 +308,6 @@ const Descent: React.FC = () => {
             <p className="text-xl text-slate-600 italic font-serif">We create five essential conditions that make the extraordinary inevitable.</p>
           </div>
 
-          {/* 2x2 grid for first 4 conditions */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {[
               {
@@ -334,6 +333,12 @@ const Descent: React.FC = () => {
                 title: "Readiness and Capacity",
                 subtitle: "Presence and commitment to what emerges",
                 content: "You're available to commit your next 2 years to steer a course to positive change. You get connected with allies who are as ready as you are."
+              },
+              {
+                id: 5,
+                title: "Domain Expertise",
+                subtitle: "Wisdom from those who've walked the path",
+                content: "Each event brings domain experts who are there to provide scaffolding, nuanced understanding and mentorship. These are the people who are actively solving the problems you're stepping into, and know the terrain and how to tread it."
               }
             ].map((item) => (
               <motion.div
@@ -343,25 +348,12 @@ const Descent: React.FC = () => {
                 className="p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow backdrop-blur-sm"
                 style={{ backgroundColor: 'rgba(255, 253, 251, 0.17)', borderColor: 'rgba(240, 230, 221, 0.3)', borderWidth: '1px' }}
               >
+                <span className="text-purple-700 font-bold mb-4 block">0{item.id}.</span>
                 <h3 className="text-3xl font-serif font-bold mb-2">{item.title}</h3>
                 <p className="text-purple-800 font-medium mb-6 text-sm uppercase tracking-widest">{item.subtitle}</p>
-                <p className="text-lg text-slate-600 leading-relaxed">{item.content}</p>
+                <p className="text-slate-600 leading-relaxed">{item.content}</p>
               </motion.div>
             ))}
-          </div>
-
-          {/* Domain Expertise - centered below */}
-          <div className="flex justify-center mt-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              className="p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow backdrop-blur-sm max-w-xl"
-              style={{ backgroundColor: 'rgba(255, 253, 251, 0.17)', borderColor: 'rgba(240, 230, 221, 0.3)', borderWidth: '1px' }}
-            >
-              <h3 className="text-3xl font-serif font-bold mb-2">Domain Expertise</h3>
-              <p className="text-purple-800 font-medium mb-6 text-sm uppercase tracking-widest">Wisdom from those who've walked the path</p>
-              <p className="text-lg text-slate-600 leading-relaxed">Each event brings domain experts who are there to provide scaffolding, nuanced understanding and mentorship. These are the people who are actively solving the problems you're stepping into, and know the terrain and how to tread it.</p>
-            </motion.div>
           </div>
 
           {/* Text below the boxes */}
@@ -516,7 +508,7 @@ const Descent: React.FC = () => {
             onClick={scrollToTeam}
             className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mx-auto"
           >
-            <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
+            <span className="text-sm tracking-widest uppercase font-sans">Meet the Team</span>
             <motion.div
               animate={{ y: [0, 5, 0] }}
               transition={{ repeat: Infinity, duration: 2 }}
@@ -546,8 +538,8 @@ const Descent: React.FC = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h4 className="text-xl font-serif font-bold text-center min-h-14 mb-2">{member.name}</h4>
-                  <p className="text-base text-slate-500 leading-relaxed text-left">{member.bio}</p>
+                  <h4 className="text-xl font-serif font-bold text-center min-h-14 mb-4">{member.name}</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed text-left">{member.bio}</p>
                 </div>
               ))}
             </div>
@@ -560,8 +552,8 @@ const Descent: React.FC = () => {
       </section>
 
       {/* Footer - Light Theme */}
-      <footer className="py-1 px-6">
-        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-4 flex flex-col md:flex-row justify-between items-center gap-4">
+      <footer className="py-12 px-6">
+        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
             <h4 className="text-2xl font-serif font-bold text-slate-900">Now What Alchemizer 2026</h4>
             <p className="text-[10px] uppercase tracking-widest text-slate-400 mt-2">Built with intention</p>

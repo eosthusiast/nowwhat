@@ -1,182 +1,191 @@
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { AppStage } from '../types';
 
 interface FloatingBlobsProps {
   stage: AppStage;
   audioProgress: number;
-  descentProgress?: number; // 0-100, tracks scroll through Descent sections
+  descentProgress?: number;
 }
 
 // Color palettes for different stages
-const BLOB_PALETTES = {
-  dark: [
-    'rgba(75, 0, 130, 0.4)',    // Indigo
-    'rgba(138, 43, 226, 0.35)', // Blue violet
-    'rgba(0, 128, 128, 0.3)',   // Teal
-    'rgba(148, 0, 211, 0.35)',  // Dark violet
-    'rgba(72, 61, 139, 0.4)',   // Dark slate blue
-    'rgba(25, 25, 112, 0.35)',  // Midnight blue
-  ],
-  mid: [
-    'rgba(186, 85, 211, 0.35)', // Medium orchid
-    'rgba(153, 50, 204, 0.3)',  // Dark orchid
-    'rgba(219, 112, 147, 0.3)', // Pale violet red
-    'rgba(255, 182, 193, 0.25)',// Light pink
-    'rgba(106, 90, 205, 0.35)', // Slate blue
-    'rgba(147, 112, 219, 0.3)', // Medium purple
-  ],
-  // Ethereal light palette for Descent - living light
-  descentEarly: [
-    'rgba(255, 200, 120, 0.3)',  // Honey gold
-    'rgba(255, 180, 160, 0.28)', // Dawn rose
-    'rgba(255, 255, 240, 0.4)',  // Creamy highlight
-    'rgba(255, 210, 180, 0.32)', // Warm peach
-    'rgba(255, 225, 200, 0.35)', // Soft amber
-    'rgba(255, 190, 170, 0.3)',  // Blush
-  ],
-  descentMid: [
-    'rgba(255, 185, 130, 0.32)', // Deeper gold
-    'rgba(255, 165, 145, 0.3)',  // Warmer rose
-    'rgba(255, 245, 235, 0.38)', // Bright cream
-    'rgba(255, 195, 165, 0.34)', // Rich peach
-    'rgba(255, 205, 175, 0.32)', // Golden amber
-    'rgba(255, 180, 160, 0.3)',  // Sunset blush
-  ],
-  descentLate: [
-    'rgba(255, 175, 125, 0.3)',  // Sunset gold
-    'rgba(255, 155, 135, 0.28)', // Evening rose
-    'rgba(255, 240, 230, 0.35)', // Warm cream
-    'rgba(255, 185, 155, 0.32)', // Amber glow
-    'rgba(255, 200, 165, 0.3)',  // Late light
-    'rgba(255, 170, 150, 0.28)', // Dusk pink
-  ],
+const GRADIENT_COLORS = {
+  // Hero - very dark, subtle navy/blue
+  hero: {
+    primary: 'rgba(10, 15, 35, 0.6)',
+    secondary: 'rgba(15, 25, 55, 0.4)',
+  },
+  // Journey/early Audio - dark blue-grays
+  dark: {
+    primary: 'rgba(25, 25, 45, 0.5)',
+    secondary: 'rgba(30, 30, 50, 0.35)',
+  },
+  // Audio end - warm tones
+  mid: {
+    primary: 'rgba(255, 180, 160, 0.4)',
+    secondary: 'rgba(255, 200, 120, 0.3)',
+  },
+  // Descent - warm dawn colors
+  descent: {
+    primary: 'rgba(255, 200, 120, 0.35)',
+    secondary: 'rgba(255, 180, 160, 0.25)',
+  },
 };
 
-// Individual blob configuration
-interface BlobConfig {
-  id: number;
-  size: number;
-  initialX: number;
-  initialY: number;
-  duration: number;
-  delay: number;
-}
-
-// Dark stage blob config - standard (0.5x speed)
-const DARK_BLOBS: BlobConfig[] = [
-  { id: 1, size: 600, initialX: -10, initialY: -20, duration: 50, delay: 0 },
-  { id: 2, size: 500, initialX: 70, initialY: 10, duration: 60, delay: 2 },
-  { id: 3, size: 450, initialX: 20, initialY: 60, duration: 44, delay: 4 },
-  { id: 4, size: 550, initialX: 80, initialY: 70, duration: 56, delay: 1 },
-  { id: 5, size: 400, initialX: 40, initialY: 30, duration: 40, delay: 3 },
-  { id: 6, size: 480, initialX: 60, initialY: 85, duration: 52, delay: 5 },
-];
-
-// Light stage blob config - larger, slower, more meditative (0.5x speed)
-const LIGHT_BLOBS: BlobConfig[] = [
-  { id: 1, size: 700, initialX: -15, initialY: -25, duration: 70, delay: 0 },
-  { id: 2, size: 600, initialX: 65, initialY: 5, duration: 80, delay: 2 },
-  { id: 3, size: 550, initialX: 15, initialY: 55, duration: 64, delay: 4 },
-  { id: 4, size: 650, initialX: 75, initialY: 65, duration: 76, delay: 1 },
-  { id: 5, size: 500, initialX: 35, initialY: 25, duration: 60, delay: 3 },
-  { id: 6, size: 580, initialX: 55, initialY: 80, duration: 72, delay: 5 },
-];
-
 const FloatingBlobs: React.FC<FloatingBlobsProps> = ({ stage, audioProgress, descentProgress = 0 }) => {
+  const isAudio = stage === AppStage.AUDIO;
   const isDescent = stage === AppStage.DESCENT;
 
-  // Use different blob configs for light vs dark stages
-  const blobs = useMemo(() => isDescent ? LIGHT_BLOBS : DARK_BLOBS, [isDescent]);
+  // Interpolate between two color objects
+  const lerpColors = (colors1: typeof GRADIENT_COLORS.dark, colors2: typeof GRADIENT_COLORS.mid, t: number) => {
+    const parseRgba = (c: string) => {
+      const match = c.match(/rgba\((\d+),\s*(\d+),\s*(\d+),\s*([\d.]+)\)/);
+      if (match) return [parseInt(match[1]), parseInt(match[2]), parseInt(match[3]), parseFloat(match[4])];
+      return [0, 0, 0, 0];
+    };
+    const lerpSingle = (c1: string, c2: string) => {
+      const [r1, g1, b1, a1] = parseRgba(c1);
+      const [r2, g2, b2, a2] = parseRgba(c2);
+      const r = Math.round(r1 + (r2 - r1) * t);
+      const g = Math.round(g1 + (g2 - g1) * t);
+      const b = Math.round(b1 + (b2 - b1) * t);
+      const a = (a1 + (a2 - a1) * t).toFixed(2);
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    };
+    return {
+      primary: lerpSingle(colors1.primary, colors2.primary),
+      secondary: lerpSingle(colors1.secondary, colors2.secondary),
+    };
+  };
 
-  // Blur amount - larger for Descent's ethereal look
-  const blurAmount = isDescent ? 150 : 100;
-
-  // Determine which palette to use based on stage and progress
+  // Get colors based on stage and progress
   const getColors = () => {
     switch (stage) {
       case AppStage.HERO:
+        return GRADIENT_COLORS.hero;
       case AppStage.JOURNEY:
-        return BLOB_PALETTES.dark;
+        return GRADIENT_COLORS.dark;
       case AppStage.AUDIO:
-        // Blend from dark to mid based on audio progress
-        if (audioProgress < 50) {
-          return BLOB_PALETTES.dark;
-        }
-        return BLOB_PALETTES.mid;
+        const t = audioProgress / 100;
+        return lerpColors(GRADIENT_COLORS.dark, GRADIENT_COLORS.mid, t);
       case AppStage.DESCENT:
-        // Shift warmth through Descent based on scroll progress
-        if (descentProgress < 33) {
-          return BLOB_PALETTES.descentEarly;
-        } else if (descentProgress < 66) {
-          return BLOB_PALETTES.descentMid;
-        }
-        return BLOB_PALETTES.descentLate;
+        return GRADIENT_COLORS.descent;
       default:
-        return BLOB_PALETTES.dark;
+        return GRADIENT_COLORS.dark;
     }
   };
 
   const colors = getColors();
+
+  // Calculate gradient position - for Audio, the "sunrise" rolls up
+  // 0% progress = gradient starts at 100% (bottom), 100% progress = gradient at 60% (risen)
+  const gradientStart = isAudio
+    ? 100 - (audioProgress * 0.4) // Rolls from 100% to 60%
+    : isDescent
+      ? 40 // Dawn has risen
+      : 70; // Hero/Journey - stays low
+
+  // Opacity increases during Audio stage
+  const opacityMultiplier = isAudio ? 1 + (audioProgress / 200) : 1;
 
   return (
     <div
       className="fixed inset-0 overflow-hidden pointer-events-none"
       style={{ zIndex: 5 }}
     >
-      {blobs.map((blob, index) => (
+      {/* Main gradient layer */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: `linear-gradient(
+            to bottom,
+            transparent 0%,
+            transparent ${gradientStart - 30}%,
+            ${colors.secondary} ${gradientStart - 15}%,
+            ${colors.primary} ${gradientStart}%,
+            ${colors.primary} 100%
+          )`,
+        }}
+        transition={{
+          duration: 2,
+          ease: 'easeInOut',
+        }}
+        style={{
+          opacity: opacityMultiplier,
+        }}
+      />
+
+      {/* Bottom glow with horizontal drift */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0"
+        style={{
+          height: isDescent ? '50%' : '40%',
+          filter: 'blur(60px)',
+        }}
+        animate={{
+          x: ['-5%', '5%', '-5%'],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      >
         <motion.div
-          key={blob.id}
-          className="absolute rounded-full"
-          style={{
-            width: blob.size,
-            height: blob.size,
-            left: `${blob.initialX}%`,
-            top: `${blob.initialY}%`,
-            filter: `blur(${blurAmount}px)`,
-            willChange: 'transform',
-            mixBlendMode: 'normal',
-          }}
-          initial={{
-            x: 0,
-            y: 0,
-            scale: 1,
-          }}
+          className="w-full h-full"
           animate={{
-            x: isDescent
-              ? [0, 40, -25, 15, -30, 0]  // Gentler movement for Descent
-              : [0, 50, -30, 20, -40, 0],
-            y: isDescent
-              ? [0, -30, 25, -15, 35, 0]  // Gentler movement for Descent
-              : [0, -40, 30, -20, 50, 0],
-            scale: isDescent
-              ? [1, 1.08, 0.95, 1.03, 0.97, 1]  // Subtler scaling for Descent
-              : [1, 1.1, 0.9, 1.05, 0.95, 1],
+            background: `radial-gradient(
+              ellipse 120% 80% at 50% 100%,
+              ${colors.primary} 0%,
+              ${colors.secondary} 40%,
+              transparent 70%
+            )`,
           }}
           transition={{
-            duration: blob.duration,
-            delay: blob.delay,
-            repeat: Infinity,
-            repeatType: 'loop',
+            duration: 2,
             ease: 'easeInOut',
           }}
-        >
-          <motion.div
-            className="w-full h-full rounded-full"
-            animate={{
-              backgroundColor: colors[index % colors.length],
-            }}
-            transition={{
-              duration: isDescent ? 3 : 2,  // Slower color transitions for Descent
-              ease: 'easeInOut',
-            }}
-            style={{
-              background: colors[index % colors.length],
-            }}
-          />
-        </motion.div>
-      ))}
+          style={{
+            opacity: opacityMultiplier * 0.8,
+          }}
+        />
+      </motion.div>
+
+      {/* Secondary glow layer for depth - slower drift */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0"
+        style={{
+          height: isDescent ? '60%' : '50%',
+          filter: 'blur(100px)',
+        }}
+        animate={{
+          x: ['3%', '-3%', '3%'],
+        }}
+        transition={{
+          duration: 30,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      >
+        <motion.div
+          className="w-full h-full"
+          animate={{
+            background: `radial-gradient(
+              ellipse 150% 60% at 50% 100%,
+              ${colors.secondary} 0%,
+              transparent 60%
+            )`,
+          }}
+          transition={{
+            duration: 2,
+            ease: 'easeInOut',
+          }}
+          style={{
+            opacity: opacityMultiplier * 0.5,
+          }}
+        />
+      </motion.div>
     </div>
   );
 };
