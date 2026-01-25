@@ -142,7 +142,7 @@ const EnsoCircle: React.FC = () => {
           transition={{ delay: 1, duration: 1.5 }}
           className="space-y-0"
         >
-          <h2 className="text-2xl md:text-3xl font-serif font-light text-white leading-none tracking-wide">
+          <h2 className="text-xl md:text-2xl font-serif font-light text-white leading-none tracking-wide">
             Two Weeks<br />
             <span className="font-bold text-[0.75em]">30 People</span>
           </h2>

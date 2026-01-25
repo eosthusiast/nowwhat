@@ -99,7 +99,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.3 }}
           transition={{ delay: 2, duration: 2 }}
-          className="text-[clamp(10px,2.5vw,14px)] tracking-[0.12em] md:tracking-[0.2em] uppercase font-sans text-center w-full"
+          className="text-[clamp(20px,5vw,28px)] tracking-[0.12em] md:tracking-[0.2em] uppercase font-sans text-center w-full"
         >
           Opening doors to radical possibility for those who shape the world.
         </motion.p>
