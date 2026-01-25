@@ -14,7 +14,7 @@ const JourneySection: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center min-h-screen py-12 md:py-20">
-      <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center flex-1">
+      <div className="container mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-16 items-center flex-1">
         <div className="flex justify-center order-2 lg:order-1">
           <EnsoCircle />
         </div>

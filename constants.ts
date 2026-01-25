@@ -20,7 +20,7 @@ export const HERO_STATEMENTS = [
 
 export const JOURNEY_STOPS = [
   {
-    title: "Call to\nAdventure",
+    title: "Call to Adventure",
     position: "top"
   },
   {
@@ -28,7 +28,7 @@ export const JOURNEY_STOPS = [
     position: "right"
   },
   {
-    title: "Finding\nKinship",
+    title: "Finding Kinship",
     position: "bottom"
   },
   {

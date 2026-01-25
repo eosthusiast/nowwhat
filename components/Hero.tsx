@@ -63,7 +63,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-16 md:bottom-12 w-full flex flex-col items-center gap-3 md:gap-6 px-4">
+      <div className="absolute bottom-8 md:bottom-12 w-full flex flex-col items-center gap-2 md:gap-6 px-4">
         {/* Progress Bar - Only visible during the 15s wait or subtly stays */}
         <div className="w-32 h-[1px] bg-white/10 relative overflow-hidden">
            <motion.div
@@ -99,7 +99,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.3 }}
           transition={{ delay: 2, duration: 2 }}
-          className="text-[9px] md:text-xs tracking-[0.15em] md:tracking-[0.2em] uppercase font-sans text-center max-w-[90vw] md:max-w-[80vw]"
+          className="text-[clamp(7px,2vw,12px)] tracking-[0.15em] md:tracking-[0.2em] uppercase font-sans text-center w-full px-4 pb-4 md:pb-0"
         >
           Opening doors to radical possibility for those who shape the world.
         </motion.p>
