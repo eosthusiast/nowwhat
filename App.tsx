@@ -45,11 +45,9 @@ const App: React.FC = () => {
     });
     setStage(nextStage);
     
-    // Explicitly remove lock before scrolling to allow movement
-    document.body.classList.remove('scroll-locked');
-    
-    // Smooth scroll to next section
+    // Smooth scroll to next section (remove lock inside timeout to prevent re-lock)
     setTimeout(() => {
+      document.body.classList.remove('scroll-locked');
       const element = document.getElementById(nextStage.toLowerCase());
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
@@ -99,12 +97,12 @@ const App: React.FC = () => {
     if (stage === AppStage.AUDIO && !unlockedStages.has(AppStage.DESCENT)) {
       if (audioEl) {
         const rect = audioEl.getBoundingClientRect();
-        // Trigger lock when the section top is near the viewport top
-        if (rect.top <= 10) {
+        // Trigger lock when the section top is near the viewport top (50px threshold for fast scrollers)
+        if (rect.top <= 50) {
           shouldLock = true;
           // Snap precisely to top if within range to ensure perfect alignment
           if (rect.top > 0) {
-            window.scrollTo({ top: window.scrollY + rect.top, behavior: 'auto' });
+            window.scrollTo({ top: window.scrollY + rect.top, behavior: 'smooth' });
           }
         }
       }

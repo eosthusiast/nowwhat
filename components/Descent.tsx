@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkles, ChevronDown } from 'lucide-react';
+import { Mail, ArrowRight, Instagram, MessageCircle, Cpu, Palette, Leaf, Sparkles, ChevronDown, Calendar, MapPin, DollarSign, ArrowUp } from 'lucide-react';
 
 const Descent: React.FC = () => {
   const [showWhatNow, setShowWhatNow] = useState(false);
@@ -44,9 +44,11 @@ const Descent: React.FC = () => {
   // Handle staged reveal for the problem sentence
   useEffect(() => {
     if (convergenceStep >= 1 && problemStep < 6) {
+      // Step 1→2 (when "AI" appears) has 1s extra delay
+      const delay = problemStep === 0 ? 0 : problemStep === 1 ? 2500 : 1500;
       problemTimerRef.current = setTimeout(() => {
         setProblemStep(prev => prev + 1);
-      }, problemStep === 0 ? 0 : 1500); // First part immediately, then 1.5s delays
+      }, delay);
     }
     return () => {
       if (problemTimerRef.current) clearTimeout(problemTimerRef.current);
@@ -78,9 +80,27 @@ const Descent: React.FC = () => {
   }, [convergenceStep, answerStep]);
 
   const handleConvergenceClick = () => {
-    if (convergenceStep < 3) {
+    // Sequential advancement: problem → question → answer
+    if (convergenceStep >= 1 && problemStep < 6) {
+      // Still revealing problem - advance problem
+      if (problemTimerRef.current) clearTimeout(problemTimerRef.current);
+      setProblemStep(prev => prev + 1);
+    } else if (convergenceStep < 2) {
+      // Problem done, trigger question phase
       if (timerRef.current) clearTimeout(timerRef.current);
-      setConvergenceStep(prev => prev + 1);
+      setConvergenceStep(2);
+    } else if (convergenceStep >= 2 && questionStep < 2) {
+      // Still revealing question - advance question
+      if (questionTimerRef.current) clearTimeout(questionTimerRef.current);
+      setQuestionStep(prev => prev + 1);
+    } else if (convergenceStep < 3) {
+      // Question done, trigger answer phase
+      if (timerRef.current) clearTimeout(timerRef.current);
+      setConvergenceStep(3);
+    } else if (convergenceStep === 3 && answerStep < 4) {
+      // Still revealing answer - advance answer
+      if (answerTimerRef.current) clearTimeout(answerTimerRef.current);
+      setAnswerStep(prev => prev + 1);
     }
   };
 
@@ -94,6 +114,18 @@ const Descent: React.FC = () => {
 
   const scrollToCTA = () => {
     document.getElementById('cta')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToEventDetails = () => {
+    document.getElementById('event-details')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTeam = () => {
+    document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -337,7 +369,7 @@ const Descent: React.FC = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            onClick={scrollToCTA}
+            onClick={scrollToEventDetails}
             className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-16 mx-auto"
           >
             <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
@@ -351,7 +383,53 @@ const Descent: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. Leadup + CTA Section */}
+      {/* 4. Event Details */}
+      <section id="event-details" className="py-24 px-6 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-serif font-bold text-center mb-16">Event Details</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { title: "When", info: "To be disclosed", icon: Calendar },
+              { title: "Where", info: "To be disclosed", icon: MapPin },
+              { title: "Cost", info: "To be disclosed", icon: DollarSign },
+              { title: "Theme", info: "To be disclosed", icon: Sparkles }
+            ].map((detail) => {
+              const Icon = detail.icon;
+              return (
+                <div key={detail.title} className="text-center p-6 flex flex-col items-center gap-4">
+                  <div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center text-purple-700">
+                    <Icon className="w-8 h-8" />
+                  </div>
+                  <h4 className="text-2xl font-serif font-bold">{detail.title}</h4>
+                  <p className="text-slate-500 italic">{detail.info}</p>
+                </div>
+              );
+            })}
+          </div>
+          <p className="text-center text-slate-600 mt-12 text-lg font-serif">
+            Two weeks. Thirty people. One transformative experience.
+          </p>
+
+          {/* Continue button */}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            onClick={scrollToCTA}
+            className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-12 mx-auto"
+          >
+            <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <ChevronDown className="w-6 h-6" />
+            </motion.div>
+          </motion.button>
+        </div>
+      </section>
+
+      {/* 5. Leadup + CTA Section */}
       <section id="cta" className="py-32 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-16">
           {/* Leadup with animated flip */}
@@ -415,6 +493,44 @@ const Descent: React.FC = () => {
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
             </form>
+
+            {/* Continue to Team button */}
+            <motion.button
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              onClick={scrollToTeam}
+              className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mt-8 mx-auto"
+            >
+              <span className="text-sm tracking-widest uppercase font-sans">Meet the Team</span>
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+              >
+                <ChevronDown className="w-6 h-6" />
+              </motion.div>
+            </motion.button>
+          </div>
+
+          {/* Team Section */}
+          <div id="team" className="pt-16 scroll-mt-16">
+            <h3 className="text-3xl font-serif font-bold text-slate-900 mb-12">The Team</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { name: "Caro", bio: "Weaving wisdom traditions with systems change", image: "/team/caro.jpg" },
+                { name: "Askja", bio: "Bridging technology and human connection", image: "/team/askja.jpg" },
+                { name: "Kaela", bio: "Crafting spaces where transformation unfolds", image: "/team/kaela.jpg" },
+                { name: "David", bio: "Designing experiences that catalyze emergence", image: "/team/david.jpg" }
+              ].map((member) => (
+                <div key={member.name} className="text-center flex flex-col items-center gap-4">
+                  <div className="w-24 h-24 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center text-slate-400 text-2xl font-serif">
+                    {member.name[0]}
+                  </div>
+                  <h4 className="text-xl font-serif font-bold">{member.name}</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed">{member.bio}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Margaret Mead quote */}
@@ -440,6 +556,16 @@ const Descent: React.FC = () => {
             <p className="text-[10px] uppercase tracking-widest text-slate-400">Built with intention • All rights reserved</p>
           </div>
         </div>
+
+        {/* Back to top */}
+        <motion.button
+          onClick={scrollToTop}
+          whileHover={{ y: -3 }}
+          className="mx-auto mt-12 flex flex-col items-center gap-2 text-slate-400 hover:text-purple-800 transition-colors"
+        >
+          <ArrowUp className="w-5 h-5" />
+          <span className="text-[10px] uppercase tracking-widest">Back to top</span>
+        </motion.button>
       </footer>
     </div>
   );
