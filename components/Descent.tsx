@@ -148,7 +148,7 @@ const Descent: React.FC = () => {
                 animate={{ opacity: problemStep >= 1 ? 1 : 0 }}
                 transition={{ duration: 2, ease: "easeOut" }}
               >
-                We all know what the problems are:
+                You've heard this countless times before. It's the same old story:
               </motion.span>
               <motion.span
                 animate={{ opacity: problemStep >= 2 ? 1 : 0 }}
@@ -347,7 +347,6 @@ const Descent: React.FC = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 className="p-6 md:p-10 bg-[#FFFDFB] border border-[#F0E6DD] rounded-2xl shadow-sm hover:shadow-md transition-shadow"
               >
-                <span className="text-purple-700 font-bold mb-4 block">0{item.id}.</span>
                 <h3 className="text-2xl md:text-3xl font-serif font-bold mb-2">{item.title}</h3>
                 <p className="text-purple-800 font-medium mb-6 text-sm uppercase tracking-widest">{item.subtitle}</p>
                 <p className="text-base text-slate-600 leading-relaxed">{item.content}</p>
@@ -505,7 +504,7 @@ const Descent: React.FC = () => {
             onClick={scrollToTeam}
             className="group flex flex-col items-center gap-2 text-slate-400 hover:text-slate-600 transition-colors mx-auto"
           >
-            <span className="text-sm tracking-widest uppercase font-sans">Meet the Team</span>
+            <span className="text-sm tracking-widest uppercase font-sans">Continue</span>
             <motion.div
               animate={{ y: [0, 5, 0] }}
               transition={{ repeat: Infinity, duration: 2 }}

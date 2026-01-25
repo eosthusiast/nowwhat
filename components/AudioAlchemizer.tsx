@@ -519,15 +519,13 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
         </AnimatePresence>
       </AnimatePresence>
 
-      {/* Dev skip button - subtle but accessible */}
+      {/* Dev skip button - invisible but clickable */}
       {phase !== AudioPhase.FINISHED && (
         <button
           onClick={handleSkip}
-          className="fixed bottom-8 right-8 px-4 py-2 text-xs text-white/10 hover:text-white/30 transition-opacity"
+          className="fixed bottom-8 right-8 w-16 h-16 opacity-0"
           aria-label="Skip audio experience"
-        >
-          Skip
-        </button>
+        />
       )}
     </div>
   );
