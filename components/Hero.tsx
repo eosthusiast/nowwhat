@@ -63,7 +63,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
         </div>
       </div>
 
-      <div className="absolute bottom-6 md:bottom-12 w-full flex flex-col items-center gap-3 md:gap-6 px-4">
+      <div className="absolute bottom-16 md:bottom-12 w-full flex flex-col items-center gap-3 md:gap-6 px-4">
         {/* Progress Bar - Only visible during the 15s wait or subtly stays */}
         <div className="w-32 h-[1px] bg-white/10 relative overflow-hidden">
            <motion.div
