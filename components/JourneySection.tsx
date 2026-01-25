@@ -30,7 +30,7 @@ const JourneySection: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-6 leading-tight">
               We gather inspired, motivated people, and create the conditions where unexpected ideas emerge naturally.
             </h2>
-            <p className="text-base md:text-lg text-gray-400 font-sans mb-4 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-400 font-serif mb-4 leading-relaxed">
               A container targeted at the world's most pressing and challenging problems, beginning with a journey of unteachable lessons.
             </p>
             <p className="text-lg md:text-xl text-gray-400 font-serif italic opacity-80">

@@ -129,7 +129,7 @@ const Descent: React.FC = () => {
   };
 
   return (
-    <div className="text-slate-900 font-sans selection:bg-indigo-100 pb-20">
+    <div className="text-slate-900 font-sans selection:bg-indigo-100 pb-2">
       {/* 1. The Convergence Moment */}
       <motion.section
         className="min-h-screen flex flex-col items-center justify-center px-6 py-32 cursor-pointer relative"
@@ -351,7 +351,7 @@ const Descent: React.FC = () => {
                 <span className="text-purple-700 font-bold mb-4 block">0{item.id}.</span>
                 <h3 className="text-3xl font-serif font-bold mb-2">{item.title}</h3>
                 <p className="text-purple-800 font-medium mb-6 text-sm uppercase tracking-widest">{item.subtitle}</p>
-                <p className="text-slate-600 leading-relaxed">{item.content}</p>
+                <p className="text-lg text-slate-600 leading-relaxed">{item.content}</p>
               </motion.div>
             ))}
           </div>
@@ -538,8 +538,8 @@ const Descent: React.FC = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h4 className="text-xl font-serif font-bold text-center min-h-14 mb-4">{member.name}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed text-left">{member.bio}</p>
+                  <h4 className="text-xl font-serif font-bold text-center min-h-14 mb-2">{member.name}</h4>
+                  <p className="text-base text-slate-500 leading-relaxed text-left">{member.bio}</p>
                 </div>
               ))}
             </div>
@@ -552,8 +552,8 @@ const Descent: React.FC = () => {
       </section>
 
       {/* Footer - Light Theme */}
-      <footer className="py-12 px-6">
-        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+      <footer className="py-1 px-6">
+        <div className="max-w-6xl mx-auto border-t border-[#F0E6DD] pt-4 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="text-center md:text-left">
             <h4 className="text-2xl font-serif font-bold text-slate-900">Now What Alchemizer 2026</h4>
             <p className="text-[10px] uppercase tracking-widest text-slate-400 mt-2">Built with intention</p>
