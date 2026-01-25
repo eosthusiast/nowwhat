@@ -13,10 +13,10 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
   const [showContinue, setShowContinue] = useState(false);
 
   useEffect(() => {
-    // Rotate statements every 5.8s (69% of original speed)
+    // Rotate statements every ~3.9s (1.5x faster)
     const rotateInterval = setInterval(() => {
       setStatementIndex(prev => (prev + 1) % HERO_STATEMENTS.length);
-    }, 5800);
+    }, 3867);
 
     // Show continue button after 15s
     const unlockTimer = setTimeout(() => {
@@ -56,7 +56,7 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.5 }}
-            className="text-[clamp(2rem,6.5vw,9rem)] font-serif font-bold italic tracking-tight text-white leading-relaxed"
+            className="text-[clamp(2rem,6.5vw,9rem)] font-serif font-bold italic tracking-tight text-purple-500 leading-relaxed"
           >
             now what?
           </motion.h1>
