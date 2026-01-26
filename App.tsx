@@ -11,14 +11,14 @@ import { AppStage } from './types';
 // DEV TOGGLE: Set to false to enable the intended gated/locked experience.
 const IS_DEV_MODE = false;
 
-// Dawn gradient color keyframes - black to purple to warm
+// Dawn gradient color keyframes - black to deep blue to warm
 const DAWN_COLORS = {
   night: '#050508',      // Pure black (Hero)
   deepNavy: '#050508',   // Very dark navy (Journey start)
   darkSlate: '#06081a',  // Dark blue-slate (Journey end)
-  midSlate: '#161624',   // Mid slate (Audio start)
-  dustyPurple: '#492259',// Dusty purple (Audio 50%)
-  mauve: '#5a3436',      // Mauve (Audio end)
+  midSlate: '#0d1525',   // Mid blue-slate (Audio start)
+  deepBlue: '#152238',   // Deep blue (Audio 50%) - was dustyPurple
+  warmSlate: '#3d3a40',  // Warm slate-brown (Audio end) - was mauve
   dustyRose: '#a87e7a',  // Dusty rose (flash transition)
   preDawn: '#d4a882',    // Warm pre-dawn peach (flash transition)
   sunriseYellow: '#FFFBF5', // Very light warm sunrise cream (flash end, convergence bg)
@@ -62,12 +62,12 @@ const App: React.FC = () => {
         // Transition from deep navy to dark slate during Journey
         return lerpColor(DAWN_COLORS.deepNavy, DAWN_COLORS.darkSlate, 0.7);
       case AppStage.AUDIO:
-        // Gradual transition through mid slate → dusty purple → mauve
+        // Gradual transition through mid slate → deep blue → warm slate
         const p = audioProgress / 100;
         if (p < 0.5) {
-          return lerpColor(DAWN_COLORS.midSlate, DAWN_COLORS.dustyPurple, p * 2);
+          return lerpColor(DAWN_COLORS.midSlate, DAWN_COLORS.deepBlue, p * 2);
         } else {
-          return lerpColor(DAWN_COLORS.dustyPurple, DAWN_COLORS.mauve, (p - 0.5) * 2);
+          return lerpColor(DAWN_COLORS.deepBlue, DAWN_COLORS.warmSlate, (p - 0.5) * 2);
         }
       case AppStage.DESCENT:
         return DAWN_COLORS.dawn; // Warm tan for Descent

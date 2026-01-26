@@ -9,22 +9,22 @@ interface FloatingBlobsProps {
   descentProgress?: number;
 }
 
-// Color palettes for different stages
+// Color palettes for different stages - deep blue to warm progression
 const GRADIENT_COLORS = {
   // Hero - very dark, subtle navy/blue
   hero: {
-    primary: 'rgba(10, 15, 35, 0.6)',
-    secondary: 'rgba(15, 25, 55, 0.4)',
+    primary: 'rgba(8, 12, 25, 0.6)',
+    secondary: 'rgba(12, 18, 35, 0.4)',
   },
-  // Journey/early Audio - dark blue-grays
+  // Journey/early Audio - deep blue-grays
   dark: {
-    primary: 'rgba(25, 25, 45, 0.5)',
-    secondary: 'rgba(30, 30, 50, 0.35)',
+    primary: 'rgba(15, 25, 45, 0.5)',
+    secondary: 'rgba(20, 32, 55, 0.35)',
   },
-  // Audio end - warm tones
+  // Audio end - warm earth tones (less saturated)
   mid: {
-    primary: 'rgba(255, 180, 160, 0.4)',
-    secondary: 'rgba(255, 200, 120, 0.3)',
+    primary: 'rgba(180, 140, 120, 0.4)',
+    secondary: 'rgba(200, 160, 130, 0.3)',
   },
   // Descent - warm dawn colors
   descent: {
@@ -94,7 +94,7 @@ const FloatingBlobs: React.FC<FloatingBlobsProps> = ({ stage, audioProgress, des
       className="fixed inset-0 overflow-hidden pointer-events-none"
       style={{ zIndex: 5 }}
     >
-      {/* Main gradient layer */}
+      {/* Main gradient layer with breathing opacity */}
       <motion.div
         className="absolute inset-0"
         animate={{
@@ -106,30 +106,33 @@ const FloatingBlobs: React.FC<FloatingBlobsProps> = ({ stage, audioProgress, des
             ${colors.primary} ${gradientStart}%,
             ${colors.primary} 100%
           )`,
+          opacity: isAudio || isDescent
+            ? [opacityMultiplier * 0.7, opacityMultiplier * 1.0, opacityMultiplier * 0.7]
+            : opacityMultiplier,
         }}
         transition={{
-          duration: 2,
-          ease: 'easeInOut',
-        }}
-        style={{
-          opacity: opacityMultiplier,
+          background: { duration: 2, ease: 'easeInOut' },
+          opacity: { duration: 10, repeat: Infinity, ease: 'easeInOut' },
         }}
       />
 
-      {/* Bottom glow with horizontal drift */}
+      {/* Bottom glow with horizontal drift + breathing scale */}
       <motion.div
         className="absolute bottom-0 left-0 right-0"
         style={{
           height: isDescent ? '50%' : '40%',
           filter: 'blur(60px)',
+          transformOrigin: 'center bottom',
         }}
         animate={{
           x: ['-5%', '5%', '-5%'],
+          scaleY: isAudio || isDescent ? [1, 1.08, 1] : 1,
+          scaleX: isAudio || isDescent ? [1, 1.03, 1] : 1,
         }}
         transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: 'easeInOut',
+          x: { duration: 20, repeat: Infinity, ease: 'easeInOut' },
+          scaleY: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
+          scaleX: { duration: 12, repeat: Infinity, ease: 'easeInOut' },
         }}
       >
         <motion.div
@@ -141,31 +144,34 @@ const FloatingBlobs: React.FC<FloatingBlobsProps> = ({ stage, audioProgress, des
               ${colors.secondary} 40%,
               transparent 70%
             )`,
+            opacity: isAudio || isDescent
+              ? [opacityMultiplier * 0.6, opacityMultiplier * 0.95, opacityMultiplier * 0.6]
+              : opacityMultiplier * 0.8,
           }}
           transition={{
-            duration: 2,
-            ease: 'easeInOut',
-          }}
-          style={{
-            opacity: opacityMultiplier * 0.8,
+            background: { duration: 2, ease: 'easeInOut' },
+            opacity: { duration: 8, repeat: Infinity, ease: 'easeInOut' },
           }}
         />
       </motion.div>
 
-      {/* Secondary glow layer for depth - slower drift */}
+      {/* Secondary glow layer - slower drift + offset breathing */}
       <motion.div
         className="absolute bottom-0 left-0 right-0"
         style={{
           height: isDescent ? '60%' : '50%',
           filter: 'blur(100px)',
+          transformOrigin: 'center bottom',
         }}
         animate={{
           x: ['3%', '-3%', '3%'],
+          scaleY: isAudio || isDescent ? [1, 1.12, 1] : 1,
+          scaleX: isAudio || isDescent ? [1, 1.05, 1] : 1,
         }}
         transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: 'easeInOut',
+          x: { duration: 30, repeat: Infinity, ease: 'easeInOut' },
+          scaleY: { duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 2 },
+          scaleX: { duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 2 },
         }}
       >
         <motion.div
@@ -176,16 +182,49 @@ const FloatingBlobs: React.FC<FloatingBlobsProps> = ({ stage, audioProgress, des
               ${colors.secondary} 0%,
               transparent 60%
             )`,
+            opacity: isAudio || isDescent
+              ? [opacityMultiplier * 0.35, opacityMultiplier * 0.65, opacityMultiplier * 0.35]
+              : opacityMultiplier * 0.5,
           }}
           transition={{
-            duration: 2,
-            ease: 'easeInOut',
-          }}
-          style={{
-            opacity: opacityMultiplier * 0.5,
+            background: { duration: 2, ease: 'easeInOut' },
+            opacity: { duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 2 },
           }}
         />
       </motion.div>
+
+      {/* Third breathing layer - very soft, wide glow */}
+      {(isAudio || isDescent) && (
+        <motion.div
+          className="absolute bottom-0 left-0 right-0"
+          style={{
+            height: '70%',
+            filter: 'blur(120px)',
+            transformOrigin: 'center bottom',
+          }}
+          animate={{
+            scaleY: [1, 1.15, 1],
+            scaleX: [1, 1.08, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{
+            scaleY: { duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 4 },
+            scaleX: { duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 4 },
+            opacity: { duration: 15, repeat: Infinity, ease: 'easeInOut', delay: 4 },
+          }}
+        >
+          <div
+            className="w-full h-full"
+            style={{
+              background: `radial-gradient(
+                ellipse 180% 50% at 50% 100%,
+                ${colors.primary} 0%,
+                transparent 50%
+              )`,
+            }}
+          />
+        </motion.div>
+      )}
     </div>
   );
 };
