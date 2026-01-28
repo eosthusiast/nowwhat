@@ -57,8 +57,8 @@ const App: React.FC = () => {
         // Pure black for Hero
         return DAWN_COLORS.night;
       case AppStage.JOURNEY:
-        // Transition to dark blue during Journey
-        return lerpColor(DAWN_COLORS.deepNavy, DAWN_COLORS.darkBlue, 0.7);
+        // Slightly lighter blue-tinted shade to contrast with Hero
+        return '#0e1420';
       case AppStage.AUDIO:
         // Gradual transition through slate blues (much darker, less purple)
         const p = audioProgress / 100;
@@ -168,13 +168,13 @@ const App: React.FC = () => {
         </section>
 
         {unlockedStages.has(AppStage.JOURNEY) && (
-          <section id="journey" className="min-h-screen">
+          <section id="journey" className="min-h-screen" style={{ backgroundColor: '#1a1a22' }}>
             <JourneySection />
           </section>
         )}
 
         {unlockedStages.has(AppStage.AUDIO) && (
-          <section id="audio" className="h-screen flex items-center justify-center overflow-hidden">
+          <section id="audio" className="h-screen flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#101520' }}>
             <AudioAlchemizer
               isUnlocked={unlockedStages.has(AppStage.DESCENT)}
               onUnlock={() => handleStageUnlock(AppStage.DESCENT)}

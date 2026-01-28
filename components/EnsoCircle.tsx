@@ -90,8 +90,8 @@ const EnsoCircle: React.FC = () => {
   return (
     <div className="relative w-[15rem] h-[15rem] md:w-[22.4rem] md:h-[22.4rem] flex items-center justify-center overflow-visible">
       {/* Hand-drawn Enso SVG */}
-      <svg 
-        viewBox="0 0 100 100" 
+      <svg
+        viewBox="0 0 100 100"
         className="absolute inset-0 w-full h-full drop-shadow-2xl"
         style={{ color: 'rgba(73, 43, 124, 0.5)', filter: 'url(#enso-texture)' }}
       >

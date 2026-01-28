@@ -198,7 +198,7 @@ const AudioAlchemizer: React.FC<AudioAlchemizerProps> = ({ onUnlock, isUnlocked,
   }, [audioDuration]);
 
   return (
-    <div className="w-full max-w-4xl px-8 md:px-6 text-center relative">
+    <div className="w-full max-w-4xl px-8 md:px-6 text-center relative select-none">
       {/* Hidden Audio Element */}
       <audio
         ref={audioRef}

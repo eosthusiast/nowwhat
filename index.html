@@ -34,17 +34,13 @@
       .bg-transition {
         transition: background-color 2s cubic-bezier(0.4, 0, 0.2, 1);
       }
-      /* Scroll snap for sections - disabled on mobile for better control */
+      /* Scroll snap for sections */
       html {
         scroll-behavior: smooth;
+        scroll-snap-type: y proximity;
       }
-      @media (min-width: 768px) {
-        html {
-          scroll-snap-type: y proximity;
-        }
-        section {
-          scroll-snap-align: start;
-        }
+      section {
+        scroll-snap-align: start;
       }
       /* Remove tap highlight for cleaner mobile UX */
       * {

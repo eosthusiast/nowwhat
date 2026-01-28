@@ -56,7 +56,8 @@ const Hero: React.FC<HeroProps> = ({ onUnlock }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 1.5 }}
-            className="text-[clamp(2rem,6.5vw,9rem)] font-serif font-bold italic tracking-tight text-purple-500 leading-relaxed"
+            className="text-[clamp(2rem,6.5vw,9rem)] font-serif font-bold italic tracking-tight leading-relaxed"
+            style={{ color: '#492259' }}
           >
             now what?
           </motion.h1>
