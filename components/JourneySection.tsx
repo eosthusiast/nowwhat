@@ -13,7 +13,7 @@ const JourneySection: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-16 md:py-20">
+    <div className="flex flex-col items-center min-h-screen py-5 md:py-6">
       <div className="container mx-auto px-6 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-16 items-center flex-1">
         <div className="flex justify-center order-2 lg:order-1">
           <EnsoCircle />

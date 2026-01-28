@@ -164,9 +164,11 @@ const EnsoCircle: React.FC = () => {
               <motion.div
                 animate={isActive ? {
                   scale: 1.15,
+                  opacity: 0,
                   boxShadow: '0 0 20px rgba(73, 43, 124, 0.6), 0 0 40px rgba(73, 43, 124, 0.3)'
                 } : {
                   scale: 1,
+                  opacity: 1,
                   boxShadow: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.05)'
                 }}
                 whileHover={{ scale: 1.15, rotate: 5 }}
@@ -192,10 +194,10 @@ const EnsoCircle: React.FC = () => {
                       backgroundColor: 'rgba(73, 43, 124, 0.95)',
                       borderWidth: '1px',
                       borderColor: 'rgba(73, 43, 124, 0.6)',
-                      ...(stop.position === 'top' && { bottom: '3rem', left: '50%', transform: 'translateX(-50%)' }),
-                      ...(stop.position === 'bottom' && { top: '3rem', left: '50%', transform: 'translateX(-50%)' }),
-                      ...(stop.position === 'left' && { right: '3rem', top: '50%', transform: 'translateY(-50%)' }),
-                      ...(stop.position === 'right' && { left: '3rem', top: '50%', transform: 'translateY(-50%)' }),
+                      ...(stop.position === 'top' && { bottom: '0rem', left: '50%', transform: 'translateX(-50%)' }),
+                      ...(stop.position === 'bottom' && { top: '0rem', left: '50%', transform: 'translateX(-50%)' }),
+                      ...(stop.position === 'left' && { right: '0rem', top: '50%', transform: 'translateY(-50%)' }),
+                      ...(stop.position === 'right' && { left: '0rem', top: '50%', transform: 'translateY(-50%)' }),
                     }}
                   >
                     <h4 className="font-serif text-sm md:text-sm font-bold text-white tracking-tight whitespace-pre-line text-center">{stop.title}</h4>
