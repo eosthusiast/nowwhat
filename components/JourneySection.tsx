@@ -13,13 +13,13 @@ const JourneySection: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center min-h-screen py-5 md:py-6">
+    <div className="flex flex-col items-center min-h-fit lg:min-h-screen py-5 md:py-6">
       <div className="container mx-auto px-6 md:px-6 grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-8 items-start lg:items-center flex-1 lg:content-center">
         <div className="flex justify-center order-2 lg:order-1">
           <EnsoCircle />
         </div>
 
-        <div className="space-y-6 md:space-y-8 order-1 lg:order-2 text-center lg:text-left">
+        <div className="space-y-4 md:space-y-8 order-1 lg:order-2 text-center lg:text-left">
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -46,7 +46,7 @@ const JourneySection: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
         onClick={scrollToAudio}
-        className="group flex flex-col items-center gap-2 md:gap-2 text-white/60 hover:text-white transition-colors mt-auto pb-8"
+        className="group flex flex-col items-center gap-2 md:gap-2 text-white/60 hover:text-white transition-colors mt-4 lg:mt-auto pb-8"
       >
         <span className="text-sm md:text-sm tracking-widest uppercase font-sans">Continue</span>
         <motion.div
